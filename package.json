@@ -1,0 +1,9 @@
+{
+  "name": "NeutronDeceleration",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^1.7.9"
+  }
+}
