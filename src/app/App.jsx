@@ -9,7 +9,7 @@ export class App extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-2 col-lg-1">
-            <p>Текущая темаsda dasd asd</p>
+            <p>Текущая тема</p>
           </div>
           <div>
             <select id="lab_theme_chooser">
