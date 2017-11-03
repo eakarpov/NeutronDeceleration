@@ -1,6 +1,6 @@
 import React from 'react';
 import Theory from './Theory/Theory';
-import Test from './Test/Test';
+import Test from './Testing/Testing';
 import Modeling from './Modeling/Modeling';
 
 export class App extends React.Component {
@@ -9,7 +9,7 @@ export class App extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-2 col-lg-1">
-            <p>Текущая тема</p>
+            <p>Текущая темаsda dasd asd</p>
           </div>
           <div>
             <select id="lab_theme_chooser">

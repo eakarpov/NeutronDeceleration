@@ -15,8 +15,16 @@ electron.crashReporter.start({
   }
 });
 
-// const menu = Menu.buildFromTemplate(template);
-// Menu.setApplicationMenu(menu);
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer');
+  const extensions = [
+    'REACT_DEVELOPER_TOOLS',
+    'REDUX_DEVTOOLS'
+  ];
+  return Promise
+    .all(extensions.map(name => installer.default(installer[name], true)))
+    .catch(console.log);
+};
 
 let mainWindow = null;
 
@@ -26,10 +34,18 @@ app.on('window-all-closed', function() {
   }
 });
 
-app.on('ready', function() {
+app.on('ready', async () => {
+
+  if (process.env.NODE_ENV === 'development') {
+    await installExtensions();
+  }
+
   mainWindow = new BrowserWindow({width: 1280, height: 720});
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
-  mainWindow.webContents.openDevTools();
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
+  }
 
   mainWindow.on('closed', function() {
     mainWindow = null;
