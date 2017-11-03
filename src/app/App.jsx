@@ -4,6 +4,8 @@ import Test from './Test/Test';
 import Modeling from './Modeling/Modeling';
 
 export class App extends React.Component {
+
+  //TODO: Here we should render the login component
   render() {
     return (
       <div>
