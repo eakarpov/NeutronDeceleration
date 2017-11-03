@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: path.join(__dirname, './src/index.jsx'),
@@ -15,14 +15,16 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         loader: 'babel-loader',
+        options: {
+          cacheDirectory: true
+        },
         exclude: /node_modules/
       },
       {
-        test: /\.less$/,
+        test: /\.css$/,
         loader: [
           'style-loader',
-          'css-loader',
-          'less-loader'
+          'css-loader'
         ]
       }
     ]

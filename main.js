@@ -3,19 +3,19 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 electron.crashReporter.start({
-  companyName: 'MEPhI Cybernetic Department',
-  productName: 'MMFP Neutron Deceleration',
+  companyName: 'МИФИ Кафедра №22 "Кибернетика"',
+  productName: 'Лабораторная система по курсу ММФП',
   submitURL: 'localhost',
   autoSubmit: true,
   extra: {
-    'prod': 'MMFP Neutron Deceleration',
+    'prod': 'Лабораторная система по курсу ММФП',
     'key': '0.0.1',
     'email': 'eakarpov@yandex.ru',
-    'comments': 'Some news'
+    'comments': ''
   }
 });
 
-var mainWindow = null;
+let mainWindow = null;
 
 app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') {
@@ -24,7 +24,7 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 1280, height: 720});
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
   mainWindow.webContents.openDevTools();
 
