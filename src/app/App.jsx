@@ -1,4 +1,7 @@
 import React from 'react';
+import Theory from './Theory/Theory';
+import Test from './Test/Test';
+import Modeling from './Modeling/Modeling';
 
 export class App extends React.Component {
   render() {
@@ -17,19 +20,13 @@ export class App extends React.Component {
         <div className="tabs">
           <input type="radio" name="tab-group" id="theory_tab" defaultChecked aria-hidden="true"/>
           <label htmlFor="theory_tab" aria-hidden="true">Теория</label>
-          <div>
-            <p>Теоретический раздел.</p>
-          </div>
+          <Theory />
           <input type="radio" name="tab-group" id="modeling_tab" aria-hidden="true"/>
           <label htmlFor="modeling_tab" aria-hidden="true">Моделирование</label>
-          <div>
-            <p>Раздел моделирования.</p>
-          </div>
+          <Modeling />
           <input type="radio" name="tab-group" id="testing_tab" aria-hidden="true"/>
           <label htmlFor="testing_tab" aria-hidden="true">Тестирование</label>
-          <div>
-            <p>Раздел тестирования.</p>
-          </div>
+          <Test />
         </div>
       </div>
     )

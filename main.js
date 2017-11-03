@@ -1,5 +1,5 @@
 const electron = require('electron');
-const app = electron.app;
+const {app} = electron;
 const BrowserWindow = electron.BrowserWindow;
 
 electron.crashReporter.start({
@@ -14,6 +14,9 @@ electron.crashReporter.start({
     'comments': ''
   }
 });
+
+// const menu = Menu.buildFromTemplate(template);
+// Menu.setApplicationMenu(menu);
 
 let mainWindow = null;
 
@@ -31,4 +34,6 @@ app.on('ready', function() {
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+
+  require('./menu/mainMenu');
 });

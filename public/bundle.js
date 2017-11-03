@@ -300,6 +300,21 @@ module.exports = emptyFunction;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(16);
+} else {
+  module.exports = __webpack_require__(17);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -356,7 +371,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -451,21 +466,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(16);
-} else {
-  module.exports = __webpack_require__(17);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 5 */
@@ -575,7 +575,7 @@ module.exports = warning;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(2);
+  var invariant = __webpack_require__(3);
   var warning = __webpack_require__(6);
   var ReactPropTypesSecret = __webpack_require__(8);
   var loggedTypeFailures = {};
@@ -959,7 +959,7 @@ module.exports = getActiveElement;
 "use strict";
 
 
-var _react = __webpack_require__(4);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -969,7 +969,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _App = __webpack_require__(32);
 
-__webpack_require__(33);
+__webpack_require__(36);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -989,7 +989,7 @@ _reactDom2.default.render(_react2.default.createElement(_App.App, null), documen
  This source code is licensed under the MIT license found in the
  LICENSE file in the root directory of this source tree.
 */
-var f=__webpack_require__(3),p=__webpack_require__(5);__webpack_require__(2);var r=__webpack_require__(1);
+var f=__webpack_require__(4),p=__webpack_require__(5);__webpack_require__(3);var r=__webpack_require__(1);
 function t(a){for(var b=arguments.length-1,d="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,e=0;e<b;e++)d+="\x26args[]\x3d"+encodeURIComponent(arguments[e+1]);b=Error(d+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var u={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function v(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}v.prototype.isReactComponent={};v.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?t("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};v.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function w(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}function x(){}x.prototype=v.prototype;var y=w.prototype=new x;y.constructor=w;f(y,v.prototype);y.isPureReactComponent=!0;function z(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}var A=z.prototype=new x;A.constructor=z;f(A,v.prototype);A.unstable_isAsyncReactComponent=!0;A.render=function(){return this.props.children};
@@ -1026,10 +1026,10 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var objectAssign$1 = __webpack_require__(3);
+var objectAssign$1 = __webpack_require__(4);
 var require$$0 = __webpack_require__(6);
 var emptyObject = __webpack_require__(5);
-var invariant = __webpack_require__(2);
+var invariant = __webpack_require__(3);
 var emptyFunction = __webpack_require__(1);
 var checkPropTypes = __webpack_require__(7);
 
@@ -2772,7 +2772,7 @@ if (process.env.NODE_ENV === 'production') {
  LICENSE file in the root directory of this source tree.
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(4);__webpack_require__(2);var l=__webpack_require__(9),n=__webpack_require__(3),ba=__webpack_require__(10),ca=__webpack_require__(1),da=__webpack_require__(5),ea=__webpack_require__(11),fa=__webpack_require__(12),ha=__webpack_require__(13),ia=__webpack_require__(14);
+var aa=__webpack_require__(2);__webpack_require__(3);var l=__webpack_require__(9),n=__webpack_require__(4),ba=__webpack_require__(10),ca=__webpack_require__(1),da=__webpack_require__(5),ea=__webpack_require__(11),fa=__webpack_require__(12),ha=__webpack_require__(13),ia=__webpack_require__(14);
 function w(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:w("227");
 function ja(a){switch(a){case "svg":return"http://www.w3.org/2000/svg";case "math":return"http://www.w3.org/1998/Math/MathML";default:return"http://www.w3.org/1999/xhtml"}}
 var ka={Namespaces:{html:"http://www.w3.org/1999/xhtml",mathml:"http://www.w3.org/1998/Math/MathML",svg:"http://www.w3.org/2000/svg"},getIntrinsicNamespace:ja,getChildNamespace:function(a,b){return null==a||"http://www.w3.org/1999/xhtml"===a?ja(b):"http://www.w3.org/2000/svg"===a&&"foreignObject"===b?"http://www.w3.org/1999/xhtml":a}},la=null,oa={};
@@ -3097,10 +3097,10 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var react = __webpack_require__(4);
-var invariant = __webpack_require__(2);
+var react = __webpack_require__(2);
+var invariant = __webpack_require__(3);
 var ExecutionEnvironment = __webpack_require__(9);
-var _assign = __webpack_require__(3);
+var _assign = __webpack_require__(4);
 var EventListener = __webpack_require__(10);
 var require$$0 = __webpack_require__(6);
 var hyphenateStyleName = __webpack_require__(23);
@@ -20574,9 +20574,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 var emptyFunction = __webpack_require__(1);
-var invariant = __webpack_require__(2);
+var invariant = __webpack_require__(3);
 var warning = __webpack_require__(6);
-var assign = __webpack_require__(3);
+var assign = __webpack_require__(4);
 
 var ReactPropTypesSecret = __webpack_require__(8);
 var checkPropTypes = __webpack_require__(7);
@@ -21124,7 +21124,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 var emptyFunction = __webpack_require__(1);
-var invariant = __webpack_require__(2);
+var invariant = __webpack_require__(3);
 var ReactPropTypesSecret = __webpack_require__(8);
 
 module.exports = function() {
@@ -21186,91 +21186,79 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.App = undefined;
 
-var _react = __webpack_require__(4);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _Theory = __webpack_require__(33);
+
+var _Theory2 = _interopRequireDefault(_Theory);
+
+var _Test = __webpack_require__(34);
+
+var _Test2 = _interopRequireDefault(_Test);
+
+var _Modeling = __webpack_require__(35);
+
+var _Modeling2 = _interopRequireDefault(_Modeling);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class App extends _react2.default.Component {
   render() {
     return _react2.default.createElement(
-      "div",
+      'div',
       null,
       _react2.default.createElement(
-        "div",
-        { className: "row" },
+        'div',
+        { className: 'row' },
         _react2.default.createElement(
-          "div",
-          { className: "col-md-2 col-lg-1" },
+          'div',
+          { className: 'col-md-2 col-lg-1' },
           _react2.default.createElement(
-            "p",
+            'p',
             null,
-            "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0442\u0435\u043C\u0430"
+            '\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0442\u0435\u043C\u0430'
           )
         ),
         _react2.default.createElement(
-          "div",
+          'div',
           null,
           _react2.default.createElement(
-            "select",
-            { id: "lab_theme_chooser" },
+            'select',
+            { id: 'lab_theme_chooser' },
             _react2.default.createElement(
-              "option",
+              'option',
               null,
-              "\u0418\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u0430 \u0437\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u044F \u043D\u0435\u0439\u0442\u0440\u043E\u043D\u043E\u0432"
+              '\u0418\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u0430 \u0437\u0430\u043C\u0435\u0434\u043B\u0435\u043D\u0438\u044F \u043D\u0435\u0439\u0442\u0440\u043E\u043D\u043E\u0432'
             )
           )
         )
       ),
       _react2.default.createElement(
-        "div",
-        { className: "tabs" },
-        _react2.default.createElement("input", { type: "radio", name: "tab-group", id: "theory_tab", defaultChecked: true, "aria-hidden": "true" }),
+        'div',
+        { className: 'tabs' },
+        _react2.default.createElement('input', { type: 'radio', name: 'tab-group', id: 'theory_tab', defaultChecked: true, 'aria-hidden': 'true' }),
         _react2.default.createElement(
-          "label",
-          { htmlFor: "theory_tab", "aria-hidden": "true" },
-          "\u0422\u0435\u043E\u0440\u0438\u044F"
+          'label',
+          { htmlFor: 'theory_tab', 'aria-hidden': 'true' },
+          '\u0422\u0435\u043E\u0440\u0438\u044F'
         ),
+        _react2.default.createElement(_Theory2.default, null),
+        _react2.default.createElement('input', { type: 'radio', name: 'tab-group', id: 'modeling_tab', 'aria-hidden': 'true' }),
         _react2.default.createElement(
-          "div",
-          null,
-          _react2.default.createElement(
-            "p",
-            null,
-            "\u0422\u0435\u043E\u0440\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u0440\u0430\u0437\u0434\u0435\u043B."
-          )
+          'label',
+          { htmlFor: 'modeling_tab', 'aria-hidden': 'true' },
+          '\u041C\u043E\u0434\u0435\u043B\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435'
         ),
-        _react2.default.createElement("input", { type: "radio", name: "tab-group", id: "modeling_tab", "aria-hidden": "true" }),
+        _react2.default.createElement(_Modeling2.default, null),
+        _react2.default.createElement('input', { type: 'radio', name: 'tab-group', id: 'testing_tab', 'aria-hidden': 'true' }),
         _react2.default.createElement(
-          "label",
-          { htmlFor: "modeling_tab", "aria-hidden": "true" },
-          "\u041C\u043E\u0434\u0435\u043B\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435"
+          'label',
+          { htmlFor: 'testing_tab', 'aria-hidden': 'true' },
+          '\u0422\u0435\u0441\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435'
         ),
-        _react2.default.createElement(
-          "div",
-          null,
-          _react2.default.createElement(
-            "p",
-            null,
-            "\u0420\u0430\u0437\u0434\u0435\u043B \u043C\u043E\u0434\u0435\u043B\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F."
-          )
-        ),
-        _react2.default.createElement("input", { type: "radio", name: "tab-group", id: "testing_tab", "aria-hidden": "true" }),
-        _react2.default.createElement(
-          "label",
-          { htmlFor: "testing_tab", "aria-hidden": "true" },
-          "\u0422\u0435\u0441\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435"
-        ),
-        _react2.default.createElement(
-          "div",
-          null,
-          _react2.default.createElement(
-            "p",
-            null,
-            "\u0420\u0430\u0437\u0434\u0435\u043B \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F."
-          )
-        )
+        _react2.default.createElement(_Test2.default, null)
       )
     );
   }
@@ -21281,10 +21269,109 @@ exports.App = App;
 /* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Theory extends _react2.default.Component {
+  render() {
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'p',
+        null,
+        '\u0422\u0435\u043E\u0440\u0435\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u0440\u0430\u0437\u0434\u0435\u043B.'
+      )
+    );
+  }
+}
+
+exports.default = Theory;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Test extends _react2.default.Component {
+  render() {
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'p',
+        null,
+        '\u0420\u0430\u0437\u0434\u0435\u043B \u0442\u0435\u0441\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F.'
+      )
+    );
+  }
+}
+
+exports.default = Test;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Modeling extends _react2.default.Component {
+  render() {
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'p',
+        null,
+        '\u0420\u0430\u0437\u0434\u0435\u043B \u043C\u043E\u0434\u0435\u043B\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F.'
+      )
+    );
+  }
+}
+
+exports.default = Modeling;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(34);
+var content = __webpack_require__(37);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -21292,7 +21379,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(36)(content, options);
+var update = __webpack_require__(39)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -21309,10 +21396,10 @@ if(false) {
 }
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(35)(undefined);
+exports = module.exports = __webpack_require__(38)(undefined);
 // imports
 
 
@@ -21323,7 +21410,7 @@ exports.push([module.i, "html{font-size:16px}html,*{font-family:-apple-system, B
 
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports) {
 
 /*
@@ -21405,7 +21492,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -21461,7 +21548,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(37);
+var	fixUrls = __webpack_require__(40);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -21777,7 +21864,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports) {
 
 
