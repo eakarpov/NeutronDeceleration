@@ -16,6 +16,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: publicPath,
   },
+  target: "electron",
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
@@ -67,5 +68,5 @@ module.exports = {
       verbose: true,
       disableDotRule: false,
     },
-  },
+  }
 };
