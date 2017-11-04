@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from "./app/App";
+import { AppContainer } from 'react-hot-loader'
 import "mini.css"
 import {Provider} from "react-redux";
 import configureStore from './redux/store';
@@ -24,3 +25,16 @@ ReactDOM.render(<Provider store={store}>
   </Router>
   </Provider>,
   document.getElementById('root'));
+
+
+if (module.hot) {
+  module.hot.accept('./app/App', () => {
+    const NextApp = require('./app/App');
+    ReactDOM.render(
+      <AppContainer>
+        <NextApp />
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
+}

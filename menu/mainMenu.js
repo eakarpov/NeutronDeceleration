@@ -11,15 +11,6 @@ const template = [
     ]
   },
   {
-    label: 'Вид',
-    submenu: [
-      {
-        label: 'Админ',
-        click() {}
-      }
-    ]
-  },
-  {
     label: 'Помощь',
     submenu: [
       {
@@ -29,8 +20,22 @@ const template = [
         }
       }
     ]
-  }
+  },
+  {
+    label: 'О программе'
+  },
 ];
+
+if (process.env.NODE_ENV === 'development') {
+  template.push({
+    label: 'Разаработчику',
+    submenu: [
+      {role: 'reload'},
+      {role: 'forcereload'},
+      {role: 'toggledevtools'},
+    ]
+  })
+}
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
