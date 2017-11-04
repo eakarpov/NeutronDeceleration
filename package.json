@@ -35,7 +35,7 @@
         "env",
         {
           "targets": {
-            "node": 7
+            "node": 8
           }
         }
       ],
@@ -46,6 +46,6 @@
     "build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.dev.js",
     "start_electron": "electron .",
     "start": "cross-env NODE_ENV=development concurrently \"npm run build\"  \"npm run start_electron\"",
-    "start:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && electron .",
+    "start:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && electron ."
   }
 }

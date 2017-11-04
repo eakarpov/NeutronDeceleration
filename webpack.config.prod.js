@@ -7,6 +7,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/',
   },
+  target: "electron",
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
