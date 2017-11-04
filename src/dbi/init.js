@@ -1,20 +1,16 @@
 import dbi from './index';
 import sha1 from 'sha1';
+import async from '../helpers/asyncWrapper';
 
-export default () => {
+export default async () => {
   const db = dbi.getDb();
 
-  // db.run("CREATE TABLE if not exists users (login TEXT, password TEXT)");
-  //
-  // const adminFromBase = db.run("SELECT FROM users WHERE login = admin");
-  //
-  // if (adminFromBase === null) {
-  //   const stmt = db.prepare("INSERT INTO users VALUES (?, ?)");
-  //   const admin = {
-  //     login: 'root',
-  //     password: 'toor'
-  //   };
-  //   stmt.run(admin.login, sha1(admin.password));
-  //   stmt.finalize();
-  // }
+  const adminFromBase = await async(db.find, { login:  'root' });
+  if (adminFromBase.length === 0) {
+    const admin = {
+      login: 'root',
+      password: sha1('toor')
+    };
+    db.insert(admin);
+  }
 };

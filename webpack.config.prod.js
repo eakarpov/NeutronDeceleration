@@ -1,14 +1,13 @@
 const path = require('path');
-const externals = require('./src/package.json').dependencies;
 
 module.exports = {
-  externals: Object.keys(externals || {}),
   entry: path.join(__dirname, './src/index.jsx'),
   output: {
     path: path.join(__dirname, './public'),
     filename: 'bundle.js',
     publicPath: '/',
   },
+  target: "electron",
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },

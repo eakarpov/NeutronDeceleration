@@ -1,4 +1,6 @@
 const electron = require('electron');
+const Datastore = require('nedb');
+
 const {app} = electron;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -28,29 +30,13 @@ const installExtensions = async () => {
 
 let mainWindow = null;
 
-const Datastore = require('nedb')
-db = new Datastore({filename: 'example.db'});
-db.loadDatabase(function (err) {    // Callback is optional
-  // Now commands will be executed
+db = new Datastore({filename: 'my.db'});
+db.loadDatabase(function (err) {
+  if (err) console.log(err);
 });
-const doc = {
-  hello: 'world'
-  , n: 5
-  , today: new Date()
-  , nedbIsAwesome: true
-  , notthere: null
-  , notToBeSaved: undefined  // Will not be saved
-  , fruits: ['apple', 'orange', 'pear']
-  , infos: {name: 'nedb'}
-};
+global.db = db;
 
-db.insert(doc, function (err, newDoc) {   // Callback is optional
-  // newDoc is the newly inserted document, including its _id
-  // newDoc has no key called notToBeSaved since its value was undefined
-});
-
-
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit();
   }
@@ -69,7 +55,7 @@ app.on('ready', async () => {
     mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.on('closed', function() {
+  mainWindow.on('closed', function () {
     mainWindow = null;
   });
 

@@ -7,7 +7,7 @@ export default action$ =>
     .ofType(Actions.users.login)
     .mergeMap(({ payload }) =>
       dbi.validatePassword(payload.login, payload.password)
-        .map(validated => validated
-          ? loginSuccess(payload.login)
-          : loginFailure())
+        .then(validated => typeof validated !== 'boolean'
+            ? loginSuccess(payload.login)
+            : loginFailure())
     );

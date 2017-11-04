@@ -5,11 +5,12 @@
   "main": "main.js",
   "dependencies": {
     "alasql": "^0.4.3",
+    "history": "^4.7.2",
     "mini.css": "^2.3.7",
     "nedb": "^1.8.0",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-pdf-js": "^3.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
@@ -25,6 +26,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "concurrently": "^3.5.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
@@ -41,17 +43,27 @@
         "env",
         {
           "targets": {
-            "node": 7
-          }
+            "node": 8
+          },
+          "useBuiltIns": true
         }
       ],
+      "stage-0",
       "react"
-    ]
+    ],
+    "env": {
+      "development": {
+        "plugins": [
+          "transform-class-properties",
+          "transform-es2015-classes"
+        ]
+      }
+    }
   },
   "scripts": {
     "build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.dev.js",
     "start_electron": "electron .",
     "start": "cross-env NODE_ENV=development concurrently \"npm run build\"  \"npm run start_electron\"",
-    "start:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && electron .",
+    "start:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && electron ."
   }
 }

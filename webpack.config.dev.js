@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const externals = require('./src/package.json').dependencies;
 
 const port = process.env.PORT || 8080;
 const publicPath = `http://localhost:${port}/public/`;
@@ -17,6 +16,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: publicPath,
   },
+  target: "electron",
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
@@ -68,5 +68,5 @@ module.exports = {
       verbose: true,
       disableDotRule: false,
     },
-  },
+  }
 };
