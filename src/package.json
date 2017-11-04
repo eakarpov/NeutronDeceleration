@@ -1,0 +1,12 @@
+{
+  "name": "NeutronDeceleration",
+  "version": "0.0.1",
+  "dependencies": {
+    "nedb": "^1.8.0"
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.6.0"
+  }
+}

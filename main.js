@@ -15,9 +15,6 @@ electron.crashReporter.start({
   }
 });
 
-// const menu = Menu.buildFromTemplate(template);
-// Menu.setApplicationMenu(menu);
-
 let mainWindow = null;
 
 app.on('window-all-closed', function() {

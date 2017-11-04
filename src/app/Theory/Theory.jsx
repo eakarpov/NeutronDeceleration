@@ -7,7 +7,6 @@ class Theory extends React.Component {
     return (<div>
       <p>
         Теоретический раздел.
-        <PdfViewer />
       </p>
     </div>);
   }
