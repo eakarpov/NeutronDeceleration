@@ -5,7 +5,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, './public'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
@@ -16,7 +16,7 @@ module.exports = {
         test: /\.js(x)?$/,
         loader: 'babel-loader',
         options: {
-          cacheDirectory: true
+          cacheDirectory: true,
         },
         exclude: /node_modules/
       },

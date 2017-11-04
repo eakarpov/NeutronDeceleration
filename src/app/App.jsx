@@ -1,6 +1,6 @@
 import React from 'react';
 import Theory from './Theory/Theory';
-import Test from './Test/Test';
+import Test from './Testing/Testing';
 import Modeling from './Modeling/Modeling';
 
 export class App extends React.Component {
