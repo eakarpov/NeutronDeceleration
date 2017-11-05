@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import dbi from '../dbi';
 
-export class App extends React.Component {
+class App extends React.Component {
 
   async componentWillMount() {
     await dbi.init();
-    electron.ipcRenderer.on('transitionTo', (evt, route) => {
-      console.log(route);
-      this.props.push(route)
-    });
+    function router (push, route) {
+      push(route);
+    }
+    electron.ipcRenderer.on('transitionTo', (evt, route) => router(this.props.push, route))
   }
 
   render() {
@@ -19,11 +19,10 @@ export class App extends React.Component {
       {this.props.children}
     </div>;
   }
-
 }
 
 const mapDispatchToProps = {
   push
 };
 
-connect(null, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

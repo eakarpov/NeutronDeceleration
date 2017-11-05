@@ -9,7 +9,7 @@ import configureStore from './redux/store';
 import Dashboard from "./app/layouts/Dashboard/DashboardWrapper";
 import Login from "./app/layouts/Login/Login";
 import UserHelp from "./app/layouts/UserHelp/UserHelp";
-import { App } from "./app/App";
+import  App from "./app/App";
 import "mini.css";
 import 'rxjs';
 
