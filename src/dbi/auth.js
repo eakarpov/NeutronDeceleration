@@ -1,5 +1,5 @@
+import bcrypt from "bcryptjs";
 import dbi from './index';
-import sha1 from 'sha1';
 import async from '../helpers/asyncWrapper';
 
 export async function getUser(login) {
@@ -10,9 +10,11 @@ export async function getUser(login) {
 
 export async function validatePassword (login, password) {
   const user = await getUser(login);
-  return !!user
-    ? sha1(password) === user.password
-      ? user
-      : false
-    : false;
+  if (!!user) return false;
+  else {
+    console.log(password);
+    console.log(user.password);
+    const checkPasswordResult = await bcrypt.compare(password, user.password);
+    return checkPasswordResult === true ? user : false;
+  }
 }

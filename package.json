@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "main.js",
   "dependencies": {
-    "alasql": "^0.4.3",
+    "bcryptjs": "^2.4.3",
     "ckeditor": "^4.7.3",
     "history": "^4.7.2",
     "mini.css": "^2.3.7",
@@ -18,8 +18,7 @@
     "redux": "^3.7.2",
     "redux-observable": "^0.17.0",
     "redux-thunk": "^2.2.0",
-    "rxjs": "^5.5.2",
-    "sha1": "^1.1.1"
+    "rxjs": "^5.5.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
