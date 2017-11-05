@@ -4,7 +4,7 @@ import {ROLE} from '../../../helpers/enums';
 const initialState = {
   authorized: false,
   username: '',
-  role: ROLE.UNATHORIZED
+  role: ROLE.UNAUTHORIZED
 };
 
 export default (state = initialState, action) => {

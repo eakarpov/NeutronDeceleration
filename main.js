@@ -1,5 +1,7 @@
 const electron = require('electron');
 const Datastore = require('nedb');
+const buildTemplate = require("./main_utils/buildTemplate");
+const installExtensions = require("./main_utils/installExtensions");
 
 const {app} = electron;
 const BrowserWindow = electron.BrowserWindow;
@@ -16,17 +18,6 @@ electron.crashReporter.start({
     'comments': ''
   }
 });
-
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer');
-  const extensions = [
-    'REACT_DEVELOPER_TOOLS',
-    'REDUX_DEVTOOLS'
-  ];
-  return Promise
-    .all(extensions.map(name => installer.default(installer[name], true)))
-    .catch(console.log);
-};
 
 let mainWindow = null;
 
@@ -51,6 +42,9 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({width: 1280, height: 720});
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
 
+  const menu = electron.Menu.buildFromTemplate(buildTemplate(mainWindow));
+  electron.Menu.setApplicationMenu(menu);
+
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
   }
@@ -59,5 +53,4 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-  require('./menu/mainMenu');
 });
