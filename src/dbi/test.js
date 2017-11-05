@@ -32,8 +32,8 @@ export async function removeTest(testSuiteId, questionId) {
   if (!!testSuite[0]) return false;
   const newTestSuite = {
     testSuiteName: testSuite.testSuiteName,
-    tests: testSuite.tests.filter(el => el._id !== questionId);
-  }
+    tests: testSuite.tests.filter(el => el._id !== questionId)
+  };
   return db.update(testSuite, newTestSuite, () => true);
 }
 

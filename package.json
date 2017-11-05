@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "alasql": "^0.4.3",
+    "ckeditor": "^4.7.3",
     "history": "^4.7.2",
     "mini.css": "^2.3.7",
     "nedb": "^1.8.0",
