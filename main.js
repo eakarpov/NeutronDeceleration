@@ -67,6 +67,12 @@ ipcMain.on('admin_logged_in', function () {
         click() {
           mainWindow.webContents.send('transitionTo', '/instruction/admin')
         }
+      },
+      {
+        label: 'Поменять данные авторизации',
+        click() {
+          mainWindow.webContents.send('transitionTo', '/admin/change_credentials')
+        }
       }
     ]
   };
