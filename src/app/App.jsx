@@ -7,6 +7,13 @@ import { ROLE } from "../helpers/enums";
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      adminLoggedIn: false
+    };
+  }
+
   async componentWillMount() {
     await dbi.init();
     function router (push, route) {
@@ -16,9 +23,11 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.user.role === ROLE.ADMIN) {
-      console.log("in");
-      electron.ipcRenderer.send('admin_logged_in')
+    if (!this.state.adminLoggedIn && this.props.user.role === ROLE.ADMIN) {
+      electron.ipcRenderer.send('admin_logged_in');
+      this.setState({
+        adminLoggedIn: true
+      });
     }
   }
 
