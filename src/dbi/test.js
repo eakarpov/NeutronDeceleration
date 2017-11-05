@@ -39,7 +39,8 @@ export async function addTest(testSuiteId, question, answers) {
       answers: answers.forEach(el => encrypt(el))
     })
   };
-  return db.update(testSuite, newTestSuite, () => true);
+  await async(db.update, testSuite, newTestSuite);
+  return true;
 }
 
 export async function removeTest(testSuiteId, questionId) {
@@ -50,7 +51,8 @@ export async function removeTest(testSuiteId, questionId) {
     testSuiteName: testSuite.testSuiteName,
     tests: testSuite.tests.filter(el => el._id !== questionId)
   };
-  return db.update(testSuite, newTestSuite, () => true);
+  await async(db.update, testSuite, newTestSuite);
+  return true;
 }
 
 export async function editAnswers(testSuiteId, questionId, answers) {

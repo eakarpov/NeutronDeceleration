@@ -1,6 +1,6 @@
-export default async (func, args) => {
+export default async (func, ...args) => {
   return await new Promise((resolve, reject) => {
-    func.call(this, args, (err, answer) => {
+    func.call(this, ...args, (err, answer) => {
       if (err !== null) {
         reject(err);
       }
