@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
 class Dashboard extends React.Component {
-  componentWillMount() {
-    //TODO: Here should be used call to push props, not a call of a history object itself
-    if (!this.props.authorized) this.props.history.push('/login');
+  constructor(props) {
+    super(props);
+    if (!props.authorized) props.history.push('/login');
   }
   render() {
     return  (<div>

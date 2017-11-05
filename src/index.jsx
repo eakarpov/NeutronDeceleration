@@ -6,26 +6,25 @@ import "mini.css";
 import 'rxjs';
 import {Provider} from "react-redux";
 import configureStore from './redux/store';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { Route, Router, Switch} from 'react-router';
+import { Route } from 'react-router';
+import {ConnectedRouter} from 'react-router-redux';
 import Dashboard from "./app/layouts/Dashboard/Dashboard";
 import Login from "./app/layouts/Login/Login";
 import { createHashHistory } from 'history';
 
 const hashHistory = createHashHistory();
 const store = configureStore(hashHistory);
-const history = syncHistoryWithStore(hashHistory, store);
 
 ReactDOM.render(
   <AppContainer>
     <Provider store={store}>
       <App>
-        <Router history={history}>
-          <Switch>
+        <ConnectedRouter  history={hashHistory}>
+          <div>
             <Route exact path="/" component={Dashboard}/>
             <Route path="/login" component={Login}/>
-          </Switch>
-        </Router>
+          </div>
+        </ConnectedRouter>
       </App>
     </Provider>
   </AppContainer>,
