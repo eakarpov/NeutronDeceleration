@@ -4,6 +4,7 @@ import Userboard from '../Userboard/Userboard';
 import AdminTest from "../Testing/AdminTest";
 import Stats from "../Stats/Stats";
 import TheoryEdit from "../Theory/TheoryEdit";
+import Groupboard from "../Groupboard/Groupboard";
 
 class AdminDashboard extends React.Component {
   render() {
@@ -24,6 +25,9 @@ class AdminDashboard extends React.Component {
         </div>
       </div>
       <div className="tabs">
+        <input type="radio" name="tab-group" id="admin_groups_tab" defaultChecked aria-hidden="true"/>
+        <label htmlFor="admin_groups_tab" aria-hidden="true">Группы</label>
+        <Groupboard />
         <input type="radio" name="tab-group" id="admin_user_tab" defaultChecked aria-hidden="true"/>
         <label htmlFor="admin_user_tab" aria-hidden="true">Пользователи</label>
         <Userboard />
