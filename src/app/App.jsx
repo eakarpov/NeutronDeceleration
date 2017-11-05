@@ -3,6 +3,7 @@ import electron from "electron";
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import dbi from '../dbi';
+import { ROLE } from "../helpers/enums";
 
 class App extends React.Component {
 
@@ -11,7 +12,14 @@ class App extends React.Component {
     function router (push, route) {
       push(route);
     }
-    electron.ipcRenderer.on('transitionTo', (evt, route) => router(this.props.push, route))
+    electron.ipcRenderer.on('transitionTo', (evt, route) => router(this.props.push, route));
+  }
+
+  componentDidUpdate() {
+    if (this.props.user.role === ROLE.ADMIN) {
+      console.log("in");
+      electron.ipcRenderer.send('admin_logged_in')
+    }
   }
 
   render() {
@@ -21,8 +29,12 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user
+});
+
 const mapDispatchToProps = {
   push
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,4 +1,4 @@
-function buildTemplate(mainWindow) {
+function buildInitialTemplate(mainWindow) {
 
   const template = [
     {
@@ -24,19 +24,7 @@ function buildTemplate(mainWindow) {
   ];
 
   if (process.env.NODE_ENV === 'development') {
-    template.push(
-      {
-        label: 'Администратору',
-        submenu: [
-          {
-            label: 'Инструкция администратора',
-            click() {
-              mainWindow.webContents.send('transitionTo', '/instruction/admin')
-            }
-          }
-        ]
-      },
-      {
+    template.push({
         label: 'Разработчику',
         submenu: [
           {role: 'reload'},
@@ -49,11 +37,10 @@ function buildTemplate(mainWindow) {
             }
           }
         ]
-      }
-    )
+    })
   }
 
   return template;
 }
 
-module.exports = buildTemplate;
+module.exports = buildInitialTemplate;
