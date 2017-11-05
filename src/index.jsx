@@ -8,6 +8,7 @@ import { createHashHistory } from 'history';
 import configureStore from './redux/store';
 import Dashboard from "./app/layouts/Dashboard/DashboardWrapper";
 import Login from "./app/layouts/Login/Login";
+import UserHelp from "./app/layouts/UserHelp/UserHelp";
 import { App } from "./app/App";
 import "mini.css";
 import 'rxjs';
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={Dashboard}/>
             <Route path="/login" component={Login}/>
+            <Route path="/user_help" component={UserHelp} />
           </Switch>
         </ConnectedRouter>
       </App>
