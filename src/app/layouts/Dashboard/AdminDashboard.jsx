@@ -1,9 +1,9 @@
 import React from 'react';
-import Theory from '../Theory/Theory';
-import Test from '../Testing/Testing';
-import Modeling from '../Modeling/Modeling';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
+import Userboard from '../Userboard/Userboard';
+import AdminTest from "../Testing/AdminTest";
+import Stats from "../Stats/Stats";
+import TheoryEdit from "../Theory/TheoryEdit";
 
 class AdminDashboard extends React.Component {
   render() {
@@ -26,24 +26,16 @@ class AdminDashboard extends React.Component {
       <div className="tabs">
         <input type="radio" name="tab-group" id="admin_user_tab" defaultChecked aria-hidden="true"/>
         <label htmlFor="admin_user_tab" aria-hidden="true">Пользователи</label>
-        <div>
-          <p>Ваййй дорогой, здесь юзеров добавлять</p>
-        </div>
+        <Userboard />
         <input type="radio" name="tab-group" id="admin_test_tab" aria-hidden="true"/>
         <label htmlFor="admin_test_tab" aria-hidden="true">Тесты</label>
-        <div>
-          <p>Братан, тут тесты набивать</p>
-        </div>
+        <AdminTest />
         <input type="radio" name="tab-group" id="admin_theory_tab" aria-hidden="true"/>
         <label htmlFor="admin_theory_tab" aria-hidden="true">Теория</label>
-        <div>
-          <p>Эй Уася, тут теорию редактировать</p>
-        </div>
+        <TheoryEdit />
         <input type="radio" name="tab-group" id="statistics_tab" aria-hidden="true"/>
         <label htmlFor="statistics_tab" aria-hidden="true">Статистика</label>
-        <div>
-          <p>Эййййй красаучик, тут статистику смотреть</p>
-        </div>
+        <Stats />
       </div>
     </div>);
   }
