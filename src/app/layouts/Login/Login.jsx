@@ -18,7 +18,6 @@ class Login extends React.Component {
   }
 
   componentWillUpdate(newProps) {
-    console.log(newProps);
     if (newProps.authorized) this.props.push("/");
   }
   changeLogin(value) {

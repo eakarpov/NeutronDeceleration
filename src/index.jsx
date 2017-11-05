@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import { createHashHistory } from 'history';
 import configureStore from './redux/store';
-import Dashboard from "./app/layouts/Dashboard/Dashboard";
+import Dashboard from "./app/layouts/Dashboard/DashboardWrapper";
 import Login from "./app/layouts/Login/Login";
 import { App } from "./app/App";
 import "mini.css";

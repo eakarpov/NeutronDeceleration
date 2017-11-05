@@ -1,8 +1,10 @@
 import Actions from '../../Actions';
+import {ROLE} from '../../../helpers/enums';
 
 const initialState = {
   authorized: false,
-  username: ''
+  username: '',
+  role: ROLE.UNATHORIZED
 };
 
 export default (state = initialState, action) => {
@@ -10,7 +12,8 @@ export default (state = initialState, action) => {
     case Actions.users.loginSuccess: {
       return Object.assign({}, state, {
         authorized: true,
-        username: action.payload
+        username: action.payload.username,
+        role: action.payload.role
       })
     }
     case Actions.users.loginFailure: {

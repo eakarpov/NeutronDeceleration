@@ -3,13 +3,8 @@ import Theory from '../Theory/Theory';
 import Test from '../Testing/Testing';
 import Modeling from '../Modeling/Modeling';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    if (!props.authorized) props.history.push('/login');
-  }
+class StudentDashboard extends React.Component {
   render() {
     return  (<div>
         <div className="row">
@@ -43,12 +38,7 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  authorized: state.user.authorized,
   username: state.user.username
 });
 
-const mapDispatchToProps = {
-  push
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(StudentDashboard);

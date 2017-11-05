@@ -17,9 +17,12 @@ export const loginFailure = () => {
   }
 };
 
-export const loginSuccess = (login) => {
+export const loginSuccess = (login, role) => {
   return {
     type: Actions.users.loginSuccess,
-    payload: login
+    payload: {
+      username: login,
+      role: role
+    }
   }
 };
