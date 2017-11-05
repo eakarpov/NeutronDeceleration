@@ -11,13 +11,12 @@ function buildTemplate(mainWindow) {
       ]
     },
     {
-      label: 'Помощь',
+      label: 'Пользователю',
       submenu: [
         {
-          label: 'Инструкция пользователю',
+          label: 'Инструкция пользователя',
           click() {
-            console.log('clicked');
-            mainWindow.webContents.send('transitionTo', '/user_help')
+            mainWindow.webContents.send('transitionTo', '/instruction/user')
           }
         }
       ]
@@ -25,14 +24,33 @@ function buildTemplate(mainWindow) {
   ];
 
   if (process.env.NODE_ENV === 'development') {
-    template.push({
-      label: 'Разработчику',
-      submenu: [
-        {role: 'reload'},
-        {role: 'forcereload'},
-        {role: 'toggledevtools'},
-      ]
-    })
+    template.push(
+      {
+        label: 'Администратору',
+        submenu: [
+          {
+            label: 'Инструкция администратора',
+            click() {
+              mainWindow.webContents.send('transitionTo', '/instruction/admin')
+            }
+          }
+        ]
+      },
+      {
+        label: 'Разработчику',
+        submenu: [
+          {role: 'reload'},
+          {role: 'forcereload'},
+          {role: 'toggledevtools'},
+          {
+            label: 'Инструкция разаработчика',
+            click() {
+              mainWindow.webContents.send('transitionTo', '/instruction/developer')
+            }
+          }
+        ]
+      }
+    )
   }
 
   return template;
