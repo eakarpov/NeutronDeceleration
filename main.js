@@ -1,9 +1,9 @@
 const electron = require('electron');
 const Datastore = require('nedb');
-const buildTemplate = require("./main_utils/buildTemplate");
+const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 
-const {app} = electron;
+const {app, ipcMain} = electron;
 const BrowserWindow = electron.BrowserWindow;
 
 electron.crashReporter.start({
@@ -20,6 +20,7 @@ electron.crashReporter.start({
 });
 
 let mainWindow = null;
+const initialTemplate = buildInitialTemplate(mainWindow);
 
 db = new Datastore({filename: 'my.db'});
 db.loadDatabase(function (err) {
@@ -42,7 +43,7 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({width: 1280, height: 720});
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
 
-  const menu = electron.Menu.buildFromTemplate(buildTemplate(mainWindow));
+  const menu = electron.Menu.buildFromTemplate(initialTemplate);
   electron.Menu.setApplicationMenu(menu);
 
   if (process.env.NODE_ENV === 'development') {
@@ -52,5 +53,32 @@ app.on('ready', async () => {
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
+
+});
+
+ipcMain.on('admin_logged_in', function () {
+
+  const newTemplate = initialTemplate;
+  const adminMenu = {
+    label: 'Администратору',
+    submenu: [
+      {
+        label: 'Инструкция администратора',
+        click() {
+          mainWindow.webContents.send('transitionTo', '/instruction/admin')
+        }
+      },
+      {
+        label: 'Поменять данные авторизации',
+        click() {
+          mainWindow.webContents.send('transitionTo', '/admin/change_credentials')
+        }
+      }
+    ]
+  };
+  newTemplate.splice(2, 0, adminMenu);
+
+  const menu = electron.Menu.buildFromTemplate(newTemplate);
+  electron.Menu.setApplicationMenu(menu);
 
 });

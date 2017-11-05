@@ -8,8 +8,11 @@ import { createHashHistory } from 'history';
 import configureStore from './redux/store';
 import Dashboard from "./app/layouts/Dashboard/DashboardWrapper";
 import Login from "./app/layouts/Login/Login";
-import UserHelp from "./app/layouts/UserHelp/UserHelp";
-import  App from "./app/App";
+import UserInstruction from "./app/layouts/instructions/UserInstruction/UserInstruction";
+import DeveloperInstruction from "./app/layouts/instructions/DeveloperInstruction/DeveloperInstruction";
+import AdminInstruction from "./app/layouts/instructions/AdminInstruction/AdminInstruction";
+import AdminChangeCredentials from "./app/layouts/AdminChangeCredentials/AdminChangeCredentials";
+import App from "./app/App";
 import "mini.css";
 import 'rxjs';
 
@@ -24,7 +27,10 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={Dashboard}/>
             <Route path="/login" component={Login}/>
-            <Route path="/user_help" component={UserHelp} />
+            <Route path="/admin/change_credentials" component={AdminChangeCredentials} />
+            <Route path="/instruction/user" component={UserInstruction} />
+            <Route path="/instruction/developer" component={DeveloperInstruction} />
+            <Route path="/instruction/admin" component={AdminInstruction} />
           </Switch>
         </ConnectedRouter>
       </App>
