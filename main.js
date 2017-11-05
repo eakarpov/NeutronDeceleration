@@ -20,7 +20,7 @@ electron.crashReporter.start({
 });
 
 let mainWindow = null;
-const initialTemplate = buildInitialTemplate(mainWindow);
+let initialTemplate = null;
 
 db = new Datastore({filename: 'my.db'});
 db.loadDatabase(function (err) {
@@ -43,6 +43,7 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({width: 1280, height: 720});
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
 
+  initialTemplate = buildInitialTemplate(mainWindow);
   const menu = electron.Menu.buildFromTemplate(initialTemplate);
   electron.Menu.setApplicationMenu(menu);
 
