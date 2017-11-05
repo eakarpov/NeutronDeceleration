@@ -1,5 +1,6 @@
 import dbi from './index';
 import async from '../helpers/asyncWrapper';
+import { encrypt, descrypt } from '../crypter/textCrypter';
 
 export async function addTestSuite(testSuiteName) {
   const db = dbi.getDb();
@@ -12,6 +13,21 @@ export async function addTestSuite(testSuiteName) {
   } else return false;
 }
 
+export async function getTestSuites() {
+  const db = dbi.getDb();
+  const testSuite = await async(db.find, null); //TODO: filter all where testSuiteName field exists
+}
+
+export async function getTestSuiteQuestions(id) {
+  const db = dbi.getDb();
+  const testSuite = await async(db.find, { _id: id });
+  if (!!testSuite[0]) return false;
+  return {
+    testSuiteName: testSuite.testSuiteName,
+    questions: testSuite.tests.map(el => el.question)
+  };
+}
+
 export async function addTest(testSuiteId, question, answers) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, { _id: testSuiteId });
@@ -20,7 +36,7 @@ export async function addTest(testSuiteId, question, answers) {
     testSuiteName: testSuite.testSuiteName,
     tests: testSuite.tests.push({
       question,
-      answers
+      answers: answers.forEach(el => encrypt(el))
     })
   };
   return db.update(testSuite, newTestSuite, () => true);
