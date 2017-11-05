@@ -22,9 +22,10 @@ export async function getTestSuiteQuestions(id) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, { _id: id });
   if (!!testSuite[0]) return false;
+  testSuite.tests.map(el => el.question);
   return {
     testSuiteName: testSuite.testSuiteName,
-    questions: testSuite.tests.map(el => el.question)
+    questions: testSuite.tests
   };
 }
 
@@ -32,12 +33,13 @@ export async function addTest(testSuiteId, question, answers) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, { _id: testSuiteId });
   if (!!testSuite[0]) return false;
+  testSuite.tests.push({
+    question,
+    answers: answers.forEach(el => encrypt(el))
+  });
   const newTestSuite = {
     testSuiteName: testSuite.testSuiteName,
-    tests: testSuite.tests.push({
-      question,
-      answers: answers.forEach(el => encrypt(el))
-    })
+    tests: testSuite.tests
   };
   await async(db.update, testSuite, newTestSuite);
   return true;
@@ -47,9 +49,10 @@ export async function removeTest(testSuiteId, questionId) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, { _id: testSuiteId });
   if (!!testSuite[0]) return false;
+  testSuite.tests.filter(el => el._id !== questionId)
   const newTestSuite = {
     testSuiteName: testSuite.testSuiteName,
-    tests: testSuite.tests.filter(el => el._id !== questionId)
+    tests: testSuite.tests
   };
   await async(db.update, testSuite, newTestSuite);
   return true;
