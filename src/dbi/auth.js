@@ -10,7 +10,7 @@ export async function getUser(login) {
 
 export async function validatePassword (login, password) {
   const user = await getUser(login);
-  if (!!user) return false;
+  if (typeof user === 'undefined') return false;
   else {
     const checkPasswordResult = await bcrypt.compare(password, user.password);
     return checkPasswordResult === true ? user : false;
