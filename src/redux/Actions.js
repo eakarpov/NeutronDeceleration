@@ -3,6 +3,12 @@ export default {
     login: '@@USERS/LOGIN',
     loginFailure: '@@USERS/LOGIN_FAILURE',
     loginSuccess: '@@USERS/LOGIN_SUCCESS',
+    add: '@@GROUPS/ADD',
+    added: '@@GROUPS/ADDED',
+    addFail: '@@GROUPS/ADD_FAIL',
+    list: '@@USERS/LIST',
+    listSuccess: '@@USERS/LIST_SUCCESS',
+    listFail: '@@USERS/LIST_FAIL'
   },
   groups: {
     add: '@@GROUPS/ADD',

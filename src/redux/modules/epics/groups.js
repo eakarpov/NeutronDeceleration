@@ -19,7 +19,7 @@ export const listGroups = action$ =>
     .ofType(Actions.groups.list)
     .mergeMap(({ payload }) =>
       dbi.getAllGroups()
-        .then(validated => validated.length > 0
+        .then(validated => typeof validated !== 'undefined'
           ? listGroupSucceeded(validated)
           : listGroupFailed())
     );

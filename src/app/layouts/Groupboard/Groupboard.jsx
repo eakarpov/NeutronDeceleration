@@ -17,7 +17,7 @@ class Groupboard extends React.Component {
     e.target.name.value = "";
   }
   render() {
-    const groups = this.props.groups.map((el, i) => <p key={i}><b>Группа: </b>{el.groupName}</p>)
+    const groups = this.props.groups.map((el, i) => <p key={i}><b>Группа: </b>{el.groupName}</p>);
     return (<div>
       <form onSubmit={this.submitForm}>
         <label htmlFor="name" >Название</label>
