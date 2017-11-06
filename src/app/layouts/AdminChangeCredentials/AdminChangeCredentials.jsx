@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextInput from "../../components/TextInput/TextInput";
+import BackButton from "../../components/BackButton/BackButton";
 
 class AdminChangeCredentials extends React.Component {
 
@@ -13,10 +13,6 @@ class AdminChangeCredentials extends React.Component {
       password: '',
     };
   }
-
-  static contextTypes = {
-    router: PropTypes.object
-  };
 
   changeLogin(value) {
     this.setState({
@@ -32,26 +28,30 @@ class AdminChangeCredentials extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={ this.context.router.history.goBack }>Вернуться назад</button>
-        <h1>Изменить данные</h1>
-        <div className="row">
-          <div className="col-lg-2 col-md-2 col-sm-2">
-            <label>Новый логин</label>
-          </div>
-          <div className="col-lg-2 col-md-2 col-sm-4">
-            <TextInput onInputChange={this.changeLogin} />
-          </div>
+      <div className="col-sm row">
+        <div>
+          <BackButton/>
         </div>
-        <div className="row">
-          <div className="col-lg-2 col-md-2 col-sm-2">
-            <label>Новый пароль</label>
+        <div className="container">
+          <h1>Изменить данные</h1>
+          <div className="col-sm row">
+            <div className="col-sm-5">
+              <label>Новый логин</label>
+            </div>
+            <div className="col-sm-5">
+              <TextInput onInputChange={this.changeLogin} />
+            </div>
           </div>
-          <div className="col-lg-2 col-md-2 col-sm-4">
-            <TextInput onInputChange={this.changePassword} />
+          <div className="col-sm row">
+            <div className="col-sm-5">
+              <label>Новый пароль</label>
+            </div>
+            <div className="col-sm-5">
+              <TextInput onInputChange={this.changePassword} />
+            </div>
           </div>
+          <button onClick={this.auth}>Подтвердить</button>
         </div>
-        <button onClick={this.auth}>Подтвердить</button>
       </div>
     );
   }

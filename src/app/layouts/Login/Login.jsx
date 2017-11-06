@@ -39,7 +39,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{textAlign: 'center'}} className="col-sm-6 col-sm-offset-3">
         <h1>Форма авторизации</h1>
         <label>Логин</label><TextInput onInputChange={this.changeLogin} />
         <label>Пароль</label><TextInput onInputChange={this.changePassword} />

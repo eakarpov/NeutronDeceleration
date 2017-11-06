@@ -1,16 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import BackButton from "../../../components/BackButton/BackButton";
 
 class DeveloperInstruction extends React.Component {
-
-  static contextTypes = {
-    router: PropTypes.object
-  };
 
   render() {
     return (
       <div>
-        <button onClick={ this.context.router.history.goBack }>Вернуться назад</button>
+        <BackButton/>
         <p>
           Инструкция разработчика.
         </p>
