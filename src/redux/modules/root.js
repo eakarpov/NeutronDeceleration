@@ -1,11 +1,12 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 import auth from './epics/auth';
-import {  routerReducer } from 'react-router-redux'
+import { addGroup, listGroups } from './epics/groups';
 import user from './reducers/user';
-import {addGroup, listGroups} from './epics/groups';
 import error from './reducers/error';
 import groups from './reducers/group';
+import 'rxjs/add/operator/mergeMap';
 
 export const rootEpic = combineEpics(
   auth,
