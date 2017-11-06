@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import Userboard from '../Userboard/Userboard';
 import AdminTest from "../Testing/AdminTest";
 import Stats from "../Stats/Stats";
@@ -9,8 +8,8 @@ import Groupboard from "../Groupboard/Groupboard";
 class AdminDashboard extends React.Component {
   render() {
     return  (<div>
-      <div className="row">
-        <div className="col-md-2 col-lg-1">
+      <div className="col-sm row">
+        <div className="col-sm-2 col-lg-1">
           <p>Текущая тема</p>
         </div>
         <div>
@@ -18,10 +17,8 @@ class AdminDashboard extends React.Component {
             <option>Исследование процесса замедления нейтронов</option>
           </select>
         </div>
-        <div style={{ textAlign: 'right'}}>
-          <p>
-            Привет, {this.props.user.username}
-          </p>
+        <div>
+          <p>Вы вошли как админ.</p>
         </div>
       </div>
       <div className="tabs">
@@ -45,8 +42,4 @@ class AdminDashboard extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
-
-export default connect(mapStateToProps)(AdminDashboard);
+export default AdminDashboard;
