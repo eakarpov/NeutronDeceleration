@@ -1,14 +1,16 @@
 import Actions from '../../Actions';
 import dbi from '../../../dbi';
-import {groupAdded, groupFailed, listGroupFailed, listGroupSucceeded} from '../actions/groups';
+import {groupAdded, listGroups as list, groupFailed, listGroupFailed, listGroupSucceeded} from '../actions/groups';
 
 export const addGroup = action$ =>
   action$
     .ofType(Actions.groups.add)
     .mergeMap(({ payload }) =>
-      dbi.registerGroup(payload)
+      dbi.registerGroup(payload.groupName)
         .then(validated => validated
-          ? groupAdded()
+          ? payload.loadList
+            ? list()
+            : groupAdded()
           : groupFailed())
     );
 

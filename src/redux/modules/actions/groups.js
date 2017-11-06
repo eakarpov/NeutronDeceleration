@@ -1,9 +1,12 @@
 import Actions from '../../Actions';
 
-export const addGroup = (groupName) => {
+export const addGroup = (groupName, loadList = false) => {
   return {
     type: Actions.groups.add,
-    payload: groupName
+    payload: {
+      groupName,
+      loadList
+    }
   }
 };
 

@@ -28,7 +28,7 @@ class AdminDashboard extends React.Component {
         <input type="radio" name="tab-group" id="admin_groups_tab" defaultChecked aria-hidden="true"/>
         <label htmlFor="admin_groups_tab" aria-hidden="true">Группы</label>
         <Groupboard />
-        <input type="radio" name="tab-group" id="admin_user_tab" defaultChecked aria-hidden="true"/>
+        <input type="radio" name="tab-group" id="admin_user_tab" aria-hidden="true"/>
         <label htmlFor="admin_user_tab" aria-hidden="true">Пользователи</label>
         <Userboard />
         <input type="radio" name="tab-group" id="admin_test_tab" aria-hidden="true"/>

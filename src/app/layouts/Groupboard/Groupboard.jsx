@@ -13,7 +13,7 @@ class Groupboard extends React.Component {
   submitForm(e) {
     e.preventDefault();
     const groupName = e.target.name.value;
-    this.props.addGroup(groupName);
+    this.props.addGroup(groupName, true);
     e.target.name.value = "";
   }
   render() {
