@@ -11,14 +11,14 @@ class StudentDashboard extends React.Component {
           <div className="col-md-2 col-lg-1">
             <p>Текущая тема</p>
           </div>
-          <div>
+          <div className="col-md-6 col-lg-7">
             <select id="lab_theme_chooser">
               <option>Исследование процесса замедления нейтронов</option>
             </select>
           </div>
-          <div style={{ textAlign: 'right'}}>
+          <div className="col-md-4 col-lg-4">
             <p>
-              Привет, {this.props.username}
+              Привет, {this.props.user.username}
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@ class StudentDashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.user.username
+  user: state.user
 });
 
 export default connect(mapStateToProps)(StudentDashboard);
