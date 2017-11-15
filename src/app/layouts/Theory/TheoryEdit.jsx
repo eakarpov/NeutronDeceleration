@@ -1,5 +1,6 @@
 import React from 'react';
 import CKEditor from "react-ckeditor-component";
+import electron from "electron";
 
 export default class TheoryEdit extends React.Component {
 
@@ -8,14 +9,16 @@ export default class TheoryEdit extends React.Component {
     this.updateContent = this.updateContent.bind(this);
     this.onChange = this.onChange.bind(this);
     this.state = {
-      content: require('./theory.html'),
+      content: require('../../../../public/theory.html'),
     }
   }
 
   updateContent(newContent) {
+    console.log(newContent);
     this.setState({
       content: newContent
-    })
+    });
+    electron.ipcRenderer.send('update_theory', newContent);
   }
 
   onChange(evt) {

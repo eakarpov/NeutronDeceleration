@@ -1,5 +1,6 @@
 const electron = require('electron');
 const Datastore = require('nedb');
+const fs = require('fs');
 const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 
@@ -22,7 +23,7 @@ electron.crashReporter.start({
 let mainWindow = null;
 let initialTemplate = null;
 
-db = new Datastore({filename: 'my.db'});
+db = new Datastore({filename: 'lab.db'});
 db.loadDatabase(function (err) {
   if (err) console.log(err);
 });
@@ -88,4 +89,15 @@ ipcMain.on('admin_logged_in', function () {
   const menu = electron.Menu.buildFromTemplate(newTemplate);
   electron.Menu.setApplicationMenu(menu);
 
+});
+
+ipcMain.on('update_theory', function (event, newContent) {
+  console.log('here');
+  console.log(newContent);
+  fs.unlink('public/theory.html', function (err) {
+    if (err) console.log(err);
+    fs.writeFile('public/theory.html', newContent, function (err) {
+      if (err) console.log(err);
+    });
+  });
 });
