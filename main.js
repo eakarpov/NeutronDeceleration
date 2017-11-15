@@ -59,6 +59,12 @@ app.on('ready', async () => {
 
 ipcMain.on('admin_logged_in', function () {
 
+  let containsAdmin = false;
+  initialTemplate.forEach(obj => {
+    if (obj['label'] === 'Администратору') containsAdmin = true;
+  });
+  if (containsAdmin) return;
+
   const newTemplate = initialTemplate;
   const adminMenu = {
     label: 'Администратору',
