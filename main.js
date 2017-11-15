@@ -30,6 +30,17 @@ db.loadDatabase(function (err) {
 global.db = db;
 
 app.on('window-all-closed', function () {
+  const source = fs.createReadStream('resources/theory-temp.html');
+  const dest = fs.createWriteStream('resources/theory.html');
+  source.pipe(dest);
+  source.on('end', function() {
+    fs.unlink('resources/theory-temp.html', function (err) {
+      if (err) console.log(err);
+    });
+    source.on('error', function (err) {
+      console.log(err);
+    });
+  });
   if (process.platform !== 'darwin') {
     app.quit();
   }
@@ -92,12 +103,20 @@ ipcMain.on('admin_logged_in', function () {
 });
 
 ipcMain.on('update_theory', function (event, newContent) {
-  console.log('here');
-  console.log(newContent);
-  fs.unlink('public/theory.html', function (err) {
-    if (err) console.log(err);
-    fs.writeFile('public/theory.html', newContent, function (err) {
-      if (err) console.log(err);
-    });
+  fs.stat('resources/theory-temp.html', function(err) {
+    if(err === null) {
+      fs.unlink('resources/theory-temp.html', function (err) {
+        if (err) console.log(err);
+        else fs.writeFile('resources/theory-temp.html', newContent, function (err) {
+          if (err) console.log(err);
+        });
+      });
+    } else if(err.code === 'ENOENT') {
+      fs.writeFile('resources/theory-temp.html', newContent, function (err) {
+        if (err) console.log(err);
+      });
+    } else {
+      console.log('Some other error: ', err.code);
+    }
   });
 });

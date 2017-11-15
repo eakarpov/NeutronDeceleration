@@ -2,6 +2,4 @@
 Electron application
 
 ## Prerequisites
-### Windows
-
-### Linux
+NodeJs >= 8

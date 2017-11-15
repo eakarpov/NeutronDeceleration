@@ -9,12 +9,11 @@ export default class TheoryEdit extends React.Component {
     this.updateContent = this.updateContent.bind(this);
     this.onChange = this.onChange.bind(this);
     this.state = {
-      content: require('../../../../public/theory.html'),
+      content: require('../../../../resources/theory.html'),
     }
   }
 
   updateContent(newContent) {
-    console.log(newContent);
     this.setState({
       content: newContent
     });
