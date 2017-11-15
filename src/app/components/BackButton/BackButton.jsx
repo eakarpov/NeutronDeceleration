@@ -10,7 +10,7 @@ export default class BackButton extends React.Component {
   render() {
     return (
       <button onClick={ this.context.router.history.goBack }>
-        <img src={require('../../images/last-track-left-arrow.png')} />
+        <img src={require('../../../assets/images/last-track-left-arrow.png')} />
       </button>
     );
   }

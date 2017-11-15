@@ -38,12 +38,39 @@ module.exports = {
         test: /\.css$/,
         loader: [
           'style-loader',
-          'css-loader'
+          'css-loader',
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
         ]
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
         use: 'url-loader',
+      },
+      {
+        test: /\.html$/,
+        use: [{
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+              removeComments: true
+            }
+        }]
       }
     ]
   },

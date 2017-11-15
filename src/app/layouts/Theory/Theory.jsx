@@ -1,5 +1,5 @@
 import React from 'react';
-import PDF from 'react-pdf-js';
+import Parser from 'html-react-parser';
 
 class Theory extends React.Component {
   constructor(props) {
@@ -47,10 +47,7 @@ class Theory extends React.Component {
       pagination = this.renderPagination(this.state.page, this.state.pages);
     }
     return (
-      <div>
-        <PDF file="somefile.pdf" onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
-        {pagination}
-      </div>
+      <div>{Parser(require('../../../../resources/theory.html'))}</div>
     )
   }
 }
