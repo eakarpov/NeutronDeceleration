@@ -19,9 +19,7 @@ export default class TheoryEdit extends React.Component {
   }
 
   onChange(evt) {
-    console.log("onChange fired with event info: ", evt);
     const newContent = evt.editor.getData();
-    console.log(newContent);
     this.updateContent(newContent);
   }
 
