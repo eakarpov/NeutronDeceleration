@@ -13,7 +13,7 @@ import DeveloperInstruction from "./app/layouts/instructions/DeveloperInstructio
 import AdminInstruction from "./app/layouts/instructions/AdminInstruction/AdminInstruction";
 import AdminChangeCredentials from "./app/layouts/AdminChangeCredentials/AdminChangeCredentials";
 import App from "./app/App";
-import "mini.css";
+import "./assets/styles/index.scss"
 
 const hashHistory = createHashHistory();
 const store = configureStore(hashHistory);

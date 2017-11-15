@@ -38,7 +38,24 @@ module.exports = {
         test: /\.css$/,
         loader: [
           'style-loader',
-          'css-loader'
+          'css-loader',
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
         ]
       },
       {
