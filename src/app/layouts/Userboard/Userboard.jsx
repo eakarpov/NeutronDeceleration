@@ -38,16 +38,20 @@ class Userboard extends React.Component {
     const groupsToRender = groups.map((el, i) => <option key={i} id={el._id}>{el.groupName}</option>);
     const usersToRender = users
       .map((el, i) =>
-        <div key={i} className="row">
-          <div className="col-md-2"><b>Логин: </b>{el.login}</div>
-          <div className="col-md-2"><b>Пароль: </b>{el.passwordShown}</div>
-          <div className="col-md-2"><b>Имя: </b>{el.name}</div>
-          <div className="col-md-2"><b>Фамилия: </b>{el.surname}</div>
-          <div className="col-md-2"><b>Группа: </b>{groups.find(elem => elem._id === el.group).groupName}</div>
-          <div className="col-md-2">Knopočki</div>
-        </div>);
+        <tr key={i}>
+          <td data-label="Login">{el.login}</td>
+          <td data-label="Password">{el.passwordShown}</td>
+          <td data-label="Name">{el.name}</td>
+          <td data-label="Surname">{el.surname}</td>
+          <td data-label="Group">{groups.find(elem => elem._id === el.group).groupName}</td>
+          <td data-label="Buttons">
+            <button style={{height: '40px'}}>
+              <img src={require('../../../assets/images/clear-button.png')} />
+            </button>
+          </td>
+        </tr>);
     return (<div>
-      <form onSubmit={this.submitForm}>
+      <form style={{marginLeft: '0px', marginRight: '0px'}} onSubmit={this.submitForm}>
         <label htmlFor="name" >Имя</label>
         <input type="text" id="name" />
         <label htmlFor="surname">Фамилия</label>
@@ -57,9 +61,22 @@ class Userboard extends React.Component {
         </select>
         <button role="button" disabled={groups && groups.length === 0}>+</button>
       </form>
-      <div>
-        {usersToRender}
-      </div>
+      <table style={{textAlign: 'center', width: '100%'}}>
+        <caption>Список пользователей</caption>
+        <thead>
+          <tr>
+            <th>Логин</th>
+            <th>Пароль</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Группа</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {usersToRender}
+        </tbody>
+      </table>
     </div>);
   }
 }
