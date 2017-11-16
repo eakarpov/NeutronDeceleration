@@ -10,7 +10,7 @@
 <script>
   let script;
   if (process.env.NODE_ENV === 'development') {
-    const port = process.env.PORT || 8080;
+    const port = process.env.PORT || 8082;
     script = `http://localhost:${port}/public/bundle.js`
   } else {
     script = './bundle.js'

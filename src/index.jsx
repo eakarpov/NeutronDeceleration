@@ -14,6 +14,7 @@ import AdminInstruction from "./app/layouts/instructions/AdminInstruction/AdminI
 import AdminChangeCredentials from "./app/layouts/AdminChangeCredentials/AdminChangeCredentials";
 import App from "./app/App";
 import "./assets/styles/index.scss"
+import "./assets/styles/default.css"
 
 const hashHistory = createHashHistory();
 const store = configureStore(hashHistory);

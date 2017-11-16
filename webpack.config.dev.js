@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8082;
 const publicPath = `http://localhost:${port}/public/`;
 
 module.exports = {
