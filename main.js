@@ -56,7 +56,8 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
-  mainWindow = new BrowserWindow({width: 1280, height: 720});
+  mainWindow = new BrowserWindow();
+  mainWindow.setFullScreen(true);
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
 
   initialTemplate = buildInitialTemplate(mainWindow);
