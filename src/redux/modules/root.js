@@ -1,6 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
+import { reducer as formReducer } from 'redux-form'
 import auth from './epics/auth';
 import { addGroup, listGroups } from './epics/groups';
 import user from './reducers/user';
@@ -23,5 +24,6 @@ export const rootReducer = combineReducers({
   users,
   error,
   groups,
-  routing: routerReducer
+  routing: routerReducer,
+  form: formReducer
 });
