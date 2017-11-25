@@ -10,14 +10,20 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case Actions.users.loginSuccess: {
-      return Object.assign({}, state, {
+      return {
+        ...state,
         authorized: true,
         username: action.payload.username,
-        role: action.payload.role
-      })
+        role: action.payload.role,
+        name: action.payload.name,
+        surname: action.payload.surname
+      }
     }
     case Actions.users.loginFailure: {
-      return Object.assign({}, state, {authorized: false})
+      return {
+        ...state,
+        authorized: false
+      }
     }
     default:
       return state;

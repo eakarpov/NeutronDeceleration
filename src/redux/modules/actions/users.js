@@ -17,12 +17,14 @@ export const loginFailure = () => {
   }
 };
 
-export const loginSuccess = (login, role) => {
+export const loginSuccess = (login, role, name, surname) => {
   return {
     type: Actions.users.loginSuccess,
     payload: {
       username: login,
-      role: role
+      role,
+      name,
+      surname
     }
   }
 };

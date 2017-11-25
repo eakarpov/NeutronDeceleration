@@ -5,7 +5,7 @@ import styles from './DashboardHeader.module.scss'
 
 const DashboardHeader = ({user}) => {
 
-  const greeting = user.role === ROLE.ADMIN ? "Вы вошли как админ." : user.username;
+  const greeting = user.role === ROLE.ADMIN ? "Вы вошли как админ." : `${user.surname} ${user.name}`;
 
   return (
     <div className="col-sm row">
