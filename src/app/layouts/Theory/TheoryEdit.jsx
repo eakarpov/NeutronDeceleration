@@ -24,7 +24,6 @@ class TheoryEdit extends Component {
 
   render() {
     const { initial } = this.state;
-    console.log(initial);
     return initial && (
       <Editor
         save={this.save}

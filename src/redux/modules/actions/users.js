@@ -73,3 +73,24 @@ export const listUserFailed = () => {
     payload: null
   };
 };
+
+export const deleteUser = (user) => {
+  return {
+    type: Actions.users.delete,
+    payload: user,
+  };
+};
+
+export const userDeleted = (login) => {
+  return {
+    type: Actions.users.deleted,
+    payload: login,
+  };
+};
+
+export const userDeleteFail = () => {
+  return {
+    type: Actions.users.deleteFail,
+    payload: null,
+  };
+};

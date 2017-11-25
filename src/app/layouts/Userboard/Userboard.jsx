@@ -4,11 +4,13 @@ import {connect} from 'react-redux';
 import {ROLE} from "../../../helpers/enums";
 import {listGroups} from "../../../redux/modules/actions/groups";
 import bcrypt from "bcryptjs";
+import {deleteUser} from "../../../redux/modules/actions/users";
 
 class Userboard extends React.Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
   submitForm(e) {
     e.preventDefault();
@@ -33,6 +35,9 @@ class Userboard extends React.Component {
     this.props.listUsers();
     this.props.listGroups();
   }
+  deleteUser(login) {
+    this.props.deleteUser({ user: login })
+  }
   render() {
     const {groups, users} = this.props;
     const groupsToRender = groups.map((el, i) => <option key={i} id={el._id}>{el.groupName}</option>);
@@ -45,7 +50,7 @@ class Userboard extends React.Component {
           <td data-label="Surname">{el.surname}</td>
           <td data-label="Group">{groups.find(elem => elem._id === el.group).groupName}</td>
           <td data-label="Buttons">
-            <button style={{height: '40px'}}>
+            <button style={{height: '40px'}} onClick={() => this.deleteUser(el.login)}>
               <img src={require('../../../assets/images/clear-button.png')} />
             </button>
           </td>
@@ -89,7 +94,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   listGroups,
   listUsers,
-  addUser
+  addUser,
+  deleteUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Userboard);

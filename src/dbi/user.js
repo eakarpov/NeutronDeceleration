@@ -27,6 +27,7 @@ export async function removeUser(login) {
   const db = dbi.getDb();
   const userFromBase = await async(db.find, { login });
   if (typeof userFromBase[0] === 'undefined') return false;
+  console.log(userFromBase[0]);
   await async(db.remove, userFromBase[0]);
   return true;
 }

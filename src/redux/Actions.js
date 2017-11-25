@@ -8,7 +8,10 @@ export default {
     addFail: '@@GROUPS/ADD_FAIL',
     list: '@@USERS/LIST',
     listSuccess: '@@USERS/LIST_SUCCESS',
-    listFail: '@@USERS/LIST_FAIL'
+    listFail: '@@USERS/LIST_FAIL',
+    delete: '@@USERS/DELETE',
+    deleted: '@@USERS/DELETED',
+    deleteFail: '@@USERS/DELETE_FAIL',
   },
   groups: {
     add: '@@GROUPS/ADD',
