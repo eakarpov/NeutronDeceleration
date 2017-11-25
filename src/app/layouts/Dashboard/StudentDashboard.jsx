@@ -1,27 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Theory from '../Theory/Theory';
 import Test from '../Testing/Testing';
 import Modeling from '../Modeling/Modeling';
-import {connect} from 'react-redux';
+import DashboardHeader from "./DashboardHeader";
 
 class StudentDashboard extends React.Component {
   render() {
-    return  (<div>
-        <div className="row">
-          <div className="col-md-2 col-lg-1">
-            <p>Текущая тема</p>
-          </div>
-          <div className="col-md-6 col-lg-7">
-            <select id="lab_theme_chooser">
-              <option>Исследование процесса замедления нейтронов</option>
-            </select>
-          </div>
-          <div className="col-md-4 col-lg-4">
-            <p>
-              Привет, {this.props.user.username}
-            </p>
-          </div>
-        </div>
+    return  (
+      <div>
+        <DashboardHeader user={this.props.user} />
         <div className="tabs">
           <input type="radio" name="tab-group" id="theory_tab" defaultChecked aria-hidden="true"/>
           <label htmlFor="theory_tab" aria-hidden="true">Теория</label>
@@ -33,12 +21,13 @@ class StudentDashboard extends React.Component {
           <label htmlFor="testing_tab" aria-hidden="true">Тестирование</label>
           <Test />
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
+StudentDashboard.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
-export default connect(mapStateToProps)(StudentDashboard);
+export default StudentDashboard;

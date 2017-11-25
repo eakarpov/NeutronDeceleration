@@ -29,7 +29,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /^((?!\.module).)*\.scss$/,
         use: [
           {
             loader: 'style-loader'
@@ -37,7 +37,24 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              minimize: true,
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      {
+        test: /\.module.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
               importLoaders: 1,
             }
           },
