@@ -16,7 +16,7 @@ class Theory extends React.Component {
   }
   render() {
     const { initial } = this.state;
-    return initial && (
+    return (
       <div dangerouslySetInnerHTML={{ __html: initial }} />
     )
   }
