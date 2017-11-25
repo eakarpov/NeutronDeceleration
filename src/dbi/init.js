@@ -5,7 +5,7 @@ import {ROLE} from '../helpers/enums';
 
 export default async () => {
   const db = dbi.getDb();
-  const adminFromBase = await async(db.find, { login:  'root' });
+  const adminFromBase = await async(db.find, { role:  0 });
   if (adminFromBase.length === 0) {
     const admin = {
       login: 'root',

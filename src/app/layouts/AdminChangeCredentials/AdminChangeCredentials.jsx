@@ -1,6 +1,9 @@
 import React from 'react';
 import TextInput from "../../components/TextInput/TextInput";
 import BackButton from "../../components/BackButton/BackButton";
+import {connect} from "react-redux";
+import {changeUser} from "../../../redux/modules/actions/users";
+import bcrypt from 'bcryptjs';
 
 class AdminChangeCredentials extends React.Component {
 
@@ -8,6 +11,7 @@ class AdminChangeCredentials extends React.Component {
     super(props);
     this.changeLogin = this.changeLogin.bind(this);
     this.changePassword = this.changePassword.bind(this);
+    this.auth = this.auth.bind(this);
     this.state = {
       login: '',
       password: '',
@@ -24,6 +28,12 @@ class AdminChangeCredentials extends React.Component {
     this.setState({
       password: value
     });
+  }
+
+  auth() {
+    if (this.state.login !== '' && this.state.password !== '') {
+      this.props.changeUser(this.props.user.username, this.state.login, bcrypt.hashSync(this.state.password, 10));
+    }
   }
 
   render() {
@@ -58,4 +68,12 @@ class AdminChangeCredentials extends React.Component {
 
 }
 
-export default AdminChangeCredentials;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = {
+  changeUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminChangeCredentials);

@@ -12,6 +12,9 @@ export default {
     delete: '@@USERS/DELETE',
     deleted: '@@USERS/DELETED',
     deleteFail: '@@USERS/DELETE_FAIL',
+    change: '@@USERS/CHANGE',
+    changed: '@@USERS/CHANGED',
+    changeFail: '@@USERS/CHANGE_FAIL',
   },
   groups: {
     add: '@@GROUPS/ADD',

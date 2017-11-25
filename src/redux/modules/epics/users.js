@@ -1,6 +1,9 @@
 import Actions from '../../Actions';
 import dbi from '../../../dbi';
-import {userAdded, listUsers as list, userFailed, userDeleted, userDeleteFail, listUserFailed, listUserSucceeded} from '../actions/users';
+import {
+  userAdded, listUsers as list, userFailed, userDeleted, userDeleteFail, listUserFailed, listUserSucceeded,
+  userChanged, userChangeFail
+} from '../actions/users';
 
 export const addUser = action$ =>
   action$
@@ -23,6 +26,17 @@ export const deleteUser = action$ =>
             ? userDeleted(payload.user)
             : userDeleteFail()
     ));
+
+export const changeUser = action$ =>
+  action$
+    .ofType(Actions.users.change)
+    .mergeMap(({ payload }) =>
+      dbi.editUser(payload.oldLogin, { login: payload.newLoginL, password: payload.password, role: payload.role})
+        .then(changed => changed
+          ? userChanged(payload.newLoginL)
+          : userChangeFail()
+        )
+    );
 
 export const listUsers = action$ =>
   action$

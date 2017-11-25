@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { loginUser } from '../../../redux/modules/actions/users';
-import styles from './Login.module.scss'
+import * as styles from './Login.module.scss'
 import LoginForm from "./LoginForm";
 
 class Login extends React.Component {

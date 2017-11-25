@@ -94,3 +94,29 @@ export const userDeleteFail = () => {
     payload: null,
   };
 };
+
+export const changeUser = (oldL, newL, pass) => {
+  return {
+    type: Actions.users.change,
+    payload: {
+      oldLogin: oldL,
+      newLoginL: newL,
+      password: pass,
+      role: 0,
+    }
+  }
+};
+
+export const userChanged = (login) => {
+  return {
+    type: Actions.users.changed,
+    payload: login,
+  }
+};
+
+export const userChangeFail = () => {
+  return {
+    type: Actions.users.changeFail,
+    payload: null,
+  }
+};

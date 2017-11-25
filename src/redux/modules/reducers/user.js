@@ -25,6 +25,12 @@ export default (state = initialState, action) => {
         authorized: false
       }
     }
+    case Actions.users.changed: {
+      return {
+        ...state,
+        username: action.payload,
+      };
+    }
     default:
       return state;
   }
