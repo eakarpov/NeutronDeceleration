@@ -15,6 +15,7 @@ import AdminChangeCredentials from "./app/layouts/AdminChangeCredentials/AdminCh
 import App from "./app/App";
 import "./assets/styles/index.scss"
 import "./assets/styles/default.css"
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const hashHistory = createHashHistory();
 const store = configureStore(hashHistory);

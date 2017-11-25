@@ -1,40 +1,37 @@
-import React from 'react';
-import CKEditor from "react-ckeditor-component";
-import electron from "electron";
+import React, { Component } from 'react';
+import Editor from '../../components/Editor/Editor';
+import dbi from '../../../dbi';
 
-export default class TheoryEdit extends React.Component {
-
+class TheoryEdit extends Component {
   constructor(props) {
     super(props);
-    this.updateContent = this.updateContent.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.save = this.save.bind(this);
     this.state = {
-      content: require('../../../../resources/theory.html'),
-    }
+      initial: null,
+    };
   }
 
-  updateContent(newContent) {
+  async componentDidMount() {
+    const content = await dbi.getTheory();
     this.setState({
-      content: newContent
+      initial: content,
     });
-    electron.ipcRenderer.send('update_theory', newContent);
   }
 
-  onChange(evt) {
-    const newContent = evt.editor.getData();
-    this.updateContent(newContent);
+  async save(html) {
+    await dbi.saveTheory(html)
   }
 
   render() {
-    return (
-      <CKEditor
-        activeClass="p10"
-        content={this.state.content}
-        events={{
-          "change": this.onChange
-        }}
+    const { initial } = this.state;
+    console.log(initial);
+    return initial && (
+      <Editor
+        save={this.save}
+        initial={initial}
       />
-    );
+      );
   }
-
 }
+
+export default TheoryEdit;

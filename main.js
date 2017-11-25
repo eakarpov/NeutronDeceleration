@@ -105,22 +105,3 @@ ipcMain.on('admin_logged_in', function () {
   electron.Menu.setApplicationMenu(menu);
 
 });
-
-ipcMain.on('update_theory', function (event, newContent) {
-  fs.stat('resources/theory-temp.html', function(err) {
-    if(err === null) {
-      fs.unlink('resources/theory-temp.html', function (err) {
-        if (err) console.log(err);
-        else fs.writeFile('resources/theory-temp.html', newContent, function (err) {
-          if (err) console.log(err);
-        });
-      });
-    } else if(err.code === 'ENOENT') {
-      fs.writeFile('resources/theory-temp.html', newContent, function (err) {
-        if (err) console.log(err);
-      });
-    } else {
-      console.log('Some other error: ', err.code);
-    }
-  });
-});

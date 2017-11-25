@@ -3,6 +3,7 @@ import {validatePassword, getUser} from './auth';
 import { remote } from 'electron';
 import {getAllGroups, registerGroup} from "./groups";
 import {getAllUsers, registerUser} from "./user";
+import {saveTheory, getTheory} from './theory';
 
 const db = remote.getGlobal('db');
 
@@ -16,5 +17,7 @@ export default {
   getAllGroups,
   registerGroup,
   registerUser,
-  getAllUsers
+  getAllUsers,
+  saveTheory,
+  getTheory
 };
