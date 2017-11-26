@@ -1,6 +1,5 @@
 const electron = require('electron');
 const Datastore = require('nedb');
-const fs = require('fs');
 const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 
@@ -30,24 +29,9 @@ db.loadDatabase(function (err) {
 global.db = db;
 
 app.on('window-all-closed', function () {
-  fs.stat('resources/theory-temp.html', function(err) {
-    if(err === null) {
-      const source = fs.createReadStream('resources/theory-temp.html');
-      const dest = fs.createWriteStream('resources/theory.html');
-      source.pipe(dest);
-      source.on('end', function () {
-        fs.unlink('resources/theory-temp.html', function (err) {
-          if (err) console.log(err);
-        });
-        source.on('error', function (err) {
-          console.log(err);
-        });
-      });
-      if (process.platform !== 'darwin') {
-        app.quit();
-      }
-    }
-  });
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 app.on('ready', async () => {
