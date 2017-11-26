@@ -57,7 +57,11 @@ app.on('ready', async () => {
   }
 
   mainWindow = new BrowserWindow();
-  mainWindow.setFullScreen(true);
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.maximize();
+  } else {
+    mainWindow.setFullScreen(true);
+  }
   mainWindow.loadURL('file://' + __dirname + '/public/index.html');
 
   initialTemplate = buildInitialTemplate(mainWindow);
