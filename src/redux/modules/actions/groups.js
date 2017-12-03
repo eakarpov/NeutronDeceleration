@@ -45,3 +45,24 @@ export const listGroupFailed = () => {
     payload: null
   };
 };
+
+export const removeGroup = (name) => {
+  return {
+    type: Actions.groups.remove,
+    payload: name,
+  };
+};
+
+export const groupRemoved = (group) => {
+  return {
+    type: Actions.groups.removed,
+    payload: group,
+  };
+};
+
+export const groupRemoveFailed = () => {
+  return {
+    type: Actions.groups.removeFail,
+    payload: null,
+  };
+};

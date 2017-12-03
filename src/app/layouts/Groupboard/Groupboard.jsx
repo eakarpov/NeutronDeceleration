@@ -1,11 +1,12 @@
 import React from 'react';
-import {addGroup, listGroups} from '../../../redux/modules/actions/groups';
+import {addGroup, listGroups, removeGroup} from '../../../redux/modules/actions/groups';
 import {connect} from 'react-redux';
 
 class Groupboard extends React.Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
+    this.delete = this.delete.bind(this);
   }
   componentWillMount() {
     this.props.listGroups();
@@ -16,8 +17,11 @@ class Groupboard extends React.Component {
     this.props.addGroup(groupName, true);
     e.target.name.value = "";
   }
+  delete(name) {
+    this.props.removeGroup(name);
+  }
   render() {
-    const groups = this.props.groups.map((el, i) => <p key={i}><b>Группа: </b>{el.groupName}</p>);
+    const groups = this.props.groups.map((el, i) => <p key={i}><b>Группа: </b>{el.groupName}   <a onClick={() => this.delete(el.groupName)}>Удалить</a></p>);
     return (<div>
       <form onSubmit={this.submitForm}>
         <label htmlFor="name" >Название</label>
@@ -37,7 +41,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addGroup,
-  listGroups
+  listGroups,
+  removeGroup
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groupboard);

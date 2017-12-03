@@ -1,7 +1,7 @@
 import init from './init';
 import {validatePassword, getUser} from './auth';
 import { remote } from 'electron';
-import {getAllGroups, registerGroup} from "./groups";
+import {getAllGroups, registerGroup, removeGroup} from "./groups";
 import {getAllUsers, registerUser, removeUser, editUser} from "./user";
 import {saveTheory, getTheory} from './theory';
 
@@ -21,5 +21,6 @@ export default {
   saveTheory,
   getTheory,
   removeUser,
-  editUser
+  editUser,
+  removeGroup,
 };

@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import { reducer as formReducer } from 'redux-form'
 import auth from './epics/auth';
-import { addGroup, listGroups } from './epics/groups';
+import {addGroup, listGroups, removeGroup} from './epics/groups';
 import user from './reducers/user';
 import error from './reducers/error';
 import groups from './reducers/groups';
@@ -18,7 +18,8 @@ export const rootEpic = combineEpics(
   listUsers,
   addUser,
   deleteUser,
-  changeUser
+  changeUser,
+  removeGroup
 );
 
 export const rootReducer = combineReducers({

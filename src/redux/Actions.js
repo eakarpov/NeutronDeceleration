@@ -22,6 +22,9 @@ export default {
     addFail: '@@GROUPS/ADD_FAIL',
     list: '@@GROUPS/LIST',
     listSuccess: '@@GROUPS/LIST_SUCCESS',
-    listFail: '@@GROUPS/LIST_FAIL'
+    listFail: '@@GROUPS/LIST_FAIL',
+    remove: '@@GROUPS/REMOVE',
+    removed: '@@GROUPS/REMOVED',
+    removeFail: '@@GROUPS/REMOVE_FAIL',
   }
 }

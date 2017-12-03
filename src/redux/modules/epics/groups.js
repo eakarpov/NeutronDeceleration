@@ -1,6 +1,9 @@
 import Actions from '../../Actions';
 import dbi from '../../../dbi';
-import {groupAdded, listGroups as list, groupFailed, listGroupFailed, listGroupSucceeded} from '../actions/groups';
+import {
+  groupAdded, listGroups as list, groupFailed, listGroupFailed, listGroupSucceeded,
+  groupRemoved, groupRemoveFailed
+} from '../actions/groups';
 
 export const addGroup = action$ =>
   action$
@@ -23,3 +26,10 @@ export const listGroups = action$ =>
           ? listGroupSucceeded(validated)
           : listGroupFailed())
     );
+
+export const removeGroup = action$ =>
+    action$
+    .ofType(Actions.groups.remove)
+    .mergeMap(({ payload }) =>
+        dbi.removeGroup(payload)
+        .then(validated => validated !== void 0 ? groupRemoved(validated) : groupRemoveFailed()));
