@@ -7,19 +7,19 @@ import DashboardHeader from "./DashboardHeader";
 
 class StudentDashboard extends React.Component {
   render() {
-    return  (
+    return (
       <div>
-        <DashboardHeader user={this.props.user} />
+        <DashboardHeader user={this.props.user}/>
         <div className="tabs">
           <input type="radio" name="tab-group" id="theory_tab" defaultChecked aria-hidden="true"/>
           <label htmlFor="theory_tab" aria-hidden="true">Теория</label>
-          <Theory />
+          <Theory/>
           <input type="radio" name="tab-group" id="modeling_tab" aria-hidden="true"/>
           <label htmlFor="modeling_tab" aria-hidden="true">Моделирование</label>
-          <Modeling />
+          <Modeling/>
           <input type="radio" name="tab-group" id="testing_tab" aria-hidden="true"/>
           <label htmlFor="testing_tab" aria-hidden="true">Тестирование</label>
-          <Test />
+          <Test/>
         </div>
       </div>
     );

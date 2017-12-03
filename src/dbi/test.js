@@ -49,7 +49,7 @@ export async function removeTest(testSuiteId, questionId) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, { _id: testSuiteId });
   if (!!testSuite[0]) return false;
-  testSuite.tests.filter(el => el._id !== questionId)
+  testSuite.tests.filter(el => el._id !== questionId);
   const newTestSuite = {
     testSuiteName: testSuite.testSuiteName,
     tests: testSuite.tests

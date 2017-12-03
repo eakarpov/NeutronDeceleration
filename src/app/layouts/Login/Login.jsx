@@ -15,7 +15,7 @@ class Login extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.authorized) this.props.push("/");
+    if (newProps.authorized) this.props.push("/dashboard");
     else this.setState({wrongInput: true})
   }
 

@@ -82,16 +82,6 @@ module.exports = {
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
         use: 'url-loader',
-      },
-      {
-        test: /\.html$/,
-        use: [{
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-              removeComments: true
-            }
-        }]
       }
     ]
   },

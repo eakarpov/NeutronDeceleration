@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Userboard from '../Userboard/Userboard';
 import AdminTest from "../Testing/AdminTest";
 import Stats from "../Stats/Stats";
-import TheoryEdit from "../Theory/TheoryEdit";
 import Groupboard from "../Groupboard/Groupboard";
 import DashboardHeader from "./DashboardHeader";
 
@@ -22,9 +21,6 @@ class AdminDashboard extends React.Component {
           <input type="radio" name="tab-group" id="admin_test_tab" aria-hidden="true"/>
           <label htmlFor="admin_test_tab" aria-hidden="true">Тесты</label>
           <AdminTest />
-          <input type="radio" name="tab-group" id="admin_theory_tab" aria-hidden="true"/>
-          <label htmlFor="admin_theory_tab" aria-hidden="true">Теория</label>
-          <TheoryEdit />
           <input type="radio" name="tab-group" id="statistics_tab" aria-hidden="true"/>
           <label htmlFor="statistics_tab" aria-hidden="true">Статистика</label>
           <Stats />

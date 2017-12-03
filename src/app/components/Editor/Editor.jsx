@@ -60,8 +60,8 @@ class MyEditor extends Component {
 
   render() {
     const { editorState } = this.state;
-    return (<div>
-        <button onClick={this.save}>Сохранить</button>
+    return (
+      <div>
         <Editor
           editorState={editorState}
           wrapperClassName="wrapper-class"

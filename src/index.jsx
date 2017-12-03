@@ -12,10 +12,12 @@ import UserInstruction from "./app/layouts/instructions/UserInstruction/UserInst
 import DeveloperInstruction from "./app/layouts/instructions/DeveloperInstruction/DeveloperInstruction";
 import AdminInstruction from "./app/layouts/instructions/AdminInstruction/AdminInstruction";
 import AdminChangeCredentials from "./app/layouts/AdminChangeCredentials/AdminChangeCredentials";
+import AdminAddTest from "./app/layouts/Testing/AdminAddTest";
 import App from "./app/App";
 import "./assets/styles/index.scss"
 import "./assets/styles/default.css"
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-rangeslider/lib/index.css'
 
 const hashHistory = createHashHistory();
 const store = configureStore(hashHistory);
@@ -26,12 +28,13 @@ ReactDOM.render(
       <App>
         <ConnectedRouter history={hashHistory}>
           <Switch>
-            <Route exact path="/" component={Dashboard}/>
-            <Route path="/login" component={Login}/>
+            <Route exact path="/" component={Login}/>
+            <Route path="/dashboard" component={Dashboard}/>
             <Route path="/admin/change_credentials" component={AdminChangeCredentials} />
             <Route path="/instruction/user" component={UserInstruction} />
             <Route path="/instruction/developer" component={DeveloperInstruction} />
             <Route path="/instruction/admin" component={AdminInstruction} />
+            <Route path="/add_question" component={AdminAddTest}/>
           </Switch>
         </ConnectedRouter>
       </App>
