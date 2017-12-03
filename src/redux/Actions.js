@@ -15,6 +15,7 @@ export default {
     change: '@@USERS/CHANGE',
     changed: '@@USERS/CHANGED',
     changeFail: '@@USERS/CHANGE_FAIL',
+    logout: '@@USERS/LOGOUT',
   },
   groups: {
     add: '@@GROUPS/ADD',

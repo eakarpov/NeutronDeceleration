@@ -2,6 +2,8 @@ const electron = require('electron');
 const Datastore = require('nedb');
 const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
+const path = require('path');
+const fork = require('child_process').fork;
 
 const {app, ipcMain} = electron;
 const BrowserWindow = electron.BrowserWindow;
@@ -62,34 +64,78 @@ app.on('ready', async () => {
 
 });
 
-ipcMain.on('admin_logged_in', function () {
-
-  let containsAdmin = false;
-  initialTemplate.forEach(obj => {
-    if (obj['label'] === 'Администратору') containsAdmin = true;
+ipcMain.on('model', function (e, ...args) {
+  const ps = fork(path.resolve(__dirname, './model.js'), args);
+  ps.on('message', (msg) => {
+    if (msg.terminate) {
+      ps.kill();
+      mainWindow.webContents.send('model_built', msg.data);
+    }
   });
-  if (containsAdmin) return;
+  ps.send({ start: true });
+});
 
+ipcMain.on('user_logged_in', function() {
+  let containsAdmin = false;
+  let containsLogout = false;
+  initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+  initialTemplate[0].submenu.forEach(el => containsLogout = el.label === 'Выйти из аккаунта' ? true : containsLogout);
+  if (containsAdmin && containsLogout) return;
   const newTemplate = initialTemplate;
-  const adminMenu = {
-    label: 'Администратору',
-    submenu: [
-      {
-        label: 'Инструкция администратора',
-        click() {
-          mainWindow.webContents.send('transitionTo', '/instruction/admin')
-        }
-      },
-      {
-        label: 'Поменять данные авторизации',
-        click() {
-          mainWindow.webContents.send('transitionTo', '/admin/change_credentials')
-        }
+  if (!containsLogout) {
+    newTemplate[0].submenu.push({
+      label: 'Выйти из аккаунта',
+      click() {
+        mainWindow.webContents.send('logout')
       }
-    ]
-  };
-  newTemplate.splice(2, 0, adminMenu);
+    });
+  }
+  const menu = electron.Menu.buildFromTemplate(newTemplate);
+  electron.Menu.setApplicationMenu(menu);
+});
 
+ipcMain.on('admin_logged_in', function () {
+  let containsAdmin = false;
+  let containsLogout = false;
+  initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+  initialTemplate[0].submenu.forEach(el => containsLogout = el.label === 'Выйти из аккаунта' ? true : containsLogout);
+  if (containsAdmin && containsLogout) return;
+  const newTemplate = initialTemplate;
+  if (!containsAdmin) {
+    const adminMenu = {
+      label: 'Администратору',
+      submenu: [
+        {
+          label: 'Инструкция администратора',
+          click() {
+            mainWindow.webContents.send('transitionTo', '/instruction/admin')
+          }
+        },
+        {
+          label: 'Поменять данные авторизации',
+          click() {
+            mainWindow.webContents.send('transitionTo', '/admin/change_credentials')
+          }
+        }
+      ]
+    };
+    newTemplate.splice(2, 0, adminMenu);
+  }
+  if (!containsLogout) {
+    newTemplate[0].submenu.push({
+      label: 'Выйти из аккаунта',
+      click() {
+        let containsAdmin = false;
+        initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+        if (containsAdmin) {
+          const newTemplate2 = [...initialTemplate.slice(0, 2), ...initialTemplate.slice(3)];
+          const menu = electron.Menu.buildFromTemplate(newTemplate2);
+          electron.Menu.setApplicationMenu(menu);
+        }
+        mainWindow.webContents.send('logout')
+      }
+    });
+  }
   const menu = electron.Menu.buildFromTemplate(newTemplate);
   electron.Menu.setApplicationMenu(menu);
 

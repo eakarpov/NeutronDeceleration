@@ -29,6 +29,13 @@ export const loginSuccess = (login, role, name, surname) => {
   }
 };
 
+export const logout = () => {
+  return {
+    type: Actions.users.logout,
+    payload: null,
+  };
+};
+
 export const addUser = (user, loadList = false) => {
   return {
     type: Actions.users.add,

@@ -25,6 +25,11 @@ export default (state = initialState, action) => {
         authorized: false
       }
     }
+    case Actions.users.logout: {
+      return {
+        initialState
+      };
+    }
     case Actions.users.changed: {
       return {
         ...state,
