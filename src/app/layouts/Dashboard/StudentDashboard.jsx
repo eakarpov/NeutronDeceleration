@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Theory from '../Theory/Theory';
 import Test from '../Testing/Testing';
 import Modeling from '../Modeling/Modeling';
 import DashboardHeader from "./DashboardHeader";
+import { connect } from "react-redux";
 
 class StudentDashboard extends React.Component {
   render() {
@@ -26,8 +26,8 @@ class StudentDashboard extends React.Component {
   }
 }
 
-StudentDashboard.propTypes = {
-  user: PropTypes.object.isRequired
-};
+const mapStateToProps = state => ({
+  user: state.user
+});
 
-export default StudentDashboard;
+export default connect(mapStateToProps)(StudentDashboard);

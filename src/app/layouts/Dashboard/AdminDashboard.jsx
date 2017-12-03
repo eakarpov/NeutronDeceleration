@@ -5,6 +5,7 @@ import AdminTest from "../Testing/AdminTest";
 import Stats from "../Stats/Stats";
 import Groupboard from "../Groupboard/Groupboard";
 import DashboardHeader from "./DashboardHeader";
+import { connect } from "react-redux";
 
 class AdminDashboard extends React.Component {
   render() {
@@ -34,4 +35,8 @@ AdminDashboard.propTypes = {
   user: PropTypes.object.isRequired
 };
 
-export default AdminDashboard;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(AdminDashboard);

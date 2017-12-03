@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { loginUser } from '../../../redux/modules/actions/users';
-import * as styles from './Login.module.scss'
+import styles from './Login.module.scss'
 import LoginForm from "./LoginForm";
+import { ROLE } from "../../../helpers/enums";
 
 class Login extends React.Component {
 
@@ -15,7 +16,10 @@ class Login extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.authorized) this.props.push("/dashboard");
+    if (newProps.user.authorized) {
+      if (newProps.user.role === ROLE.ADMIN) this.props.push("/dashboard/admin");
+      else if (newProps.user.role === ROLE.STUDENT) this.props.push("/dashboard/student");
+    }
     else this.setState({wrongInput: true})
   }
 
@@ -34,7 +38,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  authorized: state.user.authorized
+  user: state.user
 });
 
 const mapDispatchToProps = {
