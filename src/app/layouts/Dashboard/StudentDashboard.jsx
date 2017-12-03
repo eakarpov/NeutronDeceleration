@@ -3,7 +3,7 @@ import Theory from '../Theory/Theory';
 import Test from '../Testing/Testing';
 import Modeling from '../Modeling/Modeling';
 import DashboardHeader from "./DashboardHeader";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class StudentDashboard extends React.Component {
   render() {
@@ -26,8 +26,8 @@ class StudentDashboard extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
-});
+StudentDashboard.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
-export default connect(mapStateToProps)(StudentDashboard);
+export default StudentDashboard;

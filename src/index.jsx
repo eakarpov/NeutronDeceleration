@@ -6,8 +6,7 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import { createHashHistory } from 'history';
 import configureStore from './redux/store';
-import DashboardAdmin from "./app/layouts/Dashboard/AdminDashboard";
-import DashboardStudent from "./app/layouts/Dashboard/StudentDashboard";
+import Dashboard from "./app/layouts/Dashboard/DashboardWrapper";
 import Login from "./app/layouts/Login/Login";
 import UserInstruction from "./app/layouts/instructions/UserInstruction/UserInstruction";
 import DeveloperInstruction from "./app/layouts/instructions/DeveloperInstruction/DeveloperInstruction";
@@ -29,9 +28,8 @@ ReactDOM.render(
       <App>
         <ConnectedRouter history={hashHistory}>
           <Switch>
-            <Route exact path="/" component={Login}/>
-            <Route path="/dashboard/admin" component={DashboardAdmin}/>
-            <Route path="/dashboard/student" component={DashboardStudent}/>
+            <Route exact path="/" component={Dashboard}/>
+            <Route path="/login" component={Login}/>
             <Route path="/admin/change_credentials" component={AdminChangeCredentials} />
             <Route path="/instruction/user" component={UserInstruction} />
             <Route path="/instruction/developer" component={DeveloperInstruction} />
