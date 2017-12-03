@@ -8,13 +8,6 @@ import { logout } from '../redux/modules/actions/users';
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      adminLoggedIn: false
-    };
-  }
-
   async componentWillMount() {
     await dbi.init();
     function router (push, route) {
@@ -28,12 +21,9 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.adminLoggedIn) {
+    if (this.props.user.authorized) {
       if (this.props.user.role === ROLE.ADMIN) {
         electron.ipcRenderer.send('admin_logged_in');
-        this.setState({
-          adminLoggedIn: true
-        });
       } else {
         electron.ipcRenderer.send('user_logged_in');
       }

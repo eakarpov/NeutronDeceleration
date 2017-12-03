@@ -86,6 +86,13 @@ ipcMain.on('user_logged_in', function() {
     newTemplate[0].submenu.push({
       label: 'Выйти из аккаунта',
       click() {
+        let containsAdmin = false;
+        initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+        if (containsAdmin) {
+          const newTemplate2 = [...initialTemplate.slice(0, 2), ...initialTemplate.slice(3)];
+          const menu = electron.Menu.buildFromTemplate(newTemplate2);
+          electron.Menu.setApplicationMenu(menu);
+        }
         mainWindow.webContents.send('logout')
       }
     });
@@ -99,7 +106,6 @@ ipcMain.on('admin_logged_in', function () {
   let containsLogout = false;
   initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
   initialTemplate[0].submenu.forEach(el => containsLogout = el.label === 'Выйти из аккаунта' ? true : containsLogout);
-  if (containsAdmin && containsLogout) return;
   const newTemplate = initialTemplate;
   if (!containsAdmin) {
     const adminMenu = {
