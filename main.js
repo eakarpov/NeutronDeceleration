@@ -69,6 +69,7 @@ ipcMain.on('model', function (e, ...args) {
   ps.on('message', (msg) => {
     if (msg.terminate) {
       ps.kill();
+      console.log(`${ps.pid} is ${ps.killed ? '' : 'not'} killed`);
       mainWindow.webContents.send('model_built', msg.data);
     }
   });
