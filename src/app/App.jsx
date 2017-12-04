@@ -16,7 +16,7 @@ class App extends React.Component {
     electron.ipcRenderer.on('transitionTo', (evt, route) => router(this.props.push, route));
     electron.ipcRenderer.on('logout', (evt) => {
       this.props.logout();
-      this.props.push('/');
+      this.props.push('/login');
     });
   }
 

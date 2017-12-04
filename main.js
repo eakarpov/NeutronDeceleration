@@ -91,6 +91,7 @@ ipcMain.on('user_logged_in', function() {
         initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
         if (containsAdmin) {
           const newTemplate2 = [...initialTemplate.slice(0, 2), ...initialTemplate.slice(3)];
+          newTemplate2[0].submenu = [...newTemplate2[0].submenu.slice(0,newTemplate2[0].submenu.length - 1)];
           const menu = electron.Menu.buildFromTemplate(newTemplate2);
           electron.Menu.setApplicationMenu(menu);
         }
@@ -136,6 +137,7 @@ ipcMain.on('admin_logged_in', function () {
         initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
         if (containsAdmin) {
           const newTemplate2 = [...initialTemplate.slice(0, 2), ...initialTemplate.slice(3)];
+          newTemplate2[0].submenu = [...newTemplate2[0].submenu.slice(0,newTemplate2[0].submenu.length - 1)];
           const menu = electron.Menu.buildFromTemplate(newTemplate2);
           electron.Menu.setApplicationMenu(menu);
         }
