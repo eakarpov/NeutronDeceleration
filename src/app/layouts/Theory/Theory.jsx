@@ -2,9 +2,9 @@ import React from 'react';
 
 class Theory extends React.Component {
   render() {
+    const __html = require('./theory.html');
     return (
       <div>
-
         <h1>Замедление нейтронов</h1>
         <p>&nbsp;</p>
         <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Cредняя энергия, при которой появляются нейтроны в результате деления ядра, составляет величину <img
@@ -16,6 +16,7 @@ class Theory extends React.Component {
             /> до тепловых энергий, замедление нейтронов происходит за счет реакции
           упругого расеяния. Рассмотрим акт упругого рассеяния на примере &quot;лобового&quot; удара нейтрона с
           ядром, находящимся в состоянии покоя (см.рис.1.12).</p>
+        <div dangerouslySetInnerHTML={{__html: __html}} />
       </div>
     )
   }
