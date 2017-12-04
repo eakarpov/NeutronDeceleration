@@ -23,8 +23,9 @@ process.on('message', (msg) => {
       const cosPsi = (A * cosTheta + 1.0) / Math.sqrt(A * A + 2.0 * A * cosTheta + 1.0);
       E1 = (E0 * ((1.0 + eps) + ((1.0 - eps) * cosTheta))) / 2.0;
       E0 = E1;
+      const vert = Math.sqrt(1 - cosPsi * cosPsi);
       x = x + length * cosPsi;
-      y = length * length - x * x;
+      y = Math.floor(Math.random() * 1000) % 2 ? y + length * vert : y - length * vert;
       res.push({
         x,
         y,

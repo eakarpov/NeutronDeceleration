@@ -12,38 +12,35 @@ export default class RenderGraph extends Component {
       },
       network: null,
     };
-    this.options = {
-      layout: {
-        hierarchical: false,
-      },
-      edges: {
-        color: "#000000"
-      }
-    };
-    this.events = {
-      select: function(event) {
-        const { nodes, edges } = event;
-      }
-    };
     this.network = this.network.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (Array.isArray(nextProps.data)) {
+      const nodes = nextProps.data.map((el, i) => ({
+        id: i,
+        x: el.x * 100,
+        y: el.y * 100,
+        shape: 'text',
+        fixed: {
+          x: true,
+          y: true,
+        },
+        physics: false,
+        label: el.e.toFixed(2).toString(),
+      }));
+      const edges = nextProps.data.map((el, i) => {
+        if (i > 0) {
+          return {
+            from: nextProps.data.indexOf(el) - 1,
+            to: i
+          };
+        }
+      }).slice(1);
       this.setState({
         graph: {
-          nodes: nextProps.data.map((el, i) => ({
-            id: i,
-            label: el.e.toFixed(2).toString(),
-          })),
-          edges: nextProps.data.map((el, i) => {
-            if (i > 0) {
-              return {
-                from: nextProps.data.indexOf(el) - 1,
-                to: i
-              };
-            }
-          }),
+          nodes,
+          edges,
         },
       });
     }
@@ -56,10 +53,10 @@ export default class RenderGraph extends Component {
 
   render() {
     const options = {
-      layout: {
-        hierarchical: false,
-      },
+      height: '600px',
+      width: `${window.innerWidth}px`,
       edges: {
+        dashes: true,
         color: "#000000"
       }
     };
