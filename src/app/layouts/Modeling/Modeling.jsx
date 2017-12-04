@@ -15,6 +15,7 @@ class Modeling extends React.Component {
       input: '',
       initial: '',
       terminal: '',
+      error: false,
       path: [],
     };
   }
@@ -22,6 +23,15 @@ class Modeling extends React.Component {
     const matter = document.getElementById('matter').value;
     const { input, initial, terminal } = this.state;
     let param = input === '' ? matter : input;
+    if (parseFloat(initial) - parseFloat(terminal) <= 0) {
+      this.setState({
+        error: true,
+      });
+      return void 0;
+    }
+    this.setState({
+      error: false,
+    });
     electron.ipcRenderer.on('model_built', (e, data) => {
       this.setState({
         path: JSON.parse(data),
@@ -46,6 +56,7 @@ class Modeling extends React.Component {
   }
   render() {
     return (<div>
+      {this.state.error?<mark className="secondary">Неверные данные</mark>: null}<br/>
       <select id="matter">
         <option value="1">Водород</option>
         <option value="2">Дейтерий</option>
