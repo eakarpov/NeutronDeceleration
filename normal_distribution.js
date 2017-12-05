@@ -1,4 +1,4 @@
-export default nextNormalDistributedValue = (mean, standardDerivation) => {
+function nextNormalDistributedValue(mean, standardDerivation) {
   // Polar Box-Muller transformation.
   let x, y, r;
   do {
@@ -8,4 +8,6 @@ export default nextNormalDistributedValue = (mean, standardDerivation) => {
   } while (r >= 1.0);
   const z = Math.sqrt(-2.0 * Math.log(r) / r);
   return mean + standardDerivation * y * z;
-};
+}
+
+module.exports = nextNormalDistributedValue;

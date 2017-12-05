@@ -7,12 +7,10 @@ class Modeling extends React.Component {
   constructor(props) {
     super(props);
     this.model = this.model.bind(this);
-    this.changeInput = this.changeInput.bind(this);
     this.changeInitial = this.changeInitial.bind(this);
     this.changeTerminal = this.changeTerminal.bind(this);
 
     this.state = {
-      input: '',
       initial: '',
       terminal: '',
       error: false,
@@ -21,8 +19,7 @@ class Modeling extends React.Component {
   }
   model() {
     const matter = document.getElementById('matter').value;
-    const { input, initial, terminal } = this.state;
-    let param = input === '' ? matter : input;
+    const { initial, terminal } = this.state;
     if (parseFloat(initial) - parseFloat(terminal) <= 0) {
       this.setState({
         error: true,
@@ -37,12 +34,7 @@ class Modeling extends React.Component {
         path: JSON.parse(data),
       });
     });
-    electron.ipcRenderer.send('model', param, initial, terminal);
-  }
-  changeInput(e) {
-    this.setState({
-      input: e.target.value,
-    });
+    electron.ipcRenderer.send('model', matter, initial, terminal);
   }
   changeInitial(e) {
     this.setState({
@@ -58,17 +50,15 @@ class Modeling extends React.Component {
     return (<div>
       {this.state.error?<mark className="secondary">Неверные данные</mark>: null}<br/>
       <select id="matter">
-        <option value="1">Водород</option>
-        <option value="2">Дейтерий</option>
-        <option value="12">Углерод</option>
-        <option value="16">Кислород</option>
-        <option value="238">Уран</option>
+        <option value="0">Вода</option>
+        <option value="1">Тяжёлая вода</option>
+        <option value="2">Бериллий</option>
+        <option value="3">Оксид бериллия</option>
+        <option value="4">Графит</option>
       </select><br/>
-      <label htmlFor="input">Введите другое значение атомной массы вещества</label>
-      <input id="input" onChange={this.changeInput}/><br/>
-      <label>Введите начальную энергию</label>
+      <label>Введите начальную энергию, МэВ</label>
       <input id="initial" onChange={this.changeInitial} /><br/>
-      <label>Введите конечную энергию</label>
+      <label>Введите конечную энергию, эВ</label>
       <input id="terminal" onChange={this.changeTerminal}/><br/>
       <button onClick={this.model}>Смоделировать</button><br/>
       <div>
