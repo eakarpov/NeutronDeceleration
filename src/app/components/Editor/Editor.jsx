@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import htmlToDraft from 'html-to-draftjs';
@@ -8,11 +9,9 @@ class MyEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorState: EditorState.createEmpty(),
-      fileContent: null,
+      editorState: EditorState.createEmpty()
     };
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
-    this.save = this.save.bind(this);
     this.uploadImageCallback = this.uploadImageCallback.bind(this);
   }
 
@@ -35,6 +34,8 @@ class MyEditor extends Component {
     this.setState({
       editorState,
     });
+    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    this.props.editorContentCallback(html);
   }
   async uploadImageCallback(params) {
     const reader = new FileReader();
@@ -50,12 +51,6 @@ class MyEditor extends Component {
         link: result,
       },
     };
-  }
-
-  async save() {
-    const {editorState} = this.state;
-    const html = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-    await this.props.save(html);
   }
 
   render() {
@@ -83,5 +78,10 @@ class MyEditor extends Component {
     )
   }
 }
+
+MyEditor.propTypes = {
+  initial: PropTypes.string,
+  editorContentCallback: PropTypes.func.isRequired
+};
 
 export default MyEditor;
