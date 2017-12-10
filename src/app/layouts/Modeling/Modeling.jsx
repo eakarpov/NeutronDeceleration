@@ -9,6 +9,7 @@ class Modeling extends React.Component {
     this.model = this.model.bind(this);
     this.changeInitial = this.changeInitial.bind(this);
     this.changeTerminal = this.changeTerminal.bind(this);
+    this.changeAmount = this.changeAmount.bind(this);
 
     this.state = {
       initial: '',
@@ -19,6 +20,7 @@ class Modeling extends React.Component {
   }
   model() {
     const matter = document.getElementById('matter').value;
+    const amount = document.getElementById('amount').value;
     const { initial, terminal } = this.state;
     if (parseFloat(initial) - parseFloat(terminal) <= 0) {
       this.setState({
@@ -30,11 +32,13 @@ class Modeling extends React.Component {
       error: false,
     });
     electron.ipcRenderer.on('model_built', (e, data) => {
+      const model = JSON.parse(data);
       this.setState({
-        path: JSON.parse(data),
+        path: model.path,
       });
+      console.log(model.avrg);
     });
-    electron.ipcRenderer.send('model', matter, initial, terminal);
+    electron.ipcRenderer.send('model', matter, initial, terminal, amount);
   }
   changeInitial(e) {
     this.setState({
@@ -44,6 +48,11 @@ class Modeling extends React.Component {
   changeTerminal(e) {
     this.setState({
       terminal: e.target.value,
+    });
+  }
+  changeAmount(e) {
+    this.setState({
+      amount: e.target.value,
     });
   }
   render() {
@@ -60,6 +69,8 @@ class Modeling extends React.Component {
       <input id="initial" onChange={this.changeInitial} /><br/>
       <label>Введите конечную энергию, эВ</label>
       <input id="terminal" onChange={this.changeTerminal}/><br/>
+      <label>Введите количество моделируемых нейтронов</label>
+      <input id="amount" onChange={this.changeAmount} /><br/>
       <button onClick={this.model}>Смоделировать</button><br/>
       <div>
         {this.state.path.length}

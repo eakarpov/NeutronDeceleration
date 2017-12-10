@@ -4,6 +4,7 @@ const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 const path = require('path');
 const fork = require('child_process').fork;
+const spawn = require('child_process').spawn;
 
 const {app, ipcMain} = electron;
 const BrowserWindow = electron.BrowserWindow;
@@ -65,15 +66,37 @@ app.on('ready', async () => {
 });
 
 ipcMain.on('model', function (e, ...args) {
-  const ps = fork(path.resolve(__dirname, './model.js'), args);
-  ps.on('message', (msg) => {
-    if (msg.terminate) {
-      ps.kill();
-      console.log(`${ps.pid} is ${ps.killed ? '' : 'not'} killed`);
-      mainWindow.webContents.send('model_built', msg.data);
-    }
+  // const ps = fork(path.resolve(__dirname, './model.js'), args);
+  // ps.on('message', (msg) => {
+  //   console.log(msg);
+  //   if (msg.terminate) {
+  //     ps.kill();
+  //     console.log(`${ps.pid} is ${ps.killed ? '' : 'not'} killed`);
+  //     mainWindow.webContents.send('model_built', msg.data);
+  //   }
+  // });
+  // ps.send({ start: true });
+  const py    = spawn('python', [path.resolve(__dirname, './model.py')]);
+  let outData = null;
+  py.stdout.on('data', function(data){
+    const res = Buffer.from(data).toString();
+    console.log(res);
   });
-  ps.send({ start: true });
+  py.stderr.on('data', function(data) {
+    const res = Buffer.from(data).toString();
+    console.log(res);
+  });
+  py.stdout.on('end', function(){
+    mainWindow.webContents.send('model_built', outData);
+  });
+  const inData = {
+    matter: args[0],
+    initial: args[1],
+    terminal: args[2],
+    amount: args[3],
+  };
+  py.stdin.write(JSON.stringify(inData));
+  py.stdin.end();
 });
 
 ipcMain.on('user_logged_in', function() {
