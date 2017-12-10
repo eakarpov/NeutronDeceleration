@@ -16,6 +16,7 @@ class Modeling extends React.Component {
       terminal: '',
       error: false,
       path: [],
+      avrg: {},
     };
   }
   model() {
@@ -34,9 +35,9 @@ class Modeling extends React.Component {
     electron.ipcRenderer.on('model_built', (e, data) => {
       const model = JSON.parse(data);
       this.setState({
-        path: model.path,
+        path: model.trace,
+        avrg: model.avrg,
       });
-      console.log(model.avrg);
     });
     electron.ipcRenderer.send('model', matter, initial, terminal, amount);
   }
@@ -72,13 +73,30 @@ class Modeling extends React.Component {
       <label>Введите количество моделируемых нейтронов</label>
       <input id="amount" onChange={this.changeAmount} /><br/>
       <button onClick={this.model}>Смоделировать</button><br/>
+      <table>
+        <thead>
+        <tr>
+          <th>Параметры</th>
+          <th>E dec</th>
+          <th>log E dec</th>
+          <th>avrg length</th>
+          <th>avrg time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Средние значения</td>
+          <td>{this.state.avrg.eDec}</td>
+          <td>{this.state.avrg.logEDec}</td>
+          <td>{this.state.avrg.path}</td>
+          <td>{this.state.avrg.neutron_age}</td>
+        </tr>
+        </tbody>
+      </table>
       <div>
         {this.state.path.length}
         <RenderGraph data={this.state.path} />
       </div>
-      <p>
-        Тут будет таблица с характеристиками средними
-      </p>
     </div>);
   }
 }

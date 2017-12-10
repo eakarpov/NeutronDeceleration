@@ -3,7 +3,6 @@ const Datastore = require('nedb');
 const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 const path = require('path');
-const fork = require('child_process').fork;
 const spawn = require('child_process').spawn;
 
 const {app, ipcMain} = electron;
@@ -66,28 +65,15 @@ app.on('ready', async () => {
 });
 
 ipcMain.on('model', function (e, ...args) {
-  // const ps = fork(path.resolve(__dirname, './model.js'), args);
-  // ps.on('message', (msg) => {
-  //   console.log(msg);
-  //   if (msg.terminate) {
-  //     ps.kill();
-  //     console.log(`${ps.pid} is ${ps.killed ? '' : 'not'} killed`);
-  //     mainWindow.webContents.send('model_built', msg.data);
-  //   }
-  // });
-  // ps.send({ start: true });
   const py    = spawn('python', [path.resolve(__dirname, './model.py')]);
   let outData = null;
   py.stdout.on('data', function(data){
-    const res = Buffer.from(data).toString();
-    console.log(res);
+    outData = Buffer.from(data).toString();
+    mainWindow.webContents.send('model_built', outData);
+    py.kill();
   });
   py.stderr.on('data', function(data) {
-    const res = Buffer.from(data).toString();
-    console.log(res);
-  });
-  py.stdout.on('end', function(){
-    mainWindow.webContents.send('model_built', outData);
+    console.log(Buffer.from(data).toString());
   });
   const inData = {
     matter: args[0],

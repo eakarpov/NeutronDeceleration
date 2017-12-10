@@ -92,13 +92,7 @@ def read_in():
 
 
 def main():
-    # lines = read_in()
-    lines = {
-        'matter': '2',
-        'terminal': '0.025',
-        'initial': '2',
-        'amount': '100000'
-    }
+    lines = read_in()
     dc = DeceleratorConstants[int(lines.get('matter'))]
     Et = float(lines.get('terminal'))
     A = dc[0]
