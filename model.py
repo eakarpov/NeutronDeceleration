@@ -1,9 +1,9 @@
-import sys, json
 import concurrent.futures
-import random
+import json
 import math
+import random
+import sys
 from functools import reduce
-
 
 MeanSquareOfDisplacement = {
     'H2O': 6 * 27,
@@ -12,7 +12,6 @@ MeanSquareOfDisplacement = {
     'BeO': 6 * 105,
     'C': 6 * 350,
 }
-
 
 DeceleratorConstants = [
     [18, MeanSquareOfDisplacement.get('H2O')],
@@ -82,7 +81,7 @@ def avrg(res):
     for e in res:
         if res.index(e) > 0:
             p = res[res.index(e) - 1]
-            arr.append(math.sqrt((e.x - p.x) ** 2 + (e.y - p.y) ** 2))
+            arr.append(math.sqrt((e.get('x') - p.get('x')) ** 2 + (e.get('y') - p.get('y')) ** 2))
     length = reduce(lambda pr, c: pr + c, arr) / len(arr)
     return length
 
@@ -93,31 +92,40 @@ def read_in():
 
 
 def main():
-    lines = read_in()
+    # lines = read_in()
+    lines = {
+        'matter': '2',
+        'terminal': '0.025',
+        'initial': '2',
+        'amount': '100000'
+    }
     dc = DeceleratorConstants[int(lines.get('matter'))]
     Et = float(lines.get('terminal'))
     A = dc[0]
     a = (A - 1.0) / (A + 1.0)
     eps = a ** 2
     Einit = float(lines.get('initial')) * 1e6
-    futures = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        for i in range(int(lines.get('amount'))):
-            futures.append(executor.submit(calculation(eps, Et, Einit, dc)))
-    results, _ = concurrent.futures.wait(futures, return_when=concurrent.futures.ALL_COMPLETED)
-    trace = futures[0].result()
-    res = {'trace': trace}
-    eDec = (Einit - Et) / len(futures)
-    logEDec =  math.log(Einit - Et) / len(futures)
-    avr = {'eDec': eDec, 'logEDec': logEDec}
-    ftrs = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor2:
-        for j in range(len(futures)):
-            ftrs.append(executor2.submit(avrg(futures[j].result())))
-    rslts, _ = concurrent.futures.wait(ftrs, return_when=concurrent.futures.ALL_COMPLETED)
-    path = reduce(lambda p, c: p + c, map(lambda elem: elem.result(), ftrs)) / len(rslts)
-    time = path ** 2 / 6
-    avr.update({'path': path, 'time': time})
+    amount = int(lines.get('amount'))
+
+    results = []
+    averages = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+        for calc_result in executor.map(calculation,
+                                        [eps] * amount, [Et] * amount, [Einit] * amount, [dc] * amount):
+            results.append(calc_result)
+
+        trace = results[0]
+        res = {'trace': trace}
+        eDec = (Einit / Et) / len(results)
+        logEDec = math.log(Einit / Et) / len(results)
+        avr = {'eDec': eDec, 'logEDec': logEDec}
+
+        for avg_result in executor.map(avrg, results):
+            averages.append(avg_result)
+
+    path = reduce(lambda p, c: p + c, averages) / len(averages)
+    neutron_age = path ** 2 / 6
+    avr.update({'path': path, 'neutron_age': neutron_age})
     res.update({'avrg': avr})
     print(json.dumps(res))
 
