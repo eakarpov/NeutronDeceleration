@@ -2,6 +2,8 @@ import React from 'react';
 import electron from 'electron';
 import RenderGraph from "./RenderGraph";
 
+import * as styles from './Modelling.css';
+
 class Modeling extends React.Component {
 
   constructor(props) {
@@ -17,9 +19,13 @@ class Modeling extends React.Component {
       error: false,
       path: [],
       avrg: {},
+      loading: false,
     };
   }
   model() {
+    this.setState({
+      loading: true,
+    });
     const matter = document.getElementById('matter').value;
     const amount = document.getElementById('amount').value;
     const { initial, terminal } = this.state;
@@ -37,6 +43,7 @@ class Modeling extends React.Component {
       this.setState({
         path: model.trace,
         avrg: model.avrg,
+        loading: false,
       });
     });
     electron.ipcRenderer.send('model', matter, initial, terminal, amount);
@@ -73,30 +80,43 @@ class Modeling extends React.Component {
       <label>Введите количество моделируемых нейтронов</label>
       <input id="amount" onChange={this.changeAmount} /><br/>
       <button onClick={this.model}>Смоделировать</button><br/>
-      <table>
-        <thead>
-        <tr>
-          <th>Параметры</th>
-          <th>E dec</th>
-          <th>log E dec</th>
-          <th>avrg length</th>
-          <th>avrg time</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Средние значения</td>
-          <td>{this.state.avrg.eDec}</td>
-          <td>{this.state.avrg.logEDec}</td>
-          <td>{this.state.avrg.path}</td>
-          <td>{this.state.avrg.neutron_age}</td>
-        </tr>
-        </tbody>
-      </table>
-      <div>
-        {this.state.path.length}
-        <RenderGraph data={this.state.path} />
-      </div>
+      {this.state.loading
+        ?
+        <div>
+          <p>Моделирование...</p>
+        <div className={styles.spinner}>
+          <div className={styles.bounce1} />
+          <div className={styles.bounce2} />
+          <div className={styles.bounce3} />
+        </div>
+        </div>
+        :
+        <div>
+          <table>
+            <thead>
+            <tr>
+              <th>Параметры</th>
+              <th>E dec</th>
+              <th>log E dec</th>
+              <th>avrg length</th>
+              <th>avrg time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Средние значения</td>
+              <td>{this.state.avrg.eDec}</td>
+              <td>{this.state.avrg.logEDec}</td>
+              <td>{this.state.avrg.path}</td>
+              <td>{this.state.avrg.neutron_age}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div>
+            {this.state.path.length}
+            <RenderGraph data={this.state.path} />
+          </div>
+        </div>}
     </div>);
   }
 }
