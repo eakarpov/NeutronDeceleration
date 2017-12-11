@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from 'react-rangeslider';
 import BackButton from "../../components/BackButton/BackButton";
 import Editor from "../../components/Editor/Editor";
+import { connect } from "react-redux";
+import { addTest } from "../../../redux/modules/actions/test";
 
 class AdminAddTest extends React.Component {
 
@@ -49,7 +51,12 @@ class AdminAddTest extends React.Component {
   };
 
   addQuestion = () => {
-    console.log(this.state)
+    this.props.addTest(
+      this.state.question,
+      [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
+      [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
+      this.state.sliderValue
+    )
   };
 
   render() {
@@ -109,4 +116,8 @@ class AdminAddTest extends React.Component {
 
 }
 
-export default AdminAddTest;
+const mapDispatchToProps = {
+  addTest
+};
+
+export default connect(null, mapDispatchToProps)(AdminAddTest);

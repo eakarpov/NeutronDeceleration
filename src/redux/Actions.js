@@ -27,5 +27,13 @@ export default {
     remove: '@@GROUPS/REMOVE',
     removed: '@@GROUPS/REMOVED',
     removeFail: '@@GROUPS/REMOVE_FAIL',
+  },
+  tests: {
+    add: '@@TEST/ADD',
+    added: '@@TEST/ADDED',
+    addFail: '@@TEST/ADD_FAIL',
+    remove: '@@TEST/REMOVE',
+    removed: '@@TEST/REMOVED',
+    removeFail: '@@TEST/REMOVE_FAIL',
   }
 }

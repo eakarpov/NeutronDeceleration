@@ -37,7 +37,6 @@ def next_normal_distributed_value(mean, standard_derivation):
 
 def calculation(eps, Et, Einit, dc):
     A = dc[0]
-    E1 = None
     E0 = Einit
     x = 0.0
     y = 0.0
