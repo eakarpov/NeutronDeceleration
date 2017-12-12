@@ -15,6 +15,35 @@ export default class RenderGraph extends Component {
     this.network = this.network.bind(this);
   }
 
+  componentDidMount() {
+    const nodes = this.props.data.map((el, i) => ({
+        id: i,
+        x: el.x * 100,
+        y: el.y * 100,
+        shape: 'text',
+        fixed: {
+            x: true,
+            y: true,
+        },
+        physics: false,
+        label: el.e.toFixed(2).toString(),
+    }));
+    const edges = this.props.data.map((el, i) => {
+        if (i > 0) {
+            return {
+                from: this.props.data.indexOf(el) - 1,
+                to: i
+            };
+        }
+    }).slice(1);
+    this.setState({
+        graph: {
+            nodes,
+            edges,
+        },
+    }, () => this.state.network.fit());
+  }
+
   componentWillReceiveProps(nextProps) {
     if (Array.isArray(nextProps.data)) {
       const nodes = nextProps.data.map((el, i) => ({
@@ -42,13 +71,13 @@ export default class RenderGraph extends Component {
           nodes,
           edges,
         },
-      });
+      }, () => this.state.network.fit());
     }
   }
   network(e) {
     this.setState({
       network: e,
-    })
+    });
   }
 
   render() {
