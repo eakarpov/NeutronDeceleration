@@ -25,9 +25,10 @@ export const getTestSuite = () => {
   }
 };
 
-export const testSuiteGot = () => {
+export const testSuiteGot = (test) => {
   return {
-    type: Actions.tests.testSuiteGot
+    type: Actions.tests.testSuiteGot,
+    payload: test
   }
 };
 

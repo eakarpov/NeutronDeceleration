@@ -14,4 +14,4 @@ export const getTestSuite = action =>
     .ofType(Actions.tests.getTestSuite)
     .mergeMap(({payload}) =>
       dbi.generateTestSuite(payload)
-        .then(testSuite => testSuite ? testSuiteGot() : testSuiteGetFail()));
+        .then(testSuite => testSuite ? testSuiteGot(testSuite) : testSuiteGetFail()));

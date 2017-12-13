@@ -19,7 +19,10 @@ export async function getTestSuiteQuestions(id) {
 }
 
 export async function generateTestSuite(...args) {
-  return true;
+  const db = dbi.getDb();
+  const testSuite = await async(db.find, {});
+  const questions = testSuite.filter(el => el.question !== void 0);
+  return questions;
 }
 
 export async function addTest(question, answers, correctAnswersId, mark) {

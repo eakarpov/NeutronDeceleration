@@ -1,15 +1,24 @@
 import React from 'react';
 import * as styles from '../Modeling/Modelling.module.scss';
+import {getTestSuite} from "../../../redux/modules/actions/test";
+import {connect} from "react-redux";
+import Checkbox from "../../components/Checkbox/Checkbox";
 
 class Testing extends React.Component {
 
   constructor(props) {
     super(props);
     this.startTest = this.startTest.bind(this);
+    this.checkAnswers = this.checkAnswers.bind(this);
     this.state = {
       initial: true,
       loading: false,
     };
+  }
+
+  checkAnswers() {
+    const checkboxes = document.getElementsByTagName('input');
+    console.log(checkboxes);
   }
 
   startTest() {
@@ -17,6 +26,7 @@ class Testing extends React.Component {
       initial: false,
       loading: true,
     }, () => {
+      this.props.getTestSuite();
       setTimeout(() => {
         this.setState({
           loading: false,
@@ -51,11 +61,23 @@ class Testing extends React.Component {
                   <div className={`${styles.skcircle12} ${styles.skchild}`}/>
                 </div>
               </div>
-            : <div>Здесь тесты</div>}
+            : <div>{this.props.tests.map((el, i) =>
+                <div key={i}>
+                  <b>Вопрос {i+1}: </b><div dangerouslySetInnerHTML={{__html: el.question}}/>
+                  {el.answers.map((ans, j) =><div key={`outer-${j}`}>
+                      <Checkbox id={`${i}-${j}`} name={`group-${j}`} label={ans} />
+                      <br/></div>)}
+                </div>)}
+                <button onClick={this.checkAnswers}>Сдать тест</button>
+              </div>}
         </div>
       </div>
     );
   }
 }
 
-export default Testing;
+export default connect(state => ({
+  tests: state.test,
+}), {
+  getTestSuite,
+})(Testing);
