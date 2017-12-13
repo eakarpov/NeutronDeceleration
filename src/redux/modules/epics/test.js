@@ -1,6 +1,9 @@
 import Actions from "../../Actions";
 import dbi from '../../../dbi';
-import {testAdded, testAddFailed, testSuiteGetFail, testSuiteGot} from "../actions/test";
+import {
+  getAllTestsFail, gotAllTests, testAdded, testAddFailed,
+  testSuiteGetFail, testSuiteGot
+} from "../actions/test";
 
 export const addTest = action =>
   action
@@ -15,3 +18,10 @@ export const getTestSuite = action =>
     .mergeMap(({payload}) =>
       dbi.generateTestSuite(payload)
         .then(testSuite => testSuite ? testSuiteGot(testSuite) : testSuiteGetFail()));
+
+export const getAllTests = action =>
+  action
+    .ofType(Actions.tests.getAllTests)
+    .mergeMap(({payload}) =>
+      dbi.getAllTests(payload)
+        .then(tests => tests ? gotAllTests(tests) : getAllTestsFail()));

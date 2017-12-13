@@ -3,7 +3,10 @@ import {validatePassword, getUser} from './auth';
 import { remote } from 'electron';
 import {getAllGroups, registerGroup, removeGroup} from "./groups";
 import {getAllUsers, registerUser, removeUser, editUser} from "./user";
-import { addTest, generateTestSuite } from "./test";
+import {
+  addTest, generateTestSuite,
+  getAllTests
+} from "./test";
 
 const db = remote.getGlobal('db');
 
@@ -23,4 +26,5 @@ export default {
   removeGroup,
   addTest,
   generateTestSuite,
+  getAllTests
 };

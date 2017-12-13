@@ -18,6 +18,12 @@ export async function getTestSuiteQuestions(id) {
   };
 }
 
+export async function getAllTests() {
+  const db = dbi.getDb();
+  const tests = await async(db.find, {});
+  return tests.filter(el => el.question !== void 0);
+}
+
 export async function generateTestSuite(...args) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, {});

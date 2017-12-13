@@ -37,3 +37,22 @@ export const testSuiteGetFail = () => {
     type: Actions.tests.testSuiteGetFail
   }
 };
+
+export const getAllTests = () => {
+  return {
+    type: Actions.tests.getAllTests,
+  }
+};
+
+export const gotAllTests = (tests) => {
+  return {
+    type: Actions.tests.gotAllTests,
+    payload: tests,
+  }
+};
+
+export const getAllTestsFail = () => {
+  return {
+    type: Actions.tests.getAllTestsFail,
+  }
+};

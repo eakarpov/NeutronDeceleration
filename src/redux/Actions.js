@@ -38,5 +38,8 @@ export default {
     getTestSuite: '@@TEST/GET_TEST_SUITE',
     testSuiteGot: '@@TEST/TEST_SUITE_GOT',
     testSuiteGetFail: '@@TEST/TEST_SUITE_GET_FAIL',
+    getAllTests: '@@TESTS/GET_ALL',
+    gotAllTests: '@@TESTS/GOT_ALL',
+    getAllTestsFail: '@@TESTS/GET_ALL_TESTS_FAIL',
   }
 }
