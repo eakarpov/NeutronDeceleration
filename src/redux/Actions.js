@@ -35,5 +35,8 @@ export default {
     remove: '@@TEST/REMOVE',
     removed: '@@TEST/REMOVED',
     removeFail: '@@TEST/REMOVE_FAIL',
+    getTestSuite: '@@TEST/GET_TEST_SUITE',
+    testSuiteGot: '@@TEST/TEST_SUITE_GOT',
+    testSuiteGetFail: '@@TEST/TEST_SUITE_GET_FAIL',
   }
 }

@@ -18,3 +18,21 @@ export const testAddFailed = () => {
     type: Actions.tests.addFail
   }
 };
+
+export const getTestSuite = () => {
+  return {
+    type: Actions.tests.getTestSuite
+  }
+};
+
+export const testSuiteGot = () => {
+  return {
+    type: Actions.tests.testSuiteGot
+  }
+};
+
+export const testSuiteGetFail = () => {
+  return {
+    type: Actions.tests.testSuiteGetFail
+  }
+};

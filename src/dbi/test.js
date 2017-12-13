@@ -18,6 +18,10 @@ export async function getTestSuiteQuestions(id) {
   };
 }
 
+export async function generateTestSuite(...args) {
+  return true;
+}
+
 export async function addTest(question, answers, correctAnswersId, mark) {
   const db = dbi.getDb();
   await async(db.insert, { question, answers, correctAnswersId, mark });
