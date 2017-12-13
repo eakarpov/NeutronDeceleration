@@ -15,14 +15,14 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
-    const {value} = this.state;
     return (<div className="input-group">
-      <input defaultChecked={value}
+      <input defaultChecked={this.state.value}
              type="checkbox"
+             tabIndex="0"
              id={this.props.id}
              name={this.props.name}
              onChange={this.handleChange} />
-      <label htmlFor={this.props.name}>|</label>
+      <label htmlFor={this.props.name} className="switch">|</label>
       <div dangerouslySetInnerHTML={{__html: this.props.label}} style={{float: 'right'}} />
     </div>);
   }
