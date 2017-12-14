@@ -65,7 +65,7 @@ app.on('ready', async () => {
 });
 
 ipcMain.on('model', function (e, ...args) {
-  const py    = spawn('python', [path.resolve(__dirname, './model.py')]);
+  const py = spawn('python', [path.resolve(__dirname, './model.py')]);
   let outData = null;
   py.stdout.on('data', function(data){
     outData = Buffer.from(data).toString();
@@ -88,7 +88,7 @@ ipcMain.on('model', function (e, ...args) {
 ipcMain.on('user_logged_in', function() {
   let containsAdmin = false;
   let containsLogout = false;
-  initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+  initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true : containsAdmin);
   initialTemplate[0].submenu.forEach(el => containsLogout = el.label === 'Выйти из аккаунта' ? true : containsLogout);
   if (containsAdmin && containsLogout) return;
   const newTemplate = initialTemplate;
@@ -97,10 +97,10 @@ ipcMain.on('user_logged_in', function() {
       label: 'Выйти из аккаунта',
       click() {
         let containsAdmin = false;
-        initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+        initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true : containsAdmin);
         if (containsAdmin) {
           const newTemplate2 = [...initialTemplate.slice(0, 2), ...initialTemplate.slice(3)];
-          newTemplate2[0].submenu = [...newTemplate2[0].submenu.slice(0,newTemplate2[0].submenu.length - 1)];
+          newTemplate2[0].submenu = [...newTemplate2[0].submenu.slice(0, newTemplate2[0].submenu.length - 1)];
           const menu = electron.Menu.buildFromTemplate(newTemplate2);
           electron.Menu.setApplicationMenu(menu);
         }
@@ -115,7 +115,7 @@ ipcMain.on('user_logged_in', function() {
 ipcMain.on('admin_logged_in', function () {
   let containsAdmin = false;
   let containsLogout = false;
-  initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+  initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true : containsAdmin);
   initialTemplate[0].submenu.forEach(el => containsLogout = el.label === 'Выйти из аккаунта' ? true : containsLogout);
   const newTemplate = initialTemplate;
   if (!containsAdmin) {
@@ -143,10 +143,10 @@ ipcMain.on('admin_logged_in', function () {
       label: 'Выйти из аккаунта',
       click() {
         let containsAdmin = false;
-        initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true :  containsAdmin);
+        initialTemplate.forEach(obj => containsAdmin = obj['label'] === 'Администратору' ? true : containsAdmin);
         if (containsAdmin) {
           const newTemplate2 = [...initialTemplate.slice(0, 2), ...initialTemplate.slice(3)];
-          newTemplate2[0].submenu = [...newTemplate2[0].submenu.slice(0,newTemplate2[0].submenu.length - 1)];
+          newTemplate2[0].submenu = [...newTemplate2[0].submenu.slice(0, newTemplate2[0].submenu.length - 1)];
           const menu = electron.Menu.buildFromTemplate(newTemplate2);
           electron.Menu.setApplicationMenu(menu);
         }

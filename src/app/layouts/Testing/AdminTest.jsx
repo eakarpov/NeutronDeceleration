@@ -7,6 +7,7 @@ class AdminTest extends React.Component {
   constructor() {
     super();
     this.editTest = this.editTest.bind(this);
+    this.deleteTest = this.deleteTest.bind(this);
   }
 
   componentWillMount() {
@@ -18,6 +19,10 @@ class AdminTest extends React.Component {
     // this.props.push('/add_question');
   }
 
+  deleteTest(ind) {
+    console.log('delete test called fot test with index: ' + ind);
+  }
+
   addQuestionClick = () => {
     this.props.push('/add_question');
   };
@@ -26,12 +31,28 @@ class AdminTest extends React.Component {
     return (
       <div>
         <button onClick={this.addQuestionClick}>Добавить вопрос</button>
-        <div>{this.props.tests.map((el, i) =>
-          <div key={i}>
-            <div dangerouslySetInnerHTML={{__html: el.question}} style={{float: 'left'}}/>
-            <button onClick={() => this.editTest(i)} >Редактировать вопрос</button>
-          </div>)}
-        </div>
+        <table style={{textAlign: 'center', width: '100%'}}>
+          <caption>Список вопросов к тесту</caption>
+          <thead>
+          <tr>
+            <th>Вопросы</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          {this.props.tests.map((el, i) =>
+            <tr key={i}>
+              <td data-label="Questions">
+                <div dangerouslySetInnerHTML={{__html: el.question}} style={{float: 'left'}}/>
+              </td>
+              <td data-label="Buttons" style={{float: 'left'}}>
+                <button onClick={() => this.editTest(i)} >Редактировать вопрос</button>
+                <button onClick={() => this.deleteTest(i)} >Удалить вопрос</button>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
       </div>
     );
   }
