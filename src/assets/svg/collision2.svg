@@ -1,0 +1,77 @@
+<svg width="450" height="140" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="76.55464" y1="101.37892" x2="110.30464" y2="101.37892" id="svg_3"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="109.56639" y1="100.92189" x2="103.23827" y2="99.02346" id="svg_4"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="102.92186" y1="103.76955" x2="109.56639" y2="101.55471" id="svg_5"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="114.31249" y1="101.2383" x2="124.12108" y2="101.2383" id="svg_6" stroke="#000000"
+              transform="rotate(-1.3019392490386963 119.21678161621035,101.23829650878918) "/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="128.70899" y1="100.92188" x2="138.51758" y2="100.92188" stroke="#000000"
+              transform="rotate(-1.3019392490386963 133.61328124999983,100.92187500000033) " id="svg_7"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="143.89649" y1="101.23829" x2="153.70508" y2="101.23829" stroke="#000000" id="svg_8"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="159.08399" y1="101.23828" x2="168.89258" y2="101.23828" stroke="#000000"
+              transform="rotate(-1.3019392490386963 163.98828124999923,101.23828124999957) " id="svg_9"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="175.22071" y1="101.55469" x2="185.0293" y2="101.55469" stroke="#000000" id="svg_10"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="190.0918" y1="101.8711" x2="199.90039" y2="101.8711" stroke="#000000" id="svg_11"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="207.49414" y1="101.8711" x2="217.30274" y2="101.8711" stroke="#000000" id="svg_12"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="223.31445" y1="101.87109" x2="233.12304" y2="101.87109" stroke="#000000"
+              transform="rotate(-1.3019392490386963 228.21875000000216,101.87109374999986) " id="svg_13"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="239.45117" y1="101.8711" x2="249.25977" y2="101.8711" stroke="#000000" id="svg_14"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="255.58789" y1="102.1875" x2="265.39649" y2="102.1875" stroke="#000000" id="svg_15"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="271.0918" y1="102.82032" x2="280.90039" y2="102.82032" stroke="#000000" id="svg_16"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="288.81055" y1="102.82032" x2="298.61914" y2="102.82032" stroke="#000000" id="svg_17"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="306.21289" y1="102.82031" x2="316.02149" y2="102.82031" stroke="#000000"
+              transform="rotate(-1.3019392490386963 311.11718749999943,102.82031250000044) " id="svg_18"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="324.88086" y1="102.50391" x2="334.68946" y2="102.50391" stroke="#000000" id="svg_19"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="341.65039" y1="102.50391" x2="351.45899" y2="102.50391" stroke="#000000" id="svg_20"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="373.92383" y1="102.1875" x2="383.73242" y2="102.1875" stroke="#000000" id="svg_21"/>
+        <circle stroke="#000000" fill="#ff0000" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+                cx="338.45898" cy="101.47461" r="15.59839" id="svg_2"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="346.55468" y1="89.21486" x2="371.86718" y2="66.43361" id="svg_22"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="365.85543" y1="68.17382" x2="371.31344" y2="66.75" id="svg_23"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="369.73141" y1="71.25878" x2="371.86715" y2="66.9873" id="svg_24"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="347.26657" y1="115.71386" x2="353.67379" y2="129.00292" id="svg_25"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="353.43649" y1="124.49414" x2="353.43649" y2="128.52832" id="svg_26"/>
+        <line fill="none" stroke="#000000" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" x1="350.11422" y1="126.39257" x2="353.67379" y2="129.00292" id="svg_27"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="389.50025" y1="101.8711" x2="399.30884" y2="101.8711" stroke="#000000" id="svg_29"/>
+        <line fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null"
+              x1="358.18262" y1="102.82032" x2="367.99121" y2="102.82032" stroke="#000000" id="svg_30"/>
+        <path stroke="#000000" fill="none" stroke-width="null" stroke-dasharray="null" stroke-linejoin="null"
+              stroke-linecap="null" id="svg_45"
+              d="m353.43649,85.41797c2.85102,1.14441 4.12818,1.65421 5.28483,2.67029c1.08189,0.95041 1.58498,2.28163 2.21017,3.57209c0.63076,1.30201 0.98639,2.58487 1.19716,3.99374c0.20309,1.35758 0.06954,2.80611 0.06954,4.29791l0,1.37328"/>
+        <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="382.07125" y="87.1582" id="svg_46" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve"/>
+  <text fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="420.16499" y="91.73198" id="svg_47" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve" transform="matrix(0.6668240980926413,0,0,0.5299767890703962,95.26232460024926,45.82399683994312) " stroke="#000000">Ψ</text>
+  <text fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="79.32356" y="160.99388" id="svg_48" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve" transform="matrix(0.7286619836129375,0,0,0.6788981921707489,30.070259210657753,30.349951255880626) " stroke="#000000">V</text>
+  <text fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="116.04805" y="152.70705" id="svg_49" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve" transform="matrix(0.42657930853145465,0,0,0.39596026945869994,45.342710551067356,85.51745427303237) " stroke="#000000">0</text>
+  <text fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="357.39279" y="143.00393" id="svg_50" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve" transform="matrix(0.5663442273142252,0,0,0.4861036419636377,139.09461852088637,62.61169821563272) " stroke="#000000">V</text>
+  <text fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="372.8164" y="63.58595" id="svg_51" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve" transform="matrix(0.6228544426489576,0,0,0.5891382343090611,121.76967317092652,25.10959206845952) " stroke="#000000">V</text>
+  <text fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="326.11802" y="131.76518" id="svg_52" font-size="24" font-family="serif" text-anchor="middle" xml:space="preserve" transform="matrix(0.38924868441995386,0,0,0.3638808526869113,234.31923384564334,19.571802600697623) " stroke="#000000">1</text>
+        <circle fill="#ff0000" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="76.01172"
+                cy="102.51172" r="17.65503" id="svg_1" stroke="#000000"/>
+    </g>
+</svg>
