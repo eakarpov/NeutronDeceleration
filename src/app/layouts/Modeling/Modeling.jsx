@@ -1,7 +1,7 @@
 import React from 'react';
 import electron from 'electron';
 import RenderGraph from "./RenderGraph";
-import * as styles from './Modelling.module.scss';
+import Spinner from "../../components/Spinner/Spinner";
 
 class Modeling extends React.Component {
 
@@ -94,20 +94,7 @@ class Modeling extends React.Component {
           <div className="col-sm-6 col-sm-offset-3">
             <p style={{textAlign: 'center'}}><b>Пожалуйста подождите, идёт моделирование...</b></p>
           </div>
-          <div className={styles.skcircle}>
-            <div className={`${styles.skcircle1} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle2} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle3} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle4} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle5} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle6} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle7} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle8} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle9} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle10} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle11} ${styles.skchild}`}/>
-            <div className={`${styles.skcircle12} ${styles.skchild}`}/>
-          </div>
+          <Spinner/>
         </div>
         : this.state.loaded
           ?

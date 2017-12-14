@@ -15,7 +15,7 @@ electron.crashReporter.start({
   autoSubmit: true,
   extra: {
     'prod': 'Лабораторная система по курсу ММФП',
-    'key': '0.0.1',
+    'key': '0.1.0',
     'email': 'eakarpov@yandex.ru',
     'comments': ''
   }
