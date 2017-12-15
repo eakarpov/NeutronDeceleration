@@ -11,3 +11,7 @@ NodeJs >= 8
 * cd NeutronDeceleration
 * npm i
 * npm start
+
+## Building application (Windows and Linux OS tested)
+
+* npm run package OR yarn package
