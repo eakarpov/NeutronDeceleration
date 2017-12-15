@@ -1,12 +1,15 @@
 {
   "name": "NeutronDeceleration",
   "version": "0.1.0",
+  "description": "Electron application of Neutron Deceleration process for MMoPhP course in NRNU MEPhI, Department of Cybernetics",
+  "author": "George Carpow <eakarpov@yandex.ru> (https://github.com/eakarpov)",
   "license": "MIT",
   "main": "main.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "draft-js": "^0.10.4",
     "draftjs-to-html": "^0.8.1",
+    "electron-devtools-installer": "^2.2.1",
     "history": "^4.7.2",
     "html-to-draftjs": "^1.1.1",
     "immutable": "^3.8.2",
@@ -36,7 +39,7 @@
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
     "electron": "^1.7.9",
-    "electron-devtools-installer": "^2.2.1",
+    "electron-builder": "^19.49.0",
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
     "node-sass": "^4.7.2",
@@ -45,19 +48,34 @@
     "redux-devtools-extension": "^2.13.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.4",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
   "scripts": {
-    "build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.dev.js",
+    "bundle": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.config.dev.js",
     "start_electron": "electron .",
-    "start": "cross-env NODE_ENV=development concurrently \"npm run build\"  \"npm run start_electron\"",
-    "start:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && electron ."
+    "start": "cross-env NODE_ENV=development concurrently \"npm run bundle\"  \"npm run start_electron\"",
+    "start:prod": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js && electron .",
+    "run": "cross-env NODE_ENV=production electron .",
+    "prepackage": "webpack --config webpack.config.prod.js",
+    "package": "build"
   },
   "devEngines": {
     "node": ">=8.x",
     "npm": ">=5.x",
     "yarn": ">=1.x"
+  },
+  "build": {
+    "productName": "MMFPlab",
+    "appId": "ru.mephi.cybernetics.MMFPlab",
+    "win": {
+      "target": "msi",
+      "icon": "build/icon.ico"
+    },
+    "msi": {
+      "warningsAsErrors": false
+    }
   }
 }

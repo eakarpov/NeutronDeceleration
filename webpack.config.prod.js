@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, './src/index.jsx'),
@@ -11,6 +13,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
@@ -79,5 +82,9 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new UglifyJSPlugin(),
+  ],
 };

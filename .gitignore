@@ -2,3 +2,5 @@
 node_modules/
 npm-debug.*
 yarn-error.*
+/public/bundle.js
+/dist
