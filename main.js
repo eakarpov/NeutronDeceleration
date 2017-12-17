@@ -4,6 +4,8 @@ const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 const path = require('path');
 const spawn = require('child_process').spawn;
+const fs = require('fs');
+const crypter = require('./crypter/textCrypter');
 
 const {app, ipcMain} = electron;
 const BrowserWindow = electron.BrowserWindow;
@@ -83,6 +85,14 @@ ipcMain.on('model', function (e, ...args) {
   };
   py.stdin.write(JSON.stringify(inData));
   py.stdin.end();
+});
+
+ipcMain.on('export', function(e, ...args) {
+  const result = args[0];
+  const resultJSONString = JSON.stringify(result);
+  const cryptedResult = crypter.encrypt(resultJSONString);
+  fs.writeFileSync('./output', cryptedResult);
+  mainWindow.webContents.send('exported', true);
 });
 
 ipcMain.on('user_logged_in', function() {

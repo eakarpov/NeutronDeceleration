@@ -28,7 +28,11 @@ export async function generateTestSuite(...args) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, {});
   const questions = testSuite.filter(el => el.question !== void 0);
-  return questions;
+  function compareRandom(a, b) {
+    return Math.random() - 0.5;
+  }
+  questions.sort(compareRandom);
+  return questions.length > 10 ? [...questions.slice(0,10)] : questions;
 }
 
 export async function addTest(question, answers, correctAnswersId, mark) {

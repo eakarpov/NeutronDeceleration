@@ -1,7 +1,7 @@
 {"login":"kqff8948ipc","passwordShown":"wssdqxphno","password":"$2a$10$7m3cwrS3DcG6ZTPJmpj5nuJGpmyY7kNqXCD7ySBgvul5NkY.OpJKG","name":"Егор","surname":"Карпов","role":1,"group":"TNQ8S1XcQWHJjblm","_id":"7X92uZB8DRMRhfCZ"}
 {"question":"<p>Сколько будет 2 + 2?</p>\n","answers":["<p>3</p>\n","<p>5</p>\n","<p>4</p>\n","<p>6</p>\n"],"correctAnswersId":[false,false,true,false],"mark":5,"_id":"AWt2mxfYtHASWgmF"}
+{"result":0,"user":"kqff8948ipc","date":1513475936549,"_id":"IbT09e7NBbyniyVk"}
+{"result":100,"user":"kqff8948ipc","date":1513473895293,"_id":"SjyD9alryIReMZ0h"}
 {"groupName":"М17-514","_id":"TNQ8S1XcQWHJjblm"}
 {"login":"root","password":"$2a$10$EcYHVwwc.m1XLrxSpw9oyO66J0Y2ZOTbnXLbCi8McOptTDlbHQcMS","role":0,"_id":"Vkj9Ft6LpnhzhDZ7"}
 {"groupName":"М17-524","_id":"wmVun82ufkYLlFTT"}
-{"result":100,"user":"kqff8948ipc","date":1513473895293,"_id":"SjyD9alryIReMZ0h"}
-{"result":0,"user":"kqff8948ipc","date":1513475936549,"_id":"IbT09e7NBbyniyVk"}

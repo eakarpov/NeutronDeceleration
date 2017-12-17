@@ -1,9 +1,9 @@
 import dbi from './index';
 import async from '../helpers/asyncWrapper';
 
-export const saveResult = async (result, userId) => {
+export const saveResult = async (result, userId, date=Date.now()) => {
     const db = await dbi.getDb();
-    await async(db.insert, { result, user: userId, date: Date.now() });
+    await async(db.insert, { result, user: userId, date });
     return true;
 }
 
