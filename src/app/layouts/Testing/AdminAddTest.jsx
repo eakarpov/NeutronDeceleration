@@ -1,8 +1,9 @@
 import React from 'react';
 import Slider from 'react-rangeslider';
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import BackButton from "../../components/BackButton/BackButton";
 import Editor from "../../components/Editor/Editor";
-import { connect } from "react-redux";
 import { addTest } from "../../../redux/modules/actions/test";
 
 class AdminAddTest extends React.Component {
@@ -19,9 +20,10 @@ class AdminAddTest extends React.Component {
       check1: false,
       check2: false,
       check3: false,
-      check4: false
+      check4: false,
+      haveAllValues: true,
+      rightAnswerChosen: true
     };
-
   }
 
   sliderValueChanged = (newSliderValue) => {
@@ -50,13 +52,41 @@ class AdminAddTest extends React.Component {
     })
   };
 
+  haveValue = (prop) => {
+    return prop !== '' && prop !== "<p></p>"
+  };
+
+  allFalse = (elem, index, array) => {
+    return elem === false
+  };
+
   addQuestion = () => {
-    this.props.addTest(
-      this.state.question,
-      [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
-      [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
-      this.state.sliderValue
-    )
+    if (this.haveValue(this.state.question) && this.haveValue(this.state.answer1) &&
+      this.haveValue(this.state.answer2) && this.haveValue(this.state.answer3) && this.haveValue(this.state.answer4)) {
+      if (![this.state.check1, this.state.check2, this.state.check3, this.state.check4].every(this.allFalse)) {
+        this.setState({
+          haveAllValues: true,
+          rightAnswerChosen: true
+        });
+        this.props.addTest(
+          this.state.question,
+          [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
+          [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
+          this.state.sliderValue
+        );
+        this.props.push("/")
+      } else {
+        this.setState({
+          haveAllValues: true,
+          rightAnswerChosen: false
+        })
+      }
+    } else {
+      this.setState({
+        haveAllValues: false,
+        rightAnswerChosen: true
+      })
+    }
   };
 
   render() {
@@ -108,6 +138,15 @@ class AdminAddTest extends React.Component {
             labels={{5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: '10'}}
           />
           <br/>
+          {!this.state.haveAllValues ?
+            <mark className="secondary">
+                Вы не ввели текст вопроса или ответа(ов)!
+            </mark> : <div/>}
+          {!this.state.rightAnswerChosen ?
+            <mark className="secondary">
+              Вы не выбрали ни одного правильного ответа!
+            </mark> : <div/>}
+          <br/>
           <button onClick={this.addQuestion}>Добавить вопрос</button>
         </div>
       </div>
@@ -117,7 +156,8 @@ class AdminAddTest extends React.Component {
 }
 
 const mapDispatchToProps = {
-  addTest
+  addTest,
+  push
 };
 
 export default connect(null, mapDispatchToProps)(AdminAddTest);
