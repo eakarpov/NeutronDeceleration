@@ -24,14 +24,21 @@ export async function getAllTests() {
   return tests.filter(el => el.question !== void 0);
 }
 
+function shuffle(arr) {
+  for (let i = 0; i < arr.length; i += 1) {
+    const index = Math.floor(Math.random() * i);
+    const swapper = arr[i];
+    arr[i] = arr[index];
+    arr[index] = swapper;
+  }
+}
+
 export async function generateTestSuite(...args) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, {});
   const questions = testSuite.filter(el => el.question !== void 0);
-  function compareRandom(a, b) {
-    return Math.random() - 0.5;
-  }
-  questions.sort(compareRandom);
+  questions.forEach(el => shuffle(el.answers));
+  shuffle(questions);
   return questions.length > 10 ? [...questions.slice(0,10)] : questions;
 }
 
