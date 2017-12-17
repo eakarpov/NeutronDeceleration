@@ -55,13 +55,11 @@ export async function generateTestSuite(...args) {
   const db = dbi.getDb();
   const testSuite = await async(db.find, {});
   const questions = testSuite.filter(el => el.question !== void 0);
-  console.log(questions);
   for (let i = 0; i < questions.length; i++) {
     const {shuffledAnswers, shuffledIds} = shuffleAnswersAndIds(questions[i].answers, questions[i].correctAnswersId);
     questions[i].answers = shuffledAnswers;
     questions[i].correctAnswersId = shuffledIds;
   }
-  console.log(questions);
   const shuffledQuestions = shuffleQuestions(questions);
   return shuffledQuestions.length > 10 ? [...shuffledQuestions.slice(0, 10)] : shuffledQuestions;
 }
