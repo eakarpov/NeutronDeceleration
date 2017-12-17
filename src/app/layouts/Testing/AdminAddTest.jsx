@@ -141,11 +141,11 @@ class AdminAddTest extends React.Component {
           {!this.state.haveAllValues ?
             <mark className="secondary">
                 Вы не ввели текст вопроса или ответа(ов)!
-            </mark> : <div/>}
+            </mark> : null}
           {!this.state.rightAnswerChosen ?
             <mark className="secondary">
               Вы не выбрали ни одного правильного ответа!
-            </mark> : <div/>}
+            </mark> : null}
           <br/>
           <button onClick={this.addQuestion}>Добавить вопрос</button>
         </div>
