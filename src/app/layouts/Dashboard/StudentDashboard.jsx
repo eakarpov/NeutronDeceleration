@@ -4,6 +4,7 @@ import Test from '../Testing/Testing';
 import Modeling from '../Modeling/Modeling';
 import DashboardHeader from "./DashboardHeader";
 import PropTypes from "prop-types";
+import StudentStats from '../Stats/StudentStats';
 
 class StudentDashboard extends React.Component {
   render() {
@@ -19,7 +20,10 @@ class StudentDashboard extends React.Component {
           <Modeling/>
           <input type="radio" name="tab-group" id="testing_tab" aria-hidden="true"/>
           <label htmlFor="testing_tab" aria-hidden="true">Тестирование</label>
-          <Test/>
+          <Test user={this.props.user}/>
+          <input type="radio" name="tab-group" id="stats_tab" aria-hidden="true"/>
+          <label htmlFor="stats_tab" aria-hidden="true">Результаты</label>
+          <StudentStats user={this.props.user}/>
         </div>
       </div>
     );

@@ -7,6 +7,10 @@ import {
   addTest, generateTestSuite,
   getAllTests
 } from "./test";
+import {
+  getAllResults,
+  saveResult
+} from './result';
 
 const db = remote.getGlobal('db');
 
@@ -26,5 +30,7 @@ export default {
   removeGroup,
   addTest,
   generateTestSuite,
-  getAllTests
+  getAllTests,
+  saveResult,
+  getAllResults,
 };

@@ -41,5 +41,13 @@ export default {
     getAllTests: '@@TESTS/GET_ALL',
     gotAllTests: '@@TESTS/GOT_ALL',
     getAllTestsFail: '@@TESTS/GET_ALL_TESTS_FAIL',
+  },
+  result: {
+    getAllResults: '@@RESULTS/GET_ALL_RESULTS',
+    gotAllResults: '@@RESULTS/GOT_ALL_RESULTS',
+    getAllResultsFail: '@@RESULTS/GET_ALL_RESULTS_FAIL',
+    saveResult: '@@RESULTS/SAVE_RESULT',
+    savedResult: '@@RESULTS/SAVED_RESULT',
+    saveResultFail: '@@RESULTS/SAVE_RESULT_FAIL'
   }
 }

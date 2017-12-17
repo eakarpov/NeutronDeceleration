@@ -10,11 +10,10 @@ import groups from './reducers/groups';
 import 'rxjs/add/operator/mergeMap';
 import { addUser, changeUser, deleteUser, listUsers } from "./epics/users";
 import users from "./reducers/users";
-import {
-  addTest, getAllTests,
-  getTestSuite
-} from "./epics/test";
+import {  addTest, getAllTests,  getTestSuite } from "./epics/test";
 import test from './reducers/test';
+import { saveResult, getAllResults } from './epics/result';
+import result from './reducers/result';
 
 export const rootEpic = combineEpics(
   auth,
@@ -27,11 +26,14 @@ export const rootEpic = combineEpics(
   removeGroup,
   addTest,
   getTestSuite,
-  getAllTests
+  getAllTests,
+  getAllResults,
+  saveResult
 );
 
 export const rootReducer = combineReducers({
   user,
+  result,
   users,
   error,
   test,

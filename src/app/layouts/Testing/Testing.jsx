@@ -1,5 +1,6 @@
 import React from 'react';
 import {getTestSuite} from "../../../redux/modules/actions/test";
+import {saveResult} from '../../../redux/modules/actions/result';
 import {connect} from "react-redux";
 import Spinner from "../../components/Spinner/Spinner";
 
@@ -48,6 +49,7 @@ class Testing extends React.Component {
         });
       });
       mark = mark / maxMark * 100;
+      this.props.saveResult(mark, this.props.user.username)
       this.setState({
         mark,
         loading: false,
@@ -114,8 +116,8 @@ class Testing extends React.Component {
                       </div>)}
                   </div>
                   <br/>
-                  <button onClick={this.passTest}>Сдать тест</button>
                 </div>)}
+                <button onClick={this.passTest}>Сдать тест</button>
               </div>
           }
         </div>
@@ -128,4 +130,5 @@ export default connect(state => ({
   tests: state.test,
 }), {
   getTestSuite,
+  saveResult
 })(Testing);
