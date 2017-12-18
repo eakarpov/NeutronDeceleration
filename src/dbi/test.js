@@ -66,7 +66,7 @@ export async function generateTestSuite(...args) {
 
 export async function addTest(question, answers, correctAnswersId, mark) {
   const db = dbi.getDb();
-  await async(db.insert, {question, answers, correctAnswersId, mark});
+  await async(db.upsert, {question, answers, correctAnswersId, mark});
   return true;
 }
 
@@ -81,11 +81,17 @@ export async function removeTest(questionId) {
   };
   await async(db.update, testSuite, newTestSuite);
   */
-  console.log(questionId);
   const testFromBase = await async(db.find, { _id: questionId });
   if (typeof testFromBase[0] === 'undefined') return false;
   await async(db.remove, testFromBase[0]);
   return true;
+}
+
+export async function getTest(questionId) {
+  const db = dbi.getDb();
+  const testFromBase = await async(db.find, { _id: questionId });
+  if (typeof testFromBase[0] === 'undefined') return null;
+  return testFromBase[0];
 }
 
 export async function editAnswers(testSuiteId, questionId, answers) {

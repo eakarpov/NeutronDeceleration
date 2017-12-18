@@ -14,9 +14,8 @@ class AdminTest extends React.Component {
     this.props.getAllTests();
   }
 
-  editTest(ind) {
-    console.log(this.props.tests.find((el, i) => el._id === ind));
-    // this.props.push('/add_question');
+  editTest(id) {
+    this.props.push('/edit_question/' + id);
   }
 
   deleteTest(id) {

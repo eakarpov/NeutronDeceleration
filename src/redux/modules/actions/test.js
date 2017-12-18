@@ -76,3 +76,23 @@ export const removeTestFail = () => {
     type: Actions.tests.removeFail,
   }
 };
+
+export const getTest = (testId) => {
+  return {
+    type: Actions.tests.get,
+    payload: testId,
+  }
+};
+
+export const gotTest = (test) => {
+  return {
+    type: Actions.tests.got,
+    payload: test,
+  }
+};
+
+export const getTestFail = () => {
+  return {
+    type: Actions.tests.getFail,
+  }
+};

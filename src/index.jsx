@@ -13,6 +13,7 @@ import DeveloperInstruction from "./app/layouts/instructions/DeveloperInstructio
 import AdminInstruction from "./app/layouts/instructions/AdminInstruction/AdminInstruction";
 import AdminChangeCredentials from "./app/layouts/AdminChangeCredentials/AdminChangeCredentials";
 import AdminAddTest from "./app/layouts/Testing/AdminAddTest";
+import AdminEditTest from './app/layouts/Testing/AdminEditTest';
 import App from "./app/App";
 import "./assets/styles/index.scss"
 import "./assets/styles/default.css"
@@ -34,6 +35,7 @@ ReactDOM.render(
             <Route path="/instruction/user" component={UserInstruction} />
             <Route path="/instruction/developer" component={DeveloperInstruction} />
             <Route path="/instruction/admin" component={AdminInstruction} />
+            <Route path="/edit_question/:id" component={AdminEditTest} />
             <Route path="/add_question" component={AdminAddTest}/>
           </Switch>
         </ConnectedRouter>

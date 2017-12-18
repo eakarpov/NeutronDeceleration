@@ -11,19 +11,34 @@ class AdminAddTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sliderValue: 5,
-      question: '',
-      answer1: '',
-      answer2: '',
-      answer3: '',
-      answer4: '',
-      check1: false,
-      check2: false,
-      check3: false,
-      check4: false,
+      sliderValue: props.sliderValue || 5,
+      question: props.question || '',
+      answer1: props.answer1 || '',
+      answer2: props.answer2 || '',
+      answer3: props.answer3 || '',
+      answer4: props.answer4 || '',
+      check1: props.check1 || false,
+      check2: props.check2 || false,
+      check3: props.check3 || false,
+      check4: props.check4 || false,
       haveAllValues: true,
       rightAnswerChosen: true
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      sliderValue: nextProps.sliderValue,
+      question: nextProps.question,
+      answer1: nextProps.answer1,
+      answer2: nextProps.answer2,
+      answer3: nextProps.answer3,
+      answer4: nextProps.answer4,
+      check1: nextProps.check1,
+      check2: nextProps.check2,
+      check3: nextProps.check3,
+      check4: nextProps.check4,
+    });
   }
 
   sliderValueChanged = (newSliderValue) => {

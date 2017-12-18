@@ -15,6 +15,8 @@ import test from './reducers/test';
 import { saveResult, getAllResults } from './epics/result';
 import result from './reducers/result';
 import { removeTest } from './epics/test';
+import { getTest } from './epics/test';
+import test_single from './reducers/test_single';
 
 export const rootEpic = combineEpics(
   auth,
@@ -30,7 +32,8 @@ export const rootEpic = combineEpics(
   getAllTests,
   getAllResults,
   saveResult,
-  removeTest
+  removeTest,
+  getTest
 );
 
 export const rootReducer = combineReducers({
@@ -39,6 +42,7 @@ export const rootReducer = combineReducers({
   users,
   error,
   test,
+  test_single,
   groups,
   routing: routerReducer,
   form: formReducer

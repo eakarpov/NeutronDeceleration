@@ -6,7 +6,8 @@ import {getAllUsers, registerUser, removeUser, editUser} from "./user";
 import {
   addTest, generateTestSuite,
   getAllTests,
-  removeTest
+  removeTest,
+  getTest
 } from "./test";
 import {
   getAllResults,
@@ -36,5 +37,6 @@ export default {
   saveResult,
   getAllResults,
   removeResult,
-  removeTest
+  removeTest,
+  getTest,
 };
