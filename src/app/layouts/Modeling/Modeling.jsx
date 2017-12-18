@@ -13,7 +13,7 @@ class Modeling extends React.Component {
       path: [],
       avrg: {},
       loading: false,
-      loaded: false
+      loaded: false,
     };
   }
 

@@ -37,7 +37,7 @@ class StudentStats extends React.Component {
       {result.map((el, i) => <div key={i}>
           <span><b>{el.date 
             ? new Date(el.date).toLocaleString() 
-            : new Date(null).toLocaleString() }</b>: {el.result ? el.result/100 : 'Неизвестно'}</span>
+            : new Date(null).toLocaleString() }</b>: {el.result ? `${el.result}/100` : 'Неизвестно'}</span>
         </div>)}
     </div>);
   }

@@ -21,7 +21,7 @@ export const saveResult = action$ =>
     .mergeMap(({payload}) =>
       dbi.saveResult(payload.result, payload.userId)
         .then(result => result  
-          ? payload.loadList
+          ? payload.listLoad
             ? list(payload.userId)
             : resultSaved() 
           : resultSaveFail()));
