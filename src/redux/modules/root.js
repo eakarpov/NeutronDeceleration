@@ -14,6 +14,7 @@ import {  addTest, getAllTests,  getTestSuite } from "./epics/test";
 import test from './reducers/test';
 import { saveResult, getAllResults } from './epics/result';
 import result from './reducers/result';
+import { removeTest } from './epics/test';
 
 export const rootEpic = combineEpics(
   auth,
@@ -28,7 +29,8 @@ export const rootEpic = combineEpics(
   getTestSuite,
   getAllTests,
   getAllResults,
-  saveResult
+  saveResult,
+  removeTest
 );
 
 export const rootReducer = combineReducers({

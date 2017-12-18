@@ -70,9 +70,9 @@ export async function addTest(question, answers, correctAnswersId, mark) {
   return true;
 }
 
-export async function removeTest(testSuiteId, questionId) {
+export async function removeTest(questionId) {
   const db = dbi.getDb();
-  const testSuite = await async(db.find, {_id: testSuiteId});
+  /* const testSuite = await async(db.find, {_id: testSuiteId});
   if (!!testSuite[0]) return false;
   testSuite.tests.filter(el => el._id !== questionId);
   const newTestSuite = {
@@ -80,6 +80,11 @@ export async function removeTest(testSuiteId, questionId) {
     tests: testSuite.tests
   };
   await async(db.update, testSuite, newTestSuite);
+  */
+  console.log(questionId);
+  const testFromBase = await async(db.find, { _id: questionId });
+  if (typeof testFromBase[0] === 'undefined') return false;
+  await async(db.remove, testFromBase[0]);
   return true;
 }
 

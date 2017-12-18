@@ -5,11 +5,13 @@ import {getAllGroups, registerGroup, removeGroup} from "./groups";
 import {getAllUsers, registerUser, removeUser, editUser} from "./user";
 import {
   addTest, generateTestSuite,
-  getAllTests
+  getAllTests,
+  removeTest
 } from "./test";
 import {
   getAllResults,
-  saveResult
+  saveResult,
+  removeResult
 } from './result';
 
 const db = remote.getGlobal('db');
@@ -33,4 +35,6 @@ export default {
   getAllTests,
   saveResult,
   getAllResults,
+  removeResult,
+  removeTest
 };

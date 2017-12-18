@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { push } from 'react-router-redux';
-import {getAllTests} from "../../../redux/modules/actions/test";
+import {getAllTests, removeTest} from "../../../redux/modules/actions/test";
 
 class AdminTest extends React.Component {
   constructor() {
@@ -15,12 +15,12 @@ class AdminTest extends React.Component {
   }
 
   editTest(ind) {
-    console.log(this.props.tests.find((el, i) => i === ind));
+    console.log(this.props.tests.find((el, i) => el._id === ind));
     // this.props.push('/add_question');
   }
 
-  deleteTest(ind) {
-    console.log('delete test called fot test with index: ' + ind);
+  deleteTest(id) {
+    this.props.removeTest(id);
   }
 
   addQuestionClick = () => {
@@ -46,8 +46,8 @@ class AdminTest extends React.Component {
                 <div dangerouslySetInnerHTML={{__html: el.question}} style={{float: 'left'}}/>
               </td>
               <td data-label="Buttons" style={{float: 'left'}}>
-                <button onClick={() => this.editTest(i)} >Редактировать вопрос</button>
-                <button onClick={() => this.deleteTest(i)} >Удалить вопрос</button>
+                <button onClick={() => this.editTest(el._id)} >Редактировать вопрос</button>
+                <button onClick={() => this.deleteTest(el._id)} >Удалить вопрос</button>
               </td>
             </tr>
           )}
@@ -62,6 +62,7 @@ class AdminTest extends React.Component {
 const mapDispatchToProps = {
   push,
   getAllTests,
+  removeTest,
 };
 
 export default connect(state => ({

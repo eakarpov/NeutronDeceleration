@@ -11,3 +11,6 @@
 {"result":0,"user":"kqff8948ipc","date":1513616174195,"_id":"sXnaki9USOefK3sv"}
 {"result":0,"user":"kqff8948ipc","date":1513616373649,"_id":"KcWQNTuS6AsnMi2N"}
 {"result":100,"user":"kqff8948ipc","date":1513616443674,"_id":"DEznlhqPL2T01fdB"}
+{"question":"<p>asdadasd</p>\n","answers":["<p>asd</p>\n","<p>sdf</p>\n","<p>dfg</p>\n","<p>fgh</p>\n"],"correctAnswersId":[false,false,false,true],"mark":6,"_id":"oYLOKPaAqx1Lmc3n"}
+{"result":68.42105263157895,"user":"kqff8948ipc","date":1513618768599,"_id":"nNdBcTuusHczSlZh"}
+{"$$deleted":true,"_id":"oYLOKPaAqx1Lmc3n"}

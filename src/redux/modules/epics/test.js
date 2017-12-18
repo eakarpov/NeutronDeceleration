@@ -2,7 +2,7 @@ import Actions from "../../Actions";
 import dbi from '../../../dbi';
 import {
   getAllTestsFail, gotAllTests, testAdded, testAddFailed,
-  testSuiteGetFail, testSuiteGot
+  testSuiteGetFail, testSuiteGot, removeTestFail, removedTest, getAllTests as list
 } from "../actions/test";
 
 export const addTest = action =>
@@ -25,3 +25,10 @@ export const getAllTests = action =>
     .mergeMap(({payload}) =>
       dbi.getAllTests(payload)
         .then(tests => tests ? gotAllTests(tests) : getAllTestsFail()));
+
+export const removeTest = action$ =>
+  action$
+    .ofType(Actions.tests.remove)
+    .mergeMap(({payload}) =>
+      dbi.removeTest(payload)
+        .then(result => result ? list() : removeTestFail()));

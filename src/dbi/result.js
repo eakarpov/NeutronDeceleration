@@ -17,3 +17,11 @@ export const getAllResults = async (userId) => {
         return res.filter(el => el.user !== void 0);
     }
 }
+
+export const removeResult = async (resultId) => {
+    const db = await dbi.getDb();
+    const resultFromBase = await async(db.find, { _id: resultId });
+    if (typeof resultFromBase[0] === 'undefined') return false;
+    await async(db.remove, resultFromBase[0]);
+    return true;
+}

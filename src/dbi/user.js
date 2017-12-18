@@ -29,5 +29,7 @@ export async function removeUser(login) {
   const userFromBase = await async(db.find, { login });
   if (typeof userFromBase[0] === 'undefined') return false;
   await async(db.remove, userFromBase[0]);
+  const results = await dbi.getAllResults(userFromBase._id);
+  results.forEach(async result => await dbi.removeResult(result._id));
   return true;
 }
