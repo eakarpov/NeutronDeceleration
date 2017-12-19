@@ -32,13 +32,18 @@ class Stats extends React.Component {
     };
     fileReader.readAsText(file);
   }
+  btnClick = () => {
+    document.getElementById("importer_input").click();
+  };
   render() {
     const { result } = this.props;
     return (<div>
       <div>
         <h2>Результаты тестов:</h2>
-        <label htmlFor="importer">Импортировать результаты</label>
-        <input type="file" id="importer" name="importer" onChange={this.import} />
+        <input type="file" id="importer_input" onChange={this.import} />
+        <button id="importer_btn" name="importer" onClick={this.btnClick}>
+          Импортировать результаты
+        </button>
       </div>
       {this.state.import !== void 0
         ? this.state.import

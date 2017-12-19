@@ -18,6 +18,7 @@ class Modeling extends React.Component {
   }
 
   model(values) {
+    console.log(values);
     this.setState({
       loading: true,
       loaded: false
@@ -41,8 +42,9 @@ class Modeling extends React.Component {
       <div>
         {this.state.error ? <mark className="secondary">Неверные данные</mark> : null}<br/>
         <form onSubmit={handleSubmit(this.model)}>
-          <label>Введите начальную энергию, МэВ</label>
+          <label>Выберите тип замедлителя</label>
           <Field name="matter" component="select">
+            <option value="x">---</option>
             <option value="0">Вода</option>
             <option value="1">Тяжёлая вода</option>
             <option value="2">Бериллий</option>
@@ -145,6 +147,9 @@ const validate = values => {
     errors.amount = 'Количество нейтронов задаётся натуральным числом.';
   } else if (parseFloat(values.amount) <= 0) {
     errors.amount = 'Количество нейтронов задаётся положительным числом.';
+  }
+  if (!values.matter || values.matter === 'x') {
+    errors.matter = 'Вы не выбрали тип замедлителя'
   }
   return errors;
 };
