@@ -34,7 +34,7 @@ function shuffleAnswersAndIds(answers, ids) {
   return {shuffledAnswers, shuffledIds};
 }
 
-export async function generateTestSuite(...args) {
+export async function generateTestSuite() {
   const db = dbi.getDb();
   const testSuite = await async(db.find, {});
   const questions = testSuite.filter(el => el.question !== void 0);
@@ -43,8 +43,12 @@ export async function generateTestSuite(...args) {
     questions[i].answers = shuffledAnswers;
     questions[i].correctAnswersId = shuffledIds;
   }
-  const shuffledQuestions = shuffleQuestions(questions);
-  return shuffledQuestions.length > 10 ? [...shuffledQuestions.slice(0, 10)] : shuffledQuestions;
+  if (questions.length === 1) {
+    return questions;
+  } else {
+    const shuffledQuestions = shuffleQuestions(questions);
+    return shuffledQuestions.length > 10 ? [...shuffledQuestions.slice(0, 10)] : shuffledQuestions;
+  }
 }
 
 export async function addTest(question, answers, correctAnswersId, mark) {

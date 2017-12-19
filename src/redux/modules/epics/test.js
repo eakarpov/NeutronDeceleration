@@ -30,8 +30,8 @@ export const editTest = action =>
 export const getTestSuite = action =>
   action
     .ofType(Actions.tests.getTestSuite)
-    .mergeMap(({payload}) =>
-      dbi.generateTestSuite(payload)
+    .mergeMap(() =>
+      dbi.generateTestSuite()
         .then(testSuite => testSuite ? testSuiteGot(testSuite) : testSuiteGetFail()));
 
 export const getAllTests = action =>

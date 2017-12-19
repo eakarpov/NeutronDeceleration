@@ -1,7 +1,7 @@
 import React from 'react';
-import {getTestSuite} from "../../../redux/modules/actions/test";
-import {saveResult} from '../../../redux/modules/actions/result';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import { getTestSuite } from "../../../redux/modules/actions/test";
+import { saveResult } from '../../../redux/modules/actions/result';
 import Spinner from "../../components/Spinner/Spinner";
 
 class Testing extends React.Component {
@@ -97,29 +97,29 @@ class Testing extends React.Component {
                 <Spinner/>
               </div>
               : this.state.calculated
-              ?
+                ?
                 <div>
                   <p>Ваша оценка - {Math.round(this.state.mark)}</p>
                 </div>
                 :
-              <div>{this.props.tests.map((el, i) =>
-                <div key={i}>
-                  <b>Вопрос {i + 1}: </b>
-                  <div dangerouslySetInnerHTML={{__html: el.question}}/>
-                  <div className="input-group">
-                    {el.answers.map((ans, j) =>
-                      <div key={`outer-${j}`}>
-                        <input type="checkbox" id={`${i}-${j}`} name={`group-${j}`} tabIndex="0"/>
-                        <label htmlFor={`${i}-${j}`}>
-                          <div dangerouslySetInnerHTML={{__html: ans}}/>
-                        </label>
-                        <br/>
-                      </div>)}
-                  </div>
-                  <br/>
-                </div>)}
-                <button onClick={this.passTest}>Сдать тест</button>
-              </div>
+                <div>{this.props.tests.map((el, i) =>
+                  <div key={i}>
+                    <b>Вопрос {i + 1}: </b>
+                    <div dangerouslySetInnerHTML={{__html: el.question}}/>
+                    <div className="input-group">
+                      {el.answers.map((ans, j) =>
+                        <div key={`outer-${j}`}>
+                          <input type="checkbox" id={`${i}-${j}`} name={`group-${j}`} tabIndex="0"/>
+                          <label htmlFor={`${i}-${j}`}>
+                            <div dangerouslySetInnerHTML={{__html: ans}}/>
+                          </label>
+                          <br/>
+                        </div>)}
+                    </div>
+                    <br/>
+                  </div>)}
+                  <button onClick={this.passTest}>Сдать тест</button>
+                </div>
           }
         </div>
       </div>
