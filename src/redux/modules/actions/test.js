@@ -1,9 +1,9 @@
 import Actions from "../../Actions";
 
-export const addTest = (question, answers, correctAnswersId, mark, id) => {
+export const addTest = (question, answers, correctAnswersId, mark) => {
   return {
     type: Actions.tests.add,
-    payload: {question, answers, correctAnswersId, mark, id}
+    payload: {question, answers, correctAnswersId, mark}
   }
 };
 
@@ -94,5 +94,24 @@ export const gotTest = (test) => {
 export const getTestFail = () => {
   return {
     type: Actions.tests.getFail,
+  }
+};
+
+export const editTest = (question, answers, correctAnswersId, mark, testId) => {
+  return {
+    type: Actions.tests.edit,
+    payload: {question, answers, correctAnswersId, mark, testId},
+  }
+};
+
+export const editedTest = () => {
+  return {
+    type: Actions.tests.edited,
+  }
+};
+
+export const editTestFail = () => {
+  return {
+    type: Actions.tests.editFailed,
   }
 };

@@ -1,16 +1,31 @@
 import Actions from "../../Actions";
 import dbi from '../../../dbi';
 import {
-  getAllTestsFail, gotAllTests, testAdded, testAddFailed,
-  testSuiteGetFail, testSuiteGot, removeTestFail, removedTest, getAllTests as list, gotTest, getTestFail
+  getAllTests as list,
+  getAllTestsFail,
+  getTestFail,
+  gotAllTests,
+  gotTest,
+  removeTestFail,
+  testAddFailed,
+  testSuiteGetFail,
+  testSuiteGot,
+  editTestFail
 } from "../actions/test";
 
 export const addTest = action =>
   action
     .ofType(Actions.tests.add)
     .mergeMap(({payload}) =>
-      dbi.addTest(payload.question, payload.answers, payload.correctAnswersId, payload.mark, payload.id)
+      dbi.addTest(payload.question, payload.answers, payload.correctAnswersId, payload.mark)
         .then(added => added ? list() : testAddFailed()));
+
+export const editTest = action =>
+  action
+    .ofType(Actions.tests.edit)
+    .mergeMap(({payload}) =>
+      dbi.editTest(payload.question, payload.answers, payload.correctAnswersId, payload.mark, payload.testId)
+        .then(edited => edited ? list() : editTestFail()));
 
 export const getTestSuite = action =>
   action

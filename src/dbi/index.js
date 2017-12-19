@@ -7,7 +7,7 @@ import {
   addTest, generateTestSuite,
   getAllTests,
   removeTest,
-  getTest
+  getTest, editTest
 } from "./test";
 import {
   getAllResults,
@@ -39,4 +39,5 @@ export default {
   removeResult,
   removeTest,
   getTest,
+  editTest
 };

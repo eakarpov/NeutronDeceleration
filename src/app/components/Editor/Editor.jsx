@@ -15,7 +15,7 @@ class MyEditor extends Component {
     this.uploadImageCallback = this.uploadImageCallback.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const content = this.props.initial;
     let editorState;
     if (content) {
@@ -28,6 +28,23 @@ class MyEditor extends Component {
     this.setState({
       editorState,
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.initial !== this.props.initial) {
+      const content = nextProps.initial;
+      let editorState;
+      if (content) {
+        const contentBlock = htmlToDraft(content);
+        const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+        editorState = EditorState.createWithContent(contentState);
+      } else {
+        editorState = EditorState.createEmpty();
+      }
+      this.setState({
+        editorState,
+      });
+    }
   }
 
   onEditorStateChange(editorState) {

@@ -46,10 +46,11 @@ class Testing extends React.Component {
         const realAns = answers.filter(el => parseInt(el.question) === i);
         [...realAns].forEach((el, i) => {
           if (rightAns[i] === el.value && rightAns[i]) mark += q.mark / amountRightAnswers;
+          if (rightAns[i] !== el.value && !rightAns[i]) mark -= q.mark / (2 * amountRightAnswers);
         });
       });
       mark = mark / maxMark * 100;
-      this.props.saveResult(mark, this.props.user.username)
+      this.props.saveResult(mark, this.props.user.username);
       this.setState({
         mark,
         loading: false,
@@ -98,7 +99,7 @@ class Testing extends React.Component {
               : this.state.calculated
               ?
                 <div>
-                  <p>Ваша оценка - {this.state.mark}</p>
+                  <p>Ваша оценка - {Math.round(this.state.mark)}</p>
                 </div>
                 :
               <div>{this.props.tests.map((el, i) =>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { getTest } from "../../../redux/modules/actions/test";
 import AdminAddTest from './AdminAddTest';
 
@@ -12,6 +11,7 @@ class AdminEditTest extends React.Component {
   render() {
     const {test } = this.props;
     return test ? (<AdminAddTest
+      edit={true}
       sliderValue={test.mark}
       question={test.question}
       answer1={test.answers[0]}

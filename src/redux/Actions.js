@@ -43,7 +43,10 @@ export default {
     getAllTestsFail: '@@TESTS/GET_ALL_TESTS_FAIL',
     get: '@@TESTS/GET',
     got: '@@TESTS/GOT',
-    getFail: '@@TESTS/GET_FAIL'
+    getFail: '@@TESTS/GET_FAIL',
+    edit: '@@TESTS/EDIT',
+    edited: '@@TESTS/EDITED',
+    editFailed: '@@TESTS/EDIT_FAILED'
   },
   result: {
     getAllResults: '@@RESULTS/GET_ALL_RESULTS',

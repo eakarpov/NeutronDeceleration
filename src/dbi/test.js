@@ -1,22 +1,5 @@
 import dbi from './index';
 import async from '../helpers/asyncWrapper';
-import { descrypt, encrypt } from '../crypter/textCrypter';
-
-export async function getTestSuites() {
-  const db = dbi.getDb();
-  const testSuite = await async(db.find, null); //TODO: filter all where testSuiteName field exists
-}
-
-export async function getTestSuiteQuestions(id) {
-  const db = dbi.getDb();
-  const testSuite = await async(db.find, {_id: id});
-  if (!!testSuite[0]) return false;
-  testSuite.tests.map(el => el.question);
-  return {
-    testSuiteName: testSuite.testSuiteName,
-    questions: testSuite.tests
-  };
-}
 
 export async function getAllTests() {
   const db = dbi.getDb();
@@ -64,31 +47,22 @@ export async function generateTestSuite(...args) {
   return shuffledQuestions.length > 10 ? [...shuffledQuestions.slice(0, 10)] : shuffledQuestions;
 }
 
-export async function addTest(question, answers, correctAnswersId, mark, questionId=null) {
+export async function addTest(question, answers, correctAnswersId, mark) {
   const db = dbi.getDb();
-  let testFromBase = [];
-  if (questionId !== null) {
-    testFromBase = await async(db.find, { _id: questionId });
-  }
-  if (typeof testFromBase[0] === 'undefined') {
-    await async(db.insert, {question, answers, correctAnswersId, mark})
-  } else {
-    await async(db.update, testFromBase[0], {question, answers, correctAnswersId, mark});
-  }
+  await async(db.insert, {question, answers, correctAnswersId, mark});
+  return true;
+}
+
+export async function editTest(question, answers, correctAnswersId, mark, testId) {
+  const db = dbi.getDb();
+  const findTest = await async(db.find, {_id: testId});
+  if (findTest[0] === void 0) return false;
+  await async(db.update, findTest[0], {question, answers, correctAnswersId, mark});
   return true;
 }
 
 export async function removeTest(questionId) {
   const db = dbi.getDb();
-  /* const testSuite = await async(db.find, {_id: testSuiteId});
-  if (!!testSuite[0]) return false;
-  testSuite.tests.filter(el => el._id !== questionId);
-  const newTestSuite = {
-    testSuiteName: testSuite.testSuiteName,
-    tests: testSuite.tests
-  };
-  await async(db.update, testSuite, newTestSuite);
-  */
   const testFromBase = await async(db.find, { _id: questionId });
   if (typeof testFromBase[0] === 'undefined') return false;
   await async(db.remove, testFromBase[0]);
@@ -100,8 +74,4 @@ export async function getTest(questionId) {
   const testFromBase = await async(db.find, { _id: questionId });
   if (typeof testFromBase[0] === 'undefined') return null;
   return testFromBase[0];
-}
-
-export async function editAnswers(testSuiteId, questionId, answers) {
-  // TODO: update answers;
 }

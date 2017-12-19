@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import BackButton from "../../components/BackButton/BackButton";
 import Editor from "../../components/Editor/Editor";
-import { addTest } from "../../../redux/modules/actions/test";
+import {addTest, editTest} from "../../../redux/modules/actions/test";
 
 class AdminAddTest extends React.Component {
 
   constructor(props) {
     super(props);
+    this.editQuestion = this.editQuestion.bind(this);
     this.state = {
+      edit: props.edit || false,
       id: props.id || null,
       sliderValue: props.sliderValue || 5,
       question: props.question || '',
@@ -29,6 +31,7 @@ class AdminAddTest extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      edit: nextProps.edit,
       sliderValue: nextProps.sliderValue,
       question: nextProps.question,
       answer1: nextProps.answer1,
@@ -77,6 +80,36 @@ class AdminAddTest extends React.Component {
     return elem === false
   };
 
+  editQuestion() {
+    if (this.haveValue(this.state.question) && this.haveValue(this.state.answer1) &&
+      this.haveValue(this.state.answer2) && this.haveValue(this.state.answer3) && this.haveValue(this.state.answer4)) {
+      if (![this.state.check1, this.state.check2, this.state.check3, this.state.check4].every(this.allFalse)) {
+        this.setState({
+          haveAllValues: true,
+          rightAnswerChosen: true
+        });
+        this.props.editTest(
+          this.state.question,
+          [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
+          [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
+          this.state.sliderValue,
+          this.state.id,
+        );
+        this.props.push("/")
+      } else {
+        this.setState({
+          haveAllValues: true,
+          rightAnswerChosen: false
+        })
+      }
+    } else {
+      this.setState({
+        haveAllValues: false,
+        rightAnswerChosen: true
+      })
+    }
+  };
+
   addQuestion = () => {
     if (this.haveValue(this.state.question) && this.haveValue(this.state.answer1) &&
       this.haveValue(this.state.answer2) && this.haveValue(this.state.answer3) && this.haveValue(this.state.answer4)) {
@@ -90,7 +123,6 @@ class AdminAddTest extends React.Component {
           [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
           [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
           this.state.sliderValue,
-          this.state.id,
         );
         this.props.push("/")
       } else {
@@ -185,7 +217,10 @@ class AdminAddTest extends React.Component {
               Вы не выбрали ни одного правильного ответа!
             </mark> : null}
           <br/>
-          <button onClick={this.addQuestion}>Добавить вопрос</button>
+          {this.props.edit
+            ? <button onClick={this.editQuestion}>Обновить вопрос</button>
+            : <button onClick={this.addQuestion}>Добавить вопрос</button>
+          }
         </div>
       </div>
     );
@@ -195,6 +230,7 @@ class AdminAddTest extends React.Component {
 
 const mapDispatchToProps = {
   addTest,
+  editTest,
   push
 };
 
