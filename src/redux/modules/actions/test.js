@@ -1,9 +1,9 @@
 import Actions from "../../Actions";
 
-export const addTest = (question, answers, correctAnswersId, mark) => {
+export const addTest = (question, answers, correctAnswersId, mark, id) => {
   return {
     type: Actions.tests.add,
-    payload: {question, answers, correctAnswersId, mark}
+    payload: {question, answers, correctAnswersId, mark, id}
   }
 };
 

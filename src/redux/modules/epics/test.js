@@ -9,8 +9,8 @@ export const addTest = action =>
   action
     .ofType(Actions.tests.add)
     .mergeMap(({payload}) =>
-      dbi.addTest(payload.question, payload.answers, payload.correctAnswersId, payload.mark)
-        .then(added => added ? testAdded() : testAddFailed()));
+      dbi.addTest(payload.question, payload.answers, payload.correctAnswersId, payload.mark, payload.id)
+        .then(added => added ? list() : testAddFailed()));
 
 export const getTestSuite = action =>
   action

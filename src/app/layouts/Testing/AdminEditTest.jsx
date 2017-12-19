@@ -22,6 +22,7 @@ class AdminEditTest extends React.Component {
       check2={test.correctAnswersId[1]}
       check3={test.correctAnswersId[2]}
       check4={test.correctAnswersId[3]}
+      id={test._id}
     />) : null;
   }
 }

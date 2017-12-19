@@ -11,6 +11,7 @@ class AdminAddTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: props.id || null,
       sliderValue: props.sliderValue || 5,
       question: props.question || '',
       answer1: props.answer1 || '',
@@ -38,6 +39,7 @@ class AdminAddTest extends React.Component {
       check2: nextProps.check2,
       check3: nextProps.check3,
       check4: nextProps.check4,
+      id: nextProps.id,
     });
   }
 
@@ -87,7 +89,8 @@ class AdminAddTest extends React.Component {
           this.state.question,
           [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
           [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
-          this.state.sliderValue
+          this.state.sliderValue,
+          this.state.id,
         );
         this.props.push("/")
       } else {
@@ -114,7 +117,11 @@ class AdminAddTest extends React.Component {
           <h1>Введите информацию о новом вопросе</h1>
           <h2>Введите текст вопроса:</h2>
           <div className="bordered">
-            <Editor id="question" editorContentCallback={this.getQuestionEditorContent}/>
+            <Editor
+              id="question"
+              initial={this.props.question}
+              editorContentCallback={this.getQuestionEditorContent}
+            />
           </div>
           <h2>Введите ответы и отметьте правильные:</h2>
           <div className="input-group">
@@ -122,25 +129,41 @@ class AdminAddTest extends React.Component {
                    defaultChecked={this.state.check1} onChange={this.handleChangeCheck}/>
             <label htmlFor="check1">Ответ №1</label>
             <div className="bordered">
-              <Editor id="answer1" editorContentCallback={this.getAnswer1EditorContent}/>
+              <Editor
+                id="answer1"
+                initial={this.props.answer1}
+                editorContentCallback={this.getAnswer1EditorContent}
+              />
             </div>
             <input type="checkbox" id="check2" tabIndex="0"
                    defaultChecked={this.state.check2} onChange={this.handleChangeCheck}/>
             <label htmlFor="check2">Ответ №2</label>
             <div className="bordered">
-              <Editor id="answer2" editorContentCallback={this.getAnswer2EditorContent}/>
+              <Editor
+                id="answer2"
+                initial={this.props.answer2}
+                editorContentCallback={this.getAnswer2EditorContent}
+              />
             </div>
             <input type="checkbox" id="check3" tabIndex="0"
                    defaultChecked={this.state.check3} onChange={this.handleChangeCheck}/>
             <label htmlFor="check3">Ответ №3</label>
             <div className="bordered">
-              <Editor id="answer3" editorContentCallback={this.getAnswer3EditorContent}/>
+              <Editor 
+                id="answer3" 
+                initial={this.props.answer3}
+                editorContentCallback={this.getAnswer3EditorContent}
+              />
             </div>
             <input type="checkbox" id="check4" tabIndex="0"
                    defaultChecked={this.state.check4} onChange={this.handleChangeCheck}/>
             <label htmlFor="check4">Ответ №4</label>
             <div className="bordered">
-              <Editor id="answer4" editorContentCallback={this.getAnswer4EditorContent}/>
+              <Editor
+                id="answer4"
+                initial={this.props.answer4}
+                editorContentCallback={this.getAnswer4EditorContent}
+              />
             </div>
           </div>
           <h2>Выберите количестово баллов за вопрос:</h2>

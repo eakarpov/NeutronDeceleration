@@ -64,9 +64,17 @@ export async function generateTestSuite(...args) {
   return shuffledQuestions.length > 10 ? [...shuffledQuestions.slice(0, 10)] : shuffledQuestions;
 }
 
-export async function addTest(question, answers, correctAnswersId, mark) {
+export async function addTest(question, answers, correctAnswersId, mark, questionId=null) {
   const db = dbi.getDb();
-  await async(db.upsert, {question, answers, correctAnswersId, mark});
+  let testFromBase = [];
+  if (questionId !== null) {
+    testFromBase = await async(db.find, { _id: questionId });
+  }
+  if (typeof testFromBase[0] === 'undefined') {
+    await async(db.insert, {question, answers, correctAnswersId, mark})
+  } else {
+    await async(db.update, testFromBase[0], {question, answers, correctAnswersId, mark});
+  }
   return true;
 }
 
