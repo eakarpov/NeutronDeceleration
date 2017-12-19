@@ -6,6 +6,5 @@
 {"login":"zdg0l74gjj","passwordShown":"157pw6q2ftr","password":"$2a$10$aQFU7hxjTQpqVBWo4g3rMe82rDK1r4RNyG8iZ5coleyGVeNEiiVg2","name":"Кирилл","surname":"Кириллов","role":1,"group":"OV7ZdEmJlCXiME7b","_id":"TEezcGtTRvFDHXaw"}
 {"groupName":"М17-514","_id":"TNQ8S1XcQWHJjblm"}
 {"login":"root","password":"$2a$10$EcYHVwwc.m1XLrxSpw9oyO66J0Y2ZOTbnXLbCi8McOptTDlbHQcMS","role":0,"_id":"Vkj9Ft6LpnhzhDZ7"}
-{"groupName":"М17-524","_id":"wmVun82ufkYLlFTT"}
-{"question":"<p>2 + 2 =</p>\n","answers":["<p>3</p>\n","<p>4</p>\n","<p>5</p>\n","<p>6</p>\n"],"correctAnswersId":[false,true,false,false],"mark":5,"_id":"C6Z75tagHK2UeZ3s"}
 {"result":80.76923076923077,"user":"zdg0l74gjj","date":1513679546010,"_id":"bHaXTkBFlPQPSJtt"}
+{"groupName":"М17-524","_id":"wmVun82ufkYLlFTT"}

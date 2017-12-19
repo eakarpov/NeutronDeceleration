@@ -18,7 +18,6 @@ class Modeling extends React.Component {
   }
 
   model(values) {
-    console.log(values);
     this.setState({
       loading: true,
       loaded: false
@@ -42,19 +41,10 @@ class Modeling extends React.Component {
       <div>
         {this.state.error ? <mark className="secondary">Неверные данные</mark> : null}<br/>
         <form onSubmit={handleSubmit(this.model)}>
-          <label>Выберите тип замедлителя</label>
-          <Field name="matter" component="select">
-            <option value="x">---</option>
-            <option value="0">Вода</option>
-            <option value="1">Тяжёлая вода</option>
-            <option value="2">Бериллий</option>
-            <option value="3">Оксид бериллия</option>
-            <option value="4">Графит</option>
-          </Field>
-          <br/>
-          <Field name="initial" component={renderField} label="Введите начальную энергию, МэВ"/>
-          <Field name="terminal" component={renderField} label="Введите конечную энергию, эВ"/>
-          <Field name="amount" component={renderField} label="Введите количество моделируемых нейтронов"/>
+          <Field name="matter" component={renderSelectField} label="Выберите тип замедлителя"/>
+          <Field name="initial" component={renderInputField} label="Введите начальную энергию, МэВ"/>
+          <Field name="terminal" component={renderInputField} label="Введите конечную энергию, эВ"/>
+          <Field name="amount" component={renderInputField} label="Введите количество моделируемых нейтронов"/>
           <button type="submit">Смоделировать</button>
         </form>
         <br/>
@@ -103,7 +93,28 @@ class Modeling extends React.Component {
   }
 }
 
-const renderField = ({
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error }
+}) => (
+  <div>
+    <label>{label}</label>
+    <select {...input}>
+      <option value="x">---</option>
+      <option value="0">Вода</option>
+      <option value="1">Тяжёлая вода</option>
+      <option value="2">Бериллий</option>
+      <option value="3">Оксид бериллия</option>
+      <option value="4">Графит</option>
+    </select>
+    <div>
+      {touched && error && <mark className="secondary">{error}</mark>}
+    </div>
+  </div>
+);
+
+const renderInputField = ({
   input,
   label,
   meta: { touched, error }
