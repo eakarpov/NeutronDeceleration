@@ -15,7 +15,6 @@ class Userboard extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
-    const createAdmin = false; // If create admin, should be connected to radio button
     const name = e.target.name.value;
     const surname = e.target.surname.value;
     const groupId = e.target.groups_chooser.options[e.target.groups_chooser.options.selectedIndex].id;
@@ -26,7 +25,7 @@ class Userboard extends React.Component {
       password: bcrypt.hashSync(password, 10),
       name,
       surname,
-      role: createAdmin ? ROLE.ADMIN : ROLE.STUDENT,
+      role: ROLE.STUDENT,
       group: groupId
     }, true);
     e.target.name.value = "";
