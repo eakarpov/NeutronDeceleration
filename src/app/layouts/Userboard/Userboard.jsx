@@ -40,9 +40,9 @@ class Userboard extends React.Component {
     this.props.deleteUser({ user: login })
   }
   exportAuth = () => {
-    let userAuthAsString = "Фамилия;Имя;Логин;Пароль\n";
     const choosenGroupId = document.getElementById("group_chooser").value;
     const group = this.props.groups.find((group) => group._id === choosenGroupId);
+    let userAuthAsString = `Группа: ${group.groupName};\n\nФамилия;Имя;Логин;Пароль\n`;
     this.props.users.filter(user => user.group === group._id).sort((userA, userB) => {
       if (userA.surname > userB.surname) return 1;
       else if (userA.surname < userB.surname) return -1;
@@ -88,7 +88,7 @@ class Userboard extends React.Component {
       <select id="group_chooser">
         {this.props.groups.map((group, i) => <option value={group._id} key={i}>{group.groupName}</option>)}
       </select>
-      <button onClick={this.exportAuth}>Экспортировать данные авторизации студентов</button>
+      <button onClick={this.exportAuth}>Экспортировать данные авторизации студентов группы</button>
       <table style={{textAlign: 'center', width: '100%'}}>
         <caption>Список студентов</caption>
         <thead>
