@@ -24,7 +24,6 @@ class StudentStats extends React.Component {
   }
   render() {
     const { result } = this.props;
-    console.log(result);
     return (<div>
       <div>
         <h2>Результаты тестов:</h2>

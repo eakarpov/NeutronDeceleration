@@ -39,5 +39,5 @@ export default {
   removeResult,
   removeTest,
   getTest,
-  editTest
+  editTest,
 };

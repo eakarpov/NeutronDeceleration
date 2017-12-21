@@ -1,9 +1,10 @@
 import React from 'react';
-import {listUsers, addUser} from "../../../redux/modules/actions/users";
+import bcrypt from "bcryptjs";
+import FileSaver from 'file-saver';
 import {connect} from 'react-redux';
+import {listUsers, addUser} from "../../../redux/modules/actions/users";
 import {ROLE} from "../../../helpers/enums";
 import {listGroups} from "../../../redux/modules/actions/groups";
-import bcrypt from "bcryptjs";
 import {deleteUser} from "../../../redux/modules/actions/users";
 
 class Userboard extends React.Component {
@@ -38,6 +39,22 @@ class Userboard extends React.Component {
   deleteUser(login) {
     this.props.deleteUser({ user: login })
   }
+  exportAuth = () => {
+    let userAuthAsString = "Фамилия;Имя;Логин;Пароль\n";
+    const choosenGroupId = document.getElementById("group_chooser").value;
+    const group = this.props.groups.find((group) => group._id === choosenGroupId);
+    this.props.users.filter(user => user.group === group._id).sort((userA, userB) => {
+      if (userA.surname > userB.surname) return 1;
+      else if (userA.surname < userB.surname) return -1;
+      else if (userA.name > userB.name) return 1;
+      else if (userA.name < userB.name) return -1;
+      else return 0;
+    }).forEach(user => {
+      userAuthAsString = userAuthAsString.concat(`${user.surname};${user.name};${user.login};${user.passwordShown}\n`);
+    });
+    const blob = new Blob([userAuthAsString], {type: "text/csv;charset=utf-8"});
+    FileSaver.saveAs(blob, `Данные_авторизации_студентов_группы_${group.groupName}.csv`);
+  }
   render() {
     const {groups, users} = this.props;
     const groupsToRender = groups.map((el, i) => <option key={i} id={el._id}>{el.groupName}</option>);
@@ -56,6 +73,7 @@ class Userboard extends React.Component {
           </td>
         </tr>);
     return (<div>
+      <h2>Добавить нового студента</h2>
       <form style={{marginLeft: '0px', marginRight: '0px'}} onSubmit={this.submitForm}>
         <label htmlFor="name" >Имя</label>
         <input type="text" id="name" />
@@ -66,8 +84,13 @@ class Userboard extends React.Component {
         </select>
         <button role="button" disabled={groups && groups.length === 0}>+</button>
       </form>
+      <label htmlFor="group_chooser">Выберите группу:</label>
+      <select id="group_chooser">
+        {this.props.groups.map((group, i) => <option value={group._id} key={i}>{group.groupName}</option>)}
+      </select>
+      <button onClick={this.exportAuth}>Экспортировать данные авторизации студентов</button>
       <table style={{textAlign: 'center', width: '100%'}}>
-        <caption>Список пользователей</caption>
+        <caption>Список студентов</caption>
         <thead>
           <tr>
             <th>Логин</th>
@@ -95,7 +118,7 @@ const mapDispatchToProps = {
   listGroups,
   listUsers,
   addUser,
-  deleteUser
+  deleteUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Userboard);
