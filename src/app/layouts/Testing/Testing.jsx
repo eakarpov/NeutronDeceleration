@@ -50,6 +50,7 @@ class Testing extends React.Component {
         });
       });
       mark = mark / maxMark * 100;
+      if (mark < 0) mark = 0;
       this.props.saveResult(mark, this.props.user.username);
       this.setState({
         mark,

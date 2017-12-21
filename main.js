@@ -17,9 +17,8 @@ electron.crashReporter.start({
   autoSubmit: true,
   extra: {
     'prod': 'Лабораторная система по курсу ММФП',
-    'key': '0.1.0',
-    'email': 'eakarpov@yandex.ru',
-    'comments': ''
+    'key': '0.2.0',
+    'email': 'eakarpov@yandex.ru'
   }
 });
 
@@ -85,14 +84,6 @@ ipcMain.on('model', function (e, ...args) {
   };
   py.stdin.write(JSON.stringify(inData));
   py.stdin.end();
-});
-
-ipcMain.on('export', function(e, ...args) {
-  const result = args[0];
-  const resultJSONString = JSON.stringify(result);
-  const cryptedResult = crypter.encrypt(resultJSONString);
-  fs.writeFileSync('./output', cryptedResult);
-  mainWindow.webContents.send('exported', true);
 });
 
 ipcMain.on('user_logged_in', function() {
@@ -166,5 +157,4 @@ ipcMain.on('admin_logged_in', function () {
   }
   const menu = electron.Menu.buildFromTemplate(newTemplate);
   electron.Menu.setApplicationMenu(menu);
-
 });

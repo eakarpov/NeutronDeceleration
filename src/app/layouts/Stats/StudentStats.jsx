@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllResults } from '../../../redux/modules/actions/result';
 import electron from 'electron';
+import FileSaver from 'file-saver';
+import { getAllResults } from '../../../redux/modules/actions/result';
+import crypter from '../../../crypter/textCrypter';
 
 class StudentStats extends React.Component {
   constructor(props) {
@@ -15,15 +17,14 @@ class StudentStats extends React.Component {
     this.props.getAllResults(this.props.user.username);
   }
   export() {
-    electron.ipcRenderer.on('exported', (e, status) => {
-      this.setState({
-        export: status,
-      });
-    });
-    electron.ipcRenderer.send('export', this.props.result);
+    const resultJSONString = JSON.stringify(this.props.result);
+    const cryptedResult = crypter.encrypt(resultJSONString);
+    const blob = new Blob([cryptedResult], {type: "text/plain;charset=utf-8"})
+    FileSaver.saveAs(blob, `${this.props.user.surname}_${this.props.user.name}_результаты`)
   }
   render() {
     const { result } = this.props;
+    console.log(result);
     return (<div>
       <div>
         <h2>Результаты тестов:</h2>
@@ -45,6 +46,7 @@ class StudentStats extends React.Component {
 
 export default connect(state => ({
   result: state.result,
+  user: state.user
 }), {
   getAllResults,
 })(StudentStats);

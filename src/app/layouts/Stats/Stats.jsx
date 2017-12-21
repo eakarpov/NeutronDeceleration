@@ -32,7 +32,7 @@ class Stats extends React.Component {
     };
     fileReader.readAsText(file);
   }
-  btnClick = () => {
+  importBtnClick = () => {
     document.getElementById("importer_input").click();
   };
   render() {
@@ -41,7 +41,7 @@ class Stats extends React.Component {
       <div>
         <h2>Результаты тестов:</h2>
         <input type="file" id="importer_input" onChange={this.import} />
-        <button id="importer_btn" name="importer" onClick={this.btnClick}>
+        <button id="importer_btn" name="importer" onClick={this.importBtnClick}>
           Импортировать результаты
         </button>
       </div>
