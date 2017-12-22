@@ -16,6 +16,7 @@ class Testing extends React.Component {
       calculating: false,
       calculated: false,
       mark: 0,
+      wrongAnsweredQuestions: [],
     };
   }
 
@@ -40,20 +41,26 @@ class Testing extends React.Component {
       });
       let mark = 0;
       let maxMark = this.props.tests.reduce((p, c) => p + c.mark, 0);
+      let wrongAnsweredQuestions = [];
       this.props.tests.forEach((q, i) => {
         const rightAns = q.correctAnswersId;
         const amountRightAnswers = rightAns.reduce((p, c) => p + (c ? 1 : 0), 0);
         const realAns = answers.filter(el => parseInt(el.question) === i);
         [...realAns].forEach((el, i) => {
           if (rightAns[i] === el.value && rightAns[i]) mark += q.mark / amountRightAnswers;
-          if (rightAns[i] !== el.value && !rightAns[i]) mark -= q.mark / (2 * amountRightAnswers);
+          if (rightAns[i] !== el.value && !rightAns[i]) {
+            mark -= q.mark / (2 * amountRightAnswers);
+            wrongAnsweredQuestions.push(q);
+          }
         });
       });
+      wrongAnsweredQuestions = [...new Set(wrongAnsweredQuestions)];
       mark = mark / maxMark * 100;
       if (mark < 0) mark = 0;
       this.props.saveResult(mark, this.props.user.username);
       this.setState({
         mark,
+        wrongAnsweredQuestions,
         loading: false,
         calculated: true,
         calculating: false,
@@ -93,14 +100,26 @@ class Testing extends React.Component {
               ?
               <div className="container">
                 <div className="col-sm-6 col-sm-offset-3">
-                  <p style={{textAlign: 'center'}}><b>Пожалуйста, подождите, сейчас мы вас подсчитаем...</b></p>
+                  <p style={{textAlign: 'center'}}><b>Пожалуйста, подождите, идёт подсчёт результата...</b></p>
                 </div>
                 <Spinner/>
               </div>
               : this.state.calculated
                 ?
                 <div>
-                  <p>Ваша оценка - {Math.round(this.state.mark)}</p>
+                  <h2>Ваша оценка - {Math.round(this.state.mark)}</h2>
+                  {this.state.wrongAnsweredQuestions.length !== 0 
+                  ? 
+                  <div>
+                    <h2>Вопросы на которые вы не дали всех правильных ответов:</h2>
+                    <ul>
+                    {this.state.wrongAnsweredQuestions.map((waq, i) =>
+                      <li key={i}><div dangerouslySetInnerHTML={{__html: waq.question}}/></li>
+                    )}
+                    </ul>
+                  </div>
+                  : null
+                }
                 </div>
                 :
                 <div>{this.props.tests.map((el, i) =>

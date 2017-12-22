@@ -52,11 +52,16 @@ class Stats extends React.Component {
         : null}
       {result.map((el, i) => {
         const user = this.props.users.find(elem => elem.login === el.user);
-        return user ? (<div key={i}>
-          <span><b>{user.name} {user.surname} </b><i>{el.date 
-            ? new Date(el.date).toLocaleString() 
-            : new Date(null).toLocaleString() }</i>: {el.result ? `${el.result}/100` : 'Неизвестно'}</span>
-        </div>) : null;
+        return user 
+        ?
+        <div key={i}>
+          <span>
+            <b>{user.name} {user.surname} </b>
+            <i>{el.date ? new Date(el.date).toLocaleString() : 'Ошибка даты'}</i>
+            : <b>{typeof el.result !== undefined ? `${Math.round(el.result)}/100` : 'Неизвестно'}</b>
+          </span>
+        </div>
+        : null;
         })}
   </div>);
   }

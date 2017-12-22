@@ -34,11 +34,14 @@ class StudentStats extends React.Component {
           ? <p>Экспорт успешно завершен</p>
           : <p>Экспорт завершен с ошибкой</p>
         : null }
-      {result.map((el, i) => <div key={i}>
-          <span><b>{el.date 
-            ? new Date(el.date).toLocaleString() 
-            : new Date(null).toLocaleString() }</b>: {el.result ? `${Math.round(el.result)}/100` : 'Неизвестно'}</span>
-        </div>)}
+      {result.map((el, i) => 
+        <div key={i}>
+          <span>
+            <i>{el.date ? new Date(el.date).toLocaleString() : 'Ошибка даты'}</i>
+            : <b>{typeof el.result !== undefined ? `${Math.round(el.result)}/100` : 'Ошибка результата'}</b>
+          </span>
+        </div>
+      )}
     </div>);
   }
 }
