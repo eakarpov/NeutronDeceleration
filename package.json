@@ -1,6 +1,6 @@
 {
   "name": "neutron-deceleration",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Electron application of Neutron Deceleration process for MMoPhP course in NRNU MEPhI, Department of Cybernetics",
   "author": "George Carpow <eakarpov@yandex.ru> (https://github.com/eakarpov)",
   "license": "MIT",
@@ -40,9 +40,8 @@
     "cross-env": "^5.1.3",
     "css-loader": "^0.28.7",
     "electron": "^1.7.10",
-    "electron-builder": "^19.49.2",
+    "electron-builder": "^19.49.3",
     "file-loader": "^1.1.6",
-    "html-loader": "^0.5.1",
     "node-sass": "^4.7.2",
     "react-hot-loader": "^3.1.3",
     "react-svg-loader": "^2.1.0",

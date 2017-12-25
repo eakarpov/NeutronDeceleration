@@ -2,10 +2,10 @@ function buildInitialTemplate(mainWindow) {
 
   const template = [
     {
-      label: 'Файл',
+      label: 'Выход',
       submenu: [
         {
-          label: 'Выйти',
+          label: 'Выйти из программы',
           role: 'close'
         }
       ]

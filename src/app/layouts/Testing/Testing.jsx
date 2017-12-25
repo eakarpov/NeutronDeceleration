@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getTestSuite } from "../../../redux/modules/actions/test";
 import { saveResult } from '../../../redux/modules/actions/result';
 import Spinner from "../../components/Spinner/Spinner";
+import textCrypter from "../../../crypter/textCrypter";
 
 class Testing extends React.Component {
 
@@ -114,7 +115,7 @@ class Testing extends React.Component {
                     <h2>Вопросы на которые вы не дали всех правильных ответов:</h2>
                     <ul>
                     {this.state.wrongAnsweredQuestions.map((waq, i) =>
-                      <li key={i}><div dangerouslySetInnerHTML={{__html: waq.question}}/></li>
+                      <li key={i}><div dangerouslySetInnerHTML={{__html: textCrypter.decrypt(waq.question)}}/></li>
                     )}
                     </ul>
                   </div>
@@ -122,16 +123,18 @@ class Testing extends React.Component {
                 }
                 </div>
                 :
+                this.props.tests.length != 0
+                ?
                 <div>{this.props.tests.map((el, i) =>
                   <div key={i}>
                     <b>Вопрос {i + 1}: </b>
-                    <div dangerouslySetInnerHTML={{__html: el.question}}/>
+                    <div dangerouslySetInnerHTML={{__html: textCrypter.decrypt(el.question)}}/>
                     <div className="input-group">
                       {el.answers.map((ans, j) =>
                         <div key={`outer-${j}`}>
                           <input type="checkbox" id={`${i}-${j}`} name={`group-${j}`} tabIndex="0"/>
                           <label htmlFor={`${i}-${j}`}>
-                            <div dangerouslySetInnerHTML={{__html: ans}}/>
+                            <div dangerouslySetInnerHTML={{__html: textCrypter.decrypt(ans)}}/>
                           </label>
                           <br/>
                         </div>)}
@@ -140,6 +143,8 @@ class Testing extends React.Component {
                   </div>)}
                   <button onClick={this.passTest}>Сдать тест</button>
                 </div>
+                :
+                <div><h1>Пока не было добалено ни одного вопроса для теста.</h1></div>
           }
         </div>
       </div>

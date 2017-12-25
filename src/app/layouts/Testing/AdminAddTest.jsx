@@ -5,6 +5,7 @@ import { push } from "react-router-redux";
 import BackButton from "../../components/BackButton/BackButton";
 import Editor from "../../components/Editor/Editor";
 import {addTest, editTest} from "../../../redux/modules/actions/test";
+import textCrypter from "../../../crypter/textCrypter";
 
 class AdminAddTest extends React.Component {
 
@@ -89,8 +90,9 @@ class AdminAddTest extends React.Component {
           rightAnswerChosen: true
         });
         this.props.editTest(
-          this.state.question,
-          [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
+          textCrypter.encrypt(this.state.question),
+          [textCrypter.encrypt(this.state.answer1), textCrypter.encrypt(this.state.answer2),
+            textCrypter.encrypt(this.state.answer3), textCrypter.encrypt(this.state.answer4)],
           [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
           this.state.sliderValue,
           this.state.id,
@@ -119,8 +121,9 @@ class AdminAddTest extends React.Component {
           rightAnswerChosen: true
         });
         this.props.addTest(
-          this.state.question,
-          [this.state.answer1, this.state.answer2, this.state.answer3, this.state.answer4],
+          textCrypter.encrypt(this.state.question),
+          [textCrypter.encrypt(this.state.answer1), textCrypter.encrypt(this.state.answer2),
+            textCrypter.encrypt(this.state.answer3), textCrypter.encrypt(this.state.answer4)],
           [this.state.check1, this.state.check2, this.state.check3, this.state.check4],
           this.state.sliderValue,
         );
