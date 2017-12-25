@@ -16,7 +16,6 @@ import AdminAddTest from "./app/layouts/Testing/AdminAddTest";
 import AdminEditTest from './app/layouts/Testing/AdminEditTest';
 import App from "./app/App";
 import "./assets/styles/index.scss"
-import "./assets/styles/default.css"
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'react-rangeslider/lib/index.css'
 
