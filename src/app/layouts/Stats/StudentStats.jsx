@@ -31,9 +31,9 @@ class StudentStats extends React.Component {
       </div>
       {this.state.export !== void 0 
         ? this.state.export 
-          ? <p>Экспорт успешно завершен</p>
-          : <p>Экспорт завершен с ошибкой</p>
-        : null }
+          ? <mark class="tertiary">Экспорт успешно завершен</mark>
+          : <mark class="secondary">Экспорт завершен с ошибкой</mark>
+        : null}
       {result.map((el, i) => 
         <div key={i}>
           <span>
