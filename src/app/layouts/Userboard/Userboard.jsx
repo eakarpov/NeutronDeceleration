@@ -10,8 +10,19 @@ import {deleteUser} from "../../../redux/modules/actions/users";
 class Userboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      usersToShow: [],
+    };
     this.submitForm = this.submitForm.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.chooseGroup = this.chooseGroup.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.users !== []) {
+      this.setState({
+        usersToShow: nextProps.users,
+      });
+    }
   }
   submitForm(e) {
     e.preventDefault();
@@ -38,11 +49,33 @@ class Userboard extends React.Component {
   deleteUser(login) {
     this.props.deleteUser({ user: login })
   }
+  chooseGroup(e) {
+    const choosenGroupId = e.target.value;
+    let group;
+    if (choosenGroupId !== 'allGroups') {
+      group = this.props.groups.find((group) => group._id === choosenGroupId);
+    }
+    const predicate = group !== void 0 ? user => user.group === group._id : () => true;
+    const usersToShow = this.props.users.filter(predicate).sort((userA, userB) => {
+      if (userA.surname > userB.surname) return 1;
+      else if (userA.surname < userB.surname) return -1;
+      else if (userA.name > userB.name) return 1;
+      else if (userA.name < userB.name) return -1;
+      else return 0;
+    });
+    this.setState({
+      usersToShow,
+    });
+  }
   exportAuth = () => {
     const choosenGroupId = document.getElementById("group_chooser").value;
-    const group = this.props.groups.find((group) => group._id === choosenGroupId);
+    let group;
+    if (choosenGroupId !== 'allGroups') {
+      group = this.props.groups.find((group) => group._id === choosenGroupId);
+    }
+    const predicate = group !== void 0 ? user => user.group === group._id : () => true;
     let userAuthAsString = `Группа: ${group.groupName};\n\nФамилия;Имя;Логин;Пароль\n`;
-    this.props.users.filter(user => user.group === group._id).sort((userA, userB) => {
+    this.props.users.filter(predicate).sort((userA, userB) => {
       if (userA.surname > userB.surname) return 1;
       else if (userA.surname < userB.surname) return -1;
       else if (userA.name > userB.name) return 1;
@@ -53,9 +86,10 @@ class Userboard extends React.Component {
     });
     const blob = new Blob([userAuthAsString], {type: "text/csv;charset=utf-8"});
     FileSaver.saveAs(blob, `Данные_авторизации_студентов_группы_${group.groupName}.csv`);
-  }
+  };
   render() {
-    const {groups, users} = this.props;
+    const {groups} = this.props;
+    const users = this.state.usersToShow;
     const groupsToRender = groups.map((el, i) => <option key={i} id={el._id}>{el.groupName}</option>);
     const usersToRender = users
       .map((el, i) =>
@@ -84,7 +118,8 @@ class Userboard extends React.Component {
         <button role="button" disabled={groups && groups.length === 0}>+</button>
       </form>
       <label htmlFor="group_chooser">Выберите группу:</label>
-      <select id="group_chooser">
+      <select id="group_chooser" onChange={this.chooseGroup}>
+        <option value="allGroups">Все группы</option>
         {this.props.groups.map((group, i) => <option value={group._id} key={i}>{group.groupName}</option>)}
       </select>
       <button onClick={this.exportAuth}>Экспортировать данные авторизации студентов группы</button>

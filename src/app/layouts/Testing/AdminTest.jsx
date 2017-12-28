@@ -31,7 +31,7 @@ class AdminTest extends React.Component {
     return (
       <div>
         <button onClick={this.addQuestionClick}>Добавить вопрос</button>
-        {this.props.tests.length != 0
+        {this.props.tests.length !== 0
         ?
         <table style={{textAlign: 'center', width: '100%'}}>
           <caption>Список вопросов к тесту</caption>
