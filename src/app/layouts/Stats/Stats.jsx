@@ -25,7 +25,7 @@ class Stats extends React.Component {
       const decryptedFile = crypter.decrypt(res);
       const results = JSON.parse(decryptedFile);
       results.forEach(el => {
-        this.props.saveResult(el.result, el.user, el.date);
+        this.props.saveResult(el.result, el.user, el.date, false);
       });
       this.setState({
         import: true,
@@ -47,8 +47,8 @@ class Stats extends React.Component {
       </div>
       {this.state.import !== void 0
         ? this.state.import
-          ? <mark class="tertiary">Данные импортированы</mark>
-          : <mark class="secondary">Ошибка при импорте данных</mark>
+          ? <mark className="tertiary">Данные импортированы</mark>
+          : <mark className="secondary">Ошибка при импорте данных</mark>
         : null}
       {result.length !== 0 
         ?

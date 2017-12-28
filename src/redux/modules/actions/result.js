@@ -1,11 +1,12 @@
 import Actions from '../../Actions';
 
-export const saveResult = (result, userId, listLoad = true) => {
+export const saveResult = (result, userId, date, listLoad = true) => {
   return {
     type: Actions.result.saveResult,
     payload: {
       result,
       userId,
+      date,
       listLoad
     }
   }

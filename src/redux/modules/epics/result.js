@@ -19,7 +19,7 @@ export const saveResult = action$ =>
   action$
     .ofType(Actions.result.saveResult)
     .mergeMap(({payload}) =>
-      dbi.saveResult(payload.result, payload.userId)
+      dbi.saveResult(payload.result, payload.userId, payload.date)
         .then(result => result  
           ? payload.listLoad
             ? list(payload.userId)
