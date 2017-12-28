@@ -3,7 +3,7 @@ const Datastore = require('nedb');
 const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 const path = require('path');
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 const fs = require('fs');
 const crypter = require('./crypter/textCrypter');
 
@@ -66,24 +66,11 @@ app.on('ready', async () => {
 });
 
 ipcMain.on('model', function (e, ...args) {
-  const py = spawn('python', [path.resolve(__dirname, './model.py')]);
-  let outData = null;
-  py.stdout.on('data', function(data){
-    outData = Buffer.from(data).toString();
+  exec(`python ${path.resolve(__dirname, './model.py')} ${[...args].join(' ')}`, (err, data) => {
+    if (err) console.log(Buffer.from(data).toString());
+    const outData = Buffer.from(data).toString();
     mainWindow.webContents.send('model_built', outData);
-    py.kill();
   });
-  py.stderr.on('data', function(data) {
-    console.log(Buffer.from(data).toString());
-  });
-  const inData = {
-    matter: args[0],
-    initial: args[1],
-    terminal: args[2],
-    amount: args[3],
-  };
-  py.stdin.write(JSON.stringify(inData));
-  py.stdin.end();
 });
 
 ipcMain.on('user_logged_in', function() {

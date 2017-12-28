@@ -10,11 +10,25 @@ class Modeling extends React.Component {
     super(props);
     this.model = this.model.bind(this);
     this.state = {
+      models: [],
       path: [],
-      avrg: {},
-      loading: false,
       loaded: false,
+      loading: false,
     };
+    this.acc = [];
+    this.onAdd = this.onAdd.bind(this);
+  }
+
+  onAdd(amount) {
+    if (this.acc.length === this.state.models.length + 1) {
+      this.setState({
+        path: this.acc[0].trace,
+        models: [...this.state.models, {...this.acc[0].avrg, amount}],
+        loading: false,
+        loaded: true
+      });
+      this.acc = [];
+    }
   }
 
   model(values) {
@@ -25,12 +39,8 @@ class Modeling extends React.Component {
     const {matter, initial, terminal, amount} = values;
     electron.ipcRenderer.on('model_built', (e, data) => {
       const model = JSON.parse(data);
-      this.setState({
-        path: model.trace,
-        avrg: model.avrg,
-        loading: false,
-        loaded: true
-      });
+      this.acc.push(model);
+      this.onAdd(amount);
     });
     electron.ipcRenderer.send('model', matter, initial, terminal, amount);
   }
@@ -60,23 +70,28 @@ class Modeling extends React.Component {
             ?
             <div>
               <table>
+                <caption>Смоделированные средние значения</caption>
                 <thead>
                 <tr>
                   <th>Параметры</th>
+                  <th>№</th>
+                  <th>Кол-во нейтронов</th>
                   <th>Длина пробега</th>
                   <th>Возраст нейтрона</th>
-                  <th>Декремент энергии</th>
                   <th>Логарифмический декремент энергии</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Средние значения</td>
-                  <td>{this.state.avrg.path}</td>
-                  <td>{this.state.avrg.neutron_age}</td>
-                  <td>{this.state.avrg.eDec}</td>
-                  <td>{this.state.avrg.logEDec}</td>
-                </tr>
+                {this.state.models.map((el, i) =>
+                  <tr key={i}>
+                    <td>Средние значения</td>
+                    <td>{i + 1}</td>
+                    <td>{el.amount}</td>
+                    <td>{parseFloat(el.path).toFixed(2)}</td>
+                    <td>{parseFloat(el.neutron_age).toFixed(2)}</td>
+                    <td>{parseFloat(el.logEDec).toFixed(2)}</td>
+                  </tr>
+                )}
                 </tbody>
               </table>
               <br/>

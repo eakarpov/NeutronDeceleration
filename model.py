@@ -85,13 +85,13 @@ def avrg(res):
     return length
 
 
-def read_in():
-    lines = sys.stdin.readlines()
-    return json.loads(lines[0])
-
-
 def main():
-    lines = read_in()
+    lines = {
+        "matter": sys.argv[1],
+        "terminal": sys.argv[3],
+        "initial": sys.argv[2],
+        "amount": sys.argv[4],
+    }
     dc = DeceleratorConstants[int(lines.get('matter'))]
     Et = float(lines.get('terminal'))
     A = dc[0]
@@ -109,9 +109,8 @@ def main():
 
         trace = results[0]
         res = {'trace': trace}
-        eDec = (Einit / Et) / len(results)
         logEDec = math.log(Einit / Et) / len(results)
-        avr = {'eDec': eDec, 'logEDec': logEDec}
+        avr = {'logEDec': logEDec}
 
         for avg_result in executor.map(avrg, results):
             averages.append(avg_result)
@@ -121,6 +120,7 @@ def main():
     avr.update({'path': path, 'neutron_age': neutron_age})
     res.update({'avrg': avr})
     print(json.dumps(res))
+    sys.exit(0)
 
 
 if __name__ == '__main__':
