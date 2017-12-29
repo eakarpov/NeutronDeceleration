@@ -3,7 +3,7 @@ const Datastore = require('nedb');
 const buildInitialTemplate = require("./main_utils/buildInitialTemplate");
 const installExtensions = require("./main_utils/installExtensions");
 const path = require('path');
-const exec = require('child_process').exec;
+const fork = require('child_process').fork;
 const fs = require('fs');
 const crypter = require('./crypter/textCrypter');
 
@@ -66,11 +66,24 @@ app.on('ready', async () => {
 });
 
 ipcMain.on('model', function (e, ...args) {
-  exec(`python ${path.resolve(__dirname, './model.py')} ${[...args].join(' ')}`, (err, data) => {
-    if (err) console.log(Buffer.from(data).toString());
-    const outData = Buffer.from(data).toString();
-    mainWindow.webContents.send('model_built', outData);
+  const ps = fork(path.resolve(__dirname, './model.js'), args);
+  ps.on('message', (msg) => {
+    console.log(msg);
+    if (msg.terminate) {
+      ps.kill();
+      console.log(`${ps.pid} is ${ps.killed ? '' : 'not'} killed`);
+      mainWindow.webContents.send('model_built', msg.data);
+    }
   });
+  ps.send({ start: true });
+});
+
+ipcMain.on('export', function(e, ...args) {
+  const result = args[0];
+  const resultJSONString = JSON.stringify(result);
+  const cryptedResult = crypter.encrypt(resultJSONString);
+  fs.writeFileSync('./output', cryptedResult);
+  mainWindow.webContents.send('exported', true);
 });
 
 ipcMain.on('user_logged_in', function() {

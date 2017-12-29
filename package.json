@@ -15,6 +15,7 @@
     "html-to-draftjs": "^1.1.1",
     "immutable": "^3.8.2",
     "mini.css": "^2.3.7",
+    "napajs": "^0.1.8",
     "nedb": "^1.8.0",
     "prop-types": "^15.6.0",
     "react": "15.6.2",
