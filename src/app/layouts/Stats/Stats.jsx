@@ -76,7 +76,7 @@ class Stats extends React.Component {
             <tbody>
               {result.sort((res1, res2) => res1.date < res2.date).map((el, i) => {
                 let user;
-                if (this.state.selectedGroup == "allGroups") {
+                if (this.state.selectedGroup === "allGroups") {
                   user = this.props.users.find(elem => elem.login === el.user);
                 } else {
                   const group = groups.find(group => group.groupName === this.state.selectedGroup);
@@ -97,7 +97,7 @@ class Stats extends React.Component {
         </table>
         </div>
         :
-        <h1>Нет ни одно результата прохождения студентом теста.</h1>
+        <h1>Нет ни одного результата прохождения студентом теста.</h1>
       } 
   </div>);
   }

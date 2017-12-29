@@ -112,7 +112,7 @@ class Testing extends React.Component {
                   {this.state.wrongAnsweredQuestions.length !== 0 
                   ? 
                   <div>
-                    <h2>Вопросы на которые вы не дали всех правильных ответов:</h2>
+                    <h2>Вопросы на которые вы дали неверные ответы:</h2>
                     <ul>
                     {this.state.wrongAnsweredQuestions.map((waq, i) =>
                       <li key={i}><div dangerouslySetInnerHTML={{__html: textCrypter.decrypt(waq.question)}}/></li>
@@ -123,7 +123,7 @@ class Testing extends React.Component {
                 }
                 </div>
                 :
-                this.props.tests.length != 0
+                this.props.tests.length !== 0
                 ?
                 <div>{this.props.tests.map((el, i) =>
                   <div key={i}>
