@@ -15,6 +15,7 @@ class AdminChangeCredentials extends React.Component {
     this.state = {
       login: '',
       password: '',
+      message: false,
     };
   }
 
@@ -33,6 +34,9 @@ class AdminChangeCredentials extends React.Component {
   auth() {
     if (this.state.login !== '' && this.state.password !== '') {
       this.props.changeUser(this.props.user.username, this.state.login, bcrypt.hashSync(this.state.password, 10));
+      this.setState({
+        message: true
+      });
     }
   }
 
@@ -44,6 +48,9 @@ class AdminChangeCredentials extends React.Component {
         </div>
         <div className="container">
           <h1>Изменить данные</h1>
+          <div className="row">
+            {this.state.message ? <mark className="tertiary">Данные успешно обновлены</mark> : null}
+          </div>
           <div className="col-sm row">
             <div className="col-sm-5">
               <label>Новый логин</label>
