@@ -56,7 +56,6 @@ class Modeling extends React.Component {
   }
  
   render() {
-    console.log(this.state.models);
     const {handleSubmit} = this.props;
     return (
       <div>

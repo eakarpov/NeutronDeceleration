@@ -18,7 +18,7 @@ class Userboard extends React.Component {
     this.chooseGroup = this.chooseGroup.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.users !== []) {
+    if (this.state.usersToShow.length === 0 && nextProps.users.length !== 0) {
       this.setState({
         usersToShow: nextProps.users,
       });
