@@ -8,10 +8,10 @@
 {"login":"ut9w462ofnr","passwordShown":"idw4ghsjdnf","password":"$2a$10$hlT4sRfB4f4fepGmXvCXGeVANUix2sbmmo2rD7bvgX9g2.te/Ot4a","name":"Андрей","surname":"Загребаев","role":1,"group":"FdsO7GwIZ3nxwmLS","_id":"PobzmTuSdS6jrEst"}
 {"login":"zdg0l74gjj","passwordShown":"157pw6q2ftr","password":"$2a$10$aQFU7hxjTQpqVBWo4g3rMe82rDK1r4RNyG8iZ5coleyGVeNEiiVg2","name":"Кирилл","surname":"Кириллов","role":1,"group":"OV7ZdEmJlCXiME7b","_id":"TEezcGtTRvFDHXaw"}
 {"groupName":"М17-514","_id":"TNQ8S1XcQWHJjblm"}
-{"login":"root","password":"$2a$10$EcYHVwwc.m1XLrxSpw9oyO66J0Y2ZOTbnXLbCi8McOptTDlbHQcMS","role":0,"_id":"Vkj9Ft6LpnhzhDZ7"}
 {"result":100,"user":"kbnth0gc9l","date":1513942414585,"_id":"YwTCAGd4IrVDXgZx"}
 {"result":80.76923076923077,"user":"zdg0l74gjj","date":1513679546010,"_id":"bHaXTkBFlPQPSJtt"}
 {"question":"589e8a20d3c093c0e1f931bc1253c42a51ff51f461086db3c542e5ac2e5139d341e970734d3845f9313ff1966ba5457571b248018c9b24891a0c7817b5c23b240ba9de14b55b3c0b4d566f3a4642d2e67b09363a30431f670c3f4ceabd302ea01197273645eec9300da561fc2429089bae1cc00e7b6f","answers":["589e8ab72e7d797e3715ab1dac89","589e8aa23473612c7f59ba67","589e8aa020627b713c15ab1dac89","589e8ab5337d797e3715ab1dac89"],"correctAnswersId":[true,false,true,false],"mark":6,"_id":"mQ75R5gwZkuHKXvo"}
 {"result":25,"user":"kqff8948ipc","date":1514465528192,"_id":"nNsFFw63hGSk7bEt"}
 {"result":25,"user":"kqff8948ipc","date":1514465708422,"_id":"p8js0tREDTvq6QxB"}
+{"login":"root","password":"$2a$10$Ql8PR.UDRY2dJHRwatrEr.Rb/EPvsFxCl0HBMeTtykabMPfmdNAOy","role":0,"_id":"u9RXMS007bDh9D2T"}
 {"groupName":"М17-524","_id":"wmVun82ufkYLlFTT"}
