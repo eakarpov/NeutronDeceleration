@@ -19,11 +19,11 @@ class Modeling extends React.Component {
     this.onAdd = this.onAdd.bind(this);
   }
 
-  onAdd(amount) {
+  onAdd(terminal, initial, amount, matter) {
     if (this.acc.length === this.state.models.length + 1) {
       this.setState({
         path: this.acc[0].trace,
-        models: [...this.state.models, {...this.acc[0].avrg, amount}],
+        models: [...this.state.models, {...this.acc[0].avrg, terminal, initial, matter, amount}],
         loading: false,
         loaded: true
       });
@@ -40,12 +40,23 @@ class Modeling extends React.Component {
     electron.ipcRenderer.on('model_built', (e, data) => {
       const model = JSON.parse(data);
       this.acc.push(model);
-      this.onAdd(amount);
+      this.onAdd(terminal, initial, amount, matter);
     });
     electron.ipcRenderer.send('model', matter, initial, terminal, amount);
   }
 
+  getMatter(index) {
+    switch(index) {
+      case 0: return 'Вода'
+      case 1: return 'Тяжелая вода'
+      case 2: return 'Бериллий'
+      case 3: return 'Оксид бериллия'
+      case 4: return 'Графит'
+    }
+  }
+ 
   render() {
+    console.log(this.state.models);
     const {handleSubmit} = this.props;
     return (
       <div>
@@ -74,7 +85,9 @@ class Modeling extends React.Component {
                 <thead>
                 <tr>
                   <th>Параметры</th>
-                  <th>№</th>
+                  <th>Тип</th>
+                  <th>E0</th>
+                  <th>ET</th>
                   <th>Кол-во нейтронов</th>
                   <th>Длина пробега</th>
                   <th>Возраст нейтрона</th>
@@ -85,7 +98,9 @@ class Modeling extends React.Component {
                 {this.state.models.map((el, i) =>
                   <tr key={i}>
                     <td>Средние значения</td>
-                    <td>{i + 1}</td>
+                    <td>{this.getMatter(parseInt(el.matter))}</td>
+                    <td>{el.initial}</td>
+                    <td>{el.terminal}</td>
                     <td>{el.amount}</td>
                     <td>{parseFloat(el.path).toFixed(2)}</td>
                     <td>{parseFloat(el.neutron_age).toFixed(2)}</td>
