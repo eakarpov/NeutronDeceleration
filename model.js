@@ -1,5 +1,6 @@
 const napa = require('napajs');
 const constants = require('./constants');
+const normRandom = require('./normal_distribution');
 
 const NUMBER_OF_WORKERS = 4;
 
@@ -37,7 +38,6 @@ process.on('message', (msg) => {
         do {
           gamma = Math.random();
         } while (gamma <= 0.001 || 1.0 - gamma <= 0.001);
-        const normRandom = require('./normal_distribution');
         const mean = Math.sqrt(deceleratorConstants[1]);
         const length = normRandom(mean, mean / 3.5);
         const cosTheta = 1.0 - 2.0 * gamma;
@@ -54,10 +54,10 @@ process.on('message', (msg) => {
         });
         console.log(E1);
       } while (E1 - Et > 0.0001);
-      res = [...res.slice(0, res.length - 1)];
+      res = res.slice(0, res.length - 1);
       return res;
     }
-    calculation = calculation.bind({ Einit, A, eps });
+    calculationBound = calculation.bind({ Einit, A, eps });
 
     function avrg(res) {
       const arr = [];
@@ -70,12 +70,15 @@ process.on('message', (msg) => {
       return arr.reduce((p,c) => p + c) / arr.length;
     }
     const zone = napa.zone.create('first', { workers: NUMBER_OF_WORKERS} );
-    console.log(zone);
     const secondZone = napa.zone.create('second', { workers: NUMBER_OF_WORKERS});
     const promises = [];
+
     for (let i = 0; i < amount; i++) {
       try {
-      promises[i] = zone.execute(calculation);
+      promises[i] = zone.execute(calculationBound);
+      promises[i].then(res => {
+        console.log(res);
+      });
       console.log(promises[i]);
       } catch(e) {
         console.log(e);
@@ -98,7 +101,7 @@ process.on('message', (msg) => {
         res.avrg.time = res.avrg.path * res.avrg.path / 6;
         process.send({terminate: true, data: JSON.stringify(res)});
       });
-    });
+    }).catch(err => console.log(err));
 
   }
 });
