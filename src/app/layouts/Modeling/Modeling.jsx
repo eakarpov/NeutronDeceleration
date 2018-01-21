@@ -37,21 +37,27 @@ class Modeling extends React.Component {
       loaded: false
     });
     const {matter, initial, terminal, amount} = values;
-    electron.ipcRenderer.on('model_built', (e, data) => {
-      const model = JSON.parse(data);
-      this.acc.push(model);
-      this.onAdd(terminal, initial, amount, matter);
-    });
-    electron.ipcRenderer.send('model', matter, initial, terminal, amount);
+    const myWorker = new Worker("calc.worker.js");
+    myWorker.onmessage = (e) => {
+      const { terminate, data } = e.data;
+      console.log(data, e.data);
+      if (terminate) {
+        myWorker.terminate();
+        const model = JSON.parse(data);
+        this.acc.push(model);
+        this.onAdd(terminal, initial, amount, matter);
+      }
+    };
+    myWorker.postMessage({start: true, args: [matter, initial, terminal, amount]});
   }
 
   getMatter(index) {
     switch(index) {
-      case 0: return 'Вода'
-      case 1: return 'Тяжелая вода'
-      case 2: return 'Бериллий'
-      case 3: return 'Оксид бериллия'
-      case 4: return 'Графит'
+      case 0: return 'Вода';
+      case 1: return 'Тяжелая вода';
+      case 2: return 'Бериллий';
+      case 3: return 'Оксид бериллия';
+      case 4: return 'Графит';
     }
   }
  

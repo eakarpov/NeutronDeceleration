@@ -43,7 +43,11 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
-  mainWindow = new BrowserWindow();
+  mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegrationInWorker: true
+    }
+  });
   if (process.env.NODE_ENV === 'development') {
     mainWindow.maximize();
   } else {
@@ -63,19 +67,6 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-});
-
-ipcMain.on('model', function (e, ...args) {
-  const ps = fork(path.resolve(__dirname, './model.js'), args);
-  ps.on('message', (msg) => {
-    console.log(msg);
-    if (msg.terminate) {
-      ps.kill();
-      console.log(`${ps.pid} is ${ps.killed ? '' : 'not'} killed`);
-      mainWindow.webContents.send('model_built', msg.data);
-    }
-  });
-  ps.send({ start: true });
 });
 
 ipcMain.on('export', function(e, ...args) {
