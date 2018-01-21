@@ -32,23 +32,82 @@ class Modeling extends React.Component {
   }
 
   model(values) {
+    const meanSquareOfDisplacement = {
+      "H2O": 6 * 27,
+      "D2O": 6 * 120,
+      "Be": 6 * 98,
+      "BeO": 6 * 105,
+      "C": 6 * 350
+    };
+
+    const deceleratorConstants = {
+      0: [18, meanSquareOfDisplacement["H2O"]],
+      1: [20, meanSquareOfDisplacement["D2O"]],
+      2: [4, meanSquareOfDisplacement["Be"]],
+      3: [20, meanSquareOfDisplacement["BeO"]],
+      4: [14, meanSquareOfDisplacement["C"]]
+    };
+
     this.setState({
       loading: true,
       loaded: false
     });
     const {matter, initial, terminal, amount} = values;
-    const myWorker = new Worker("main.worker.js");
-    myWorker.onmessage = (e) => {
-      const { terminate, data } = e.data;
-      console.log(data, e.data);
-      if (terminate) {
-        myWorker.terminate();
-        const model = JSON.parse(data);
-        this.acc.push(model);
-        this.onAdd(terminal, initial, amount, matter);
+
+    const A = deceleratorConstants[matter][0];
+    const a = (A - 1.0) / (A + 1.0);
+    const eps = a * a;
+
+    const Et = parseFloat(terminal);
+    const Einit = parseFloat(initial) * 1e6;
+
+    const promises = [];
+
+    for (let i = 0; i < amount; i++) {
+      try {
+        promises[i] = new Promise((res, rej) => {
+          const newW = new Worker('calc.worker.js');
+          newW.postMessage({
+            decelerator: deceleratorConstants[matter][1],
+            Einit,
+            eps,
+            A,
+            Et
+          });
+          newW.onmessage = function (e) {
+            res(e.data);
+          };
+        });
+      } catch(e) {
+        console.log(e);
       }
-    };
-    myWorker.postMessage({start: true, args: [matter, initial, terminal, amount]});
+    }
+
+    Promise.all(promises).then(result => {
+      const res = {};
+      res.trace = result[0];
+      const prms = [];
+
+      for (let j = 0; j < result.length; j++)
+        prms[j] = new Promise((res, rej) => {
+          const newW = new Worker('avrg.worker.js');
+          newW.postMessage(result[j]);
+          newW.onmessage = function (e) {
+            res(e.data)
+          };
+        });
+
+      res.avrg = {};
+      res.avrg.eDec = (Einit - Et) / result.length;
+      res.avrg.logEDec = Math.log(Einit - Et) / result.length;
+      Promise.all(prms).then(avrg => {
+        const path = avrg.reduce((p,c) => p + parseInt(c), 0) / avrg.length;
+        res.avrg.path = path;
+        res.avrg.time = path ** 2 / 6;
+        this.acc.push(res);
+        this.onAdd(terminal, initial, amount, matter);
+      });
+    }).catch(err => console.log(err));
   }
 
   getMatter(index) {
@@ -108,7 +167,7 @@ class Modeling extends React.Component {
                     <td>{el.terminal}</td>
                     <td>{el.amount}</td>
                     <td>{parseFloat(el.path).toFixed(2)}</td>
-                    <td>{parseFloat(el.neutron_age).toFixed(2)}</td>
+                    <td>{parseFloat(el.time).toFixed(2)}</td>
                     <td>{parseFloat(el.logEDec).toFixed(2)}</td>
                   </tr>
                 )}

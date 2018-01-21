@@ -11,12 +11,10 @@ function normRandom(mean, standardDerivation) {
 
 onmessage = function(e) {
   let E1;
-  console.log(e.args);
   let E0 = parseFloat(e.data.Einit);
   const eps = parseFloat(e.data.eps);
   const A = parseInt(e.data.A);
   const Et = parseFloat(e.data.Et);
-  console.log(E0, eps, A, Et);
   let x = 0.0;
   let y = 0.0;
   let res = [{
@@ -44,7 +42,6 @@ onmessage = function(e) {
       y,
       e: E0,
     });
-    console.log(E1);
   } while (E1 - Et > 0.0001);
   res = res.slice(0, res.length - 1);
   postMessage(res);

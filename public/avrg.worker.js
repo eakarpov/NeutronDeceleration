@@ -7,6 +7,6 @@ onmessage = function (e) {
       arr.push(Math.sqrt((e.x - p.x) * (e.x - p.x) + (e.y - p.y) * (e.y - p.y)));
     }
   });
-  const result = arr.reduce((p,c) => p + c) / arr.length;
+  const result = arr.reduce((p,c) => p + parseInt(c), 0) / arr.length;
   postMessage(result);
-}
+};
