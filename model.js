@@ -75,8 +75,7 @@ process.on('message', (msg) => {
 
     for (let i = 0; i < amount; i++) {
       try {
-      promises[i] = zone.execute(calculationBound);
-      promises[i].then(res => {
+      promises[i] = zone.execute(calculationBound).then(res => {
         console.log(res);
       });
       console.log(promises[i]);
