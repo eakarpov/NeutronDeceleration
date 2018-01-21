@@ -11,11 +11,12 @@ function normRandom(mean, standardDerivation) {
 
 onmessage = function(e) {
   let E1;
+  console.log(e.args);
   let E0 = parseFloat(e.data.Einit);
   const eps = parseFloat(e.data.eps);
   const A = parseInt(e.data.A);
   const Et = parseFloat(e.data.Et);
-
+  console.log(E0, eps, A, Et);
   let x = 0.0;
   let y = 0.0;
   let res = [{

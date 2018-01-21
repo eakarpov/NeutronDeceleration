@@ -37,7 +37,7 @@ class Modeling extends React.Component {
       loaded: false
     });
     const {matter, initial, terminal, amount} = values;
-    const myWorker = new Worker("calc.worker.js");
+    const myWorker = new Worker("main.worker.js");
     myWorker.onmessage = (e) => {
       const { terminate, data } = e.data;
       console.log(data, e.data);
